@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="HAXE_MODULE" version="4">
+  <component name="HaxeModuleSettingsStorage">
+    <option name="arguments" value="-swf-version 15" />
+    <option name="excludeFromCompilation" value="true" />
+    <option name="flexSdkName" value="4.6.0 AIR 14" />
+    <option name="haxeTarget" value="Flash" />
+    <option name="mainClass" value="Main" />
+    <option name="outputFolder" value="$MODULE_DIR$/../GameLib/out/production/GameLibSWC" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <output url="file://$MODULE_DIR$/../../FlashConverter/libs" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Haxe 3.2.1" jdkType="Haxe toolkit" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
