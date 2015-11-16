@@ -239,7 +239,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		}
 		
 		textureScale = content.scaleX = content.scaleY = 1;
-		descriptor.reset();
+		resetDescriptor();
 		
 		if(!hierarchyParsingComplete)
 		{
@@ -276,7 +276,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		var objConfig:Dynamic;
 		var _mc:MovieClip;
 		
-		descriptor.reset();
+		resetDescriptor();
 		
 		for(key in _atlasConfig.keys())
 		{

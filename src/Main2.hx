@@ -1,4 +1,8 @@
 package ;
+import flash.display.Sprite;
+import flash.display.DisplayObjectContainer;
+import flash.display.DisplayObject;
+import flash.events.MouseEvent;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashAtlas;
 import flash.utils.Function;
 import flash.display.Stage;
@@ -50,12 +54,21 @@ class Main2 {
 
         FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
         FlashAtlas.getAtlasFunc = getAtlas;
-        FlashAtlas.helpTexture =  {a:1};
+        FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        cc.convert(new ScreenHome(), cd, new FlashMirrorRoot(), new Rectangle(0,0,stage.stageWidth,stage.stageHeight), false,false);
+        cc.convert(new ScreenHome(), cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight), false, false);
+        cc.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
+        cc.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
 
-//        stage.addChild(cc);
-//        stage.addChild(shape);
+        stage.addChild(shape);
+    }
+
+    private static function onMouseEvent(e:MouseEvent):Void {
+        if (e.type == MouseEvent.MOUSE_DOWN) {
+            Std.instance(e.target, Sprite).startDrag();
+        } else {
+            Std.instance(e.target, Sprite).stopDrag();
+        }
     }
 }

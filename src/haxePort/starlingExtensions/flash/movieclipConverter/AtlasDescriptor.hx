@@ -27,6 +27,9 @@ class AtlasDescriptor extends MaxRectPacker
 	public var minY:Float = 0;
 	public var maxW:Float;
 	public var maxH:Float;
+
+	private var xOffset:Int = 0;
+	private var yOffset:Int = 0;
 	
 	/**
 	 * flag that controls which packing algorythm to use. MaxRectPacker is much optional because it will fill all gaps but 30% slower because uses recursion for economic regions fit. 
@@ -39,15 +42,24 @@ class AtlasDescriptor extends MaxRectPacker
 		
 	public static var isBaselineExtended:Bool;
 	
-	public function new()
+	public function new(xOffset:Int=0, yOffset:Int = 0)
 	{
 		super(bestWidth, bestHeight);
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 		
 		MAX_RECT = new Rectangle(0, 0, bestWidth, bestHeight);
 		maxW = MAX_RECT.width / 8;
 		maxH = MAX_RECT.height / 8;
 		reset();
 	}
+
+	public inline function next():AtlasDescriptor {
+		reset();
+		return this;
+//		return new AtlasDescriptor(xOffset, yOffset);
+	}
+
 	public inline function updateMaxY(objRect:Rectangle):Void
 	{
 		updatePoints(objRect);

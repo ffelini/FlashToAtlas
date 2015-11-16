@@ -69,8 +69,11 @@ class FlashAtlas extends ContentSprite
 	public var descriptor:AtlasDescriptor = new AtlasDescriptor();
 	public function resetAll():Void
 	{
-		descriptor.reset();
+		resetDescriptor();
 		content.scaleX = content.scaleY = 1;
+	}
+	function resetDescriptor() {
+		descriptor = descriptor.next();
 	}
 	public var symbolName:String;
 	public var mc:MovieClip;
@@ -129,6 +132,8 @@ class FlashAtlas extends ContentSprite
 	}
 	public function restoreObject(obj:DisplayObject):Void
 	{
+		// only movieclips should be hidden as their frames are cloned to same movieclip with the corresponding frame and
+		// original movieclip should be hidden
 		obj.visible = mc==null;
 	}
 	public function checkSubtexture(obj:DisplayObject,name:String=""):SubtextureRegion
@@ -319,7 +324,7 @@ class FlashAtlas extends ContentSprite
 	 * @return 
 	 * 
 	 */		
-	public function onAtlasIsFull():Void
+	private function onAtlasIsFull():Void
 	{
 		var fitsAtlas:Bool = descriptor.MAX_RECT.containsRect(subtextureObjRect); 
 		subtextureObj.visible = fitsAtlas;
