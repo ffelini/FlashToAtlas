@@ -1,4 +1,6 @@
 package ;
+import haxePort.starlingExtensions.flash.movieclipConverter.FlashAtlas;
+import flash.utils.Function;
 import flash.display.Stage;
 import flash.display.Shape;
 import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
@@ -10,6 +12,7 @@ import test.FlashMirrorRoot;
 import haxePort.starlingExtensions.flash.movieclipConverter.ConvertDescriptor;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
 import flash.Lib;
+import ScreenHome;
 class Main2 {
     public function new() {
 
@@ -44,19 +47,15 @@ class Main2 {
         var cc:FlashDisplay_Converter = new FlashDisplay_Converter();
 
         var cd:ConvertDescriptor = new ConvertDescriptor();
-//		var c:Class<Dynamic> = Type.resolveClass("FairyGirlSC");
-//		cd.ignoreClass("FairyGirlSC");
 
-//        FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
-//        FlashAtlas.getAtlasFunc = getAtlas;
-//        FlashAtlas.helpTexture =  {a:1};
-//        FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
+        FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
+        FlashAtlas.getAtlasFunc = getAtlas;
+        FlashAtlas.helpTexture =  {a:1};
+        FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        cc.convert(new LayerWelcome(), cd, new FlashMirrorRoot(), new Rectangle(0,0,stage.stageWidth,stage.stageHeight), false,false);
+        cc.convert(new ScreenHome(), cd, new FlashMirrorRoot(), new Rectangle(0,0,stage.stageWidth,stage.stageHeight), false,false);
 
-        stage.addChild(cc);
-        stage.addChild(shape);
-
-        stage.addChild(LogUi.inst());
+//        stage.addChild(cc);
+//        stage.addChild(shape);
     }
 }
