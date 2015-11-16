@@ -1,4 +1,9 @@
 package ;
+import flash.ui.Keyboard;
+import flash.events.KeyboardEvent;
+import log.LogUI;
+import flash.text.TextFormat;
+import flash.text.TextField;
 import flash.display.Sprite;
 import flash.display.DisplayObjectContainer;
 import flash.display.DisplayObject;
@@ -17,28 +22,13 @@ import haxePort.starlingExtensions.flash.movieclipConverter.ConvertDescriptor;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
 import flash.Lib;
 import ScreenHome;
-class Main2 {
+
+class Main2 extends Sprite {
+
+    private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
+
     public function new() {
-
-    }
-
-    private static function textureFromBmdFunc(atlasBmd:BitmapData, textureScale:Float, onRestore:Function = null):Dynamic {
-        return {a:1 };
-    }
-
-    private static function getAtlas(helpTexture:Dynamic, atlasXML:TextureAtlasAbstract):ITextureAtlasDynamic {
-        return new TextureAtlasDynamic();
-    }
-
-    private static function saveAtlasPng(path:String, atlasBmd:BitmapData):Void {
-
-    }
-
-    static inline function func(a:String):Void {
-        trace("func-" + a);
-    }
-
-    static function main() {
+        super();
         var stage:Stage = Lib.current.stage;
 
 // create a center aligned rounded gray square
@@ -48,8 +38,6 @@ class Main2 {
         shape.x = (stage.stageWidth - 100) / 2;
         shape.y = (stage.stageHeight - 100) / 2;
 
-        var cc:FlashDisplay_Converter = new FlashDisplay_Converter();
-
         var cd:ConvertDescriptor = new ConvertDescriptor();
 
         FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
@@ -57,18 +45,57 @@ class Main2 {
         FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        cc.convert(new ScreenHome(), cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight), false, false);
-        cc.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
-        cc.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
+        var target:ScreenHome = new ScreenHome();
+        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight), false, false);
+        stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
+        stage.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
+        stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEvent);
 
         stage.addChild(shape);
+        stage.addChild(LogUI.inst());
+
     }
 
-    private static function onMouseEvent(e:MouseEvent):Void {
+    private function onMouseEvent(e:MouseEvent):Void {
+        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY);
         if (e.type == MouseEvent.MOUSE_DOWN) {
-            Std.instance(e.target, Sprite).startDrag();
-        } else {
-            Std.instance(e.target, Sprite).stopDrag();
+            converter.startDrag();
         }
+        if (e.type == MouseEvent.MOUSE_UP){
+            converter.stopDrag();
+        }
+    }
+
+    private function onKeyEvent(e:KeyboardEvent):Void {
+        if(e.type==KeyboardEvent.KEY_DOWN) {
+            switch e.keyCode {
+                case Keyboard.CONTROL:
+                    LogUI.inst().updateFromLogStack();
+                case Keyboard.LEFT:
+                    converter.x -= 10;
+                case Keyboard.RIGHT:
+                    converter.x += 10;
+            }
+        }
+    }
+
+    private function textureFromBmdFunc(atlasBmd:BitmapData, textureScale:Float, onRestore:Function = null):Dynamic {
+        return {a:1 };
+    }
+
+    private function getAtlas(helpTexture:Dynamic, atlasXML:TextureAtlasAbstract):ITextureAtlasDynamic {
+        return new TextureAtlasDynamic();
+    }
+
+    private function saveAtlasPng(path:String, atlasBmd:BitmapData):Void {
+
+    }
+
+    inline function func(a:String):Void {
+        trace("func-" + a);
+    }
+
+    static function main() {
+        Lib.current.stage.addChild(new Main2());
     }
 }

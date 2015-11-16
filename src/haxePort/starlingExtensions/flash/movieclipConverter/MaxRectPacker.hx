@@ -28,10 +28,13 @@ class MaxRectPacker
 	public var curentMaxW:Float;
 	public var curentMaxH:Float;
 	
-	public var textureAtlasRect:flash.geom.Rectangle = new flash.geom.Rectangle();
+	public var textureAtlasRect:Rectangle = new Rectangle();
 	public var regionPoint:Point = new Point();
 	
-	public var atlasRegionsGap:Float = 2; 
+	public var atlasRegionsGap:Float = 2;
+
+	public var xOffset:Float = 0;
+	public var yOffset:Float = 0;
 	
 	/**
 	 * if true - this flag will control the max. rectangle zie. It will start from the smallest possible and will increase each size twice till the maximum. This is useful because the content may be packed using the smalles possible size
@@ -48,14 +51,14 @@ class MaxRectPacker
 	 */		
 	public var placeInSmallestFreeRect:Bool = true;
 		
-	public function new(maximumW:Float, maximumH:Float):Void
+	public function new(xOffset:Float=0, yOffset:Float, maximumW:Float, maximumH:Float):Void
 	{
 		freeRectangles = [];
-		init(maximumW, maximumH);
+		init(xOffset, yOffset, maximumW, maximumH);
 	}
 	public var maximumWidth:Float;
 	public var maximumHeight:Float;
-	public function init(width:Float, height:Float):Void 
+	public function init(xOffset:Float, yOffset:Float, width:Float, height:Float):Void
 	{
 		_isFull = false;
 		maximumWidth = width;
@@ -66,15 +69,21 @@ class MaxRectPacker
 			width = width/8;
 			height = height/8;
 		}
-		
+
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+
 		regionPoint.x = regionPoint.y = 0;
-		textureAtlasRect.x = textureAtlasRect.y = textureAtlasRect.width = textureAtlasRect.height = 0;	
+		textureAtlasRect.x = 0;
+		textureAtlasRect.y = 0;
+		textureAtlasRect.width = textureAtlasRect.height = 0;
 		curentMaxW = width;
 		curentMaxH = height;
 		
 		freeRectangles.splice(0,freeRectangles.length);
 		freeRectangles.push(new Rectangle(0, 0, width, height));
 	}
+
 	private var _isFull:Bool = false;
 	public var isFull(get,null):Bool = false;
 	public function get_isFull():Bool
@@ -93,8 +102,8 @@ class MaxRectPacker
 		{
 			textureAtlasRect.width = newNode.x + width>textureAtlasRect.width ? newNode.x + width : textureAtlasRect.width;
 			textureAtlasRect.height = newNode.y + height>textureAtlasRect.height ? newNode.y + height : textureAtlasRect.height;
-			regionPoint.x = newNode.x;
-			regionPoint.y = newNode.y;
+			regionPoint.x = newNode.x + xOffset;
+			regionPoint.y = newNode.y + yOffset;
 		}
 		else
 		{
