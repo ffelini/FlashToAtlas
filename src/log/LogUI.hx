@@ -34,6 +34,7 @@ class LogUI extends TextField {
             height = stage.stageHeight;
         }
         text = value;
+        scrollV  = maxScrollV;
         updateStyle();
     }
 }

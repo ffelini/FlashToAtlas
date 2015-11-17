@@ -45,6 +45,8 @@ class Main2 extends Sprite {
         FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
+        stage.addChild(converter);
+
         var target:ScreenHome = new ScreenHome();
         converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight), false, false);
         stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
@@ -53,7 +55,6 @@ class Main2 extends Sprite {
 
         stage.addChild(shape);
         stage.addChild(LogUI.inst());
-
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
@@ -67,20 +68,23 @@ class Main2 extends Sprite {
     }
 
     private function onKeyEvent(e:KeyboardEvent):Void {
+        LogUI.inst().setText(e.type + " - " + e.keyCode);
         if(e.type==KeyboardEvent.KEY_DOWN) {
             switch e.keyCode {
                 case Keyboard.CONTROL:
                     LogUI.inst().updateFromLogStack();
                 case Keyboard.LEFT:
-                    converter.x -= 10;
+                    converter.x -= 100;
+                    stage.addChild(converter);
                 case Keyboard.RIGHT:
-                    converter.x += 10;
+                    converter.x += 100;
+                    stage.addChild(converter);
             }
         }
     }
 
     private function textureFromBmdFunc(atlasBmd:BitmapData, textureScale:Float, onRestore:Function = null):Dynamic {
-        return {a:1 };
+        return {a:1};
     }
 
     private function getAtlas(helpTexture:Dynamic, atlasXML:TextureAtlasAbstract):ITextureAtlasDynamic {
