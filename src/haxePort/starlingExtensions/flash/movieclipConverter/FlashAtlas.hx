@@ -71,14 +71,9 @@ class FlashAtlas extends ContentSprite {
         resetDescriptor();
         content.scaleX = content.scaleY = 1;
     }
-    private var lastDescriptor:AtlasDescriptor;
     function resetDescriptor() {
-        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
-        var xOffset:Float = atlasToDrawRect!=null ? atlasToDrawRect.width * 1.01 : 0;
-        if(lastDescriptor!=null) {
-            xOffset += lastDescriptor.xOffset;
-        }
-        lastDescriptor = descriptor;
+        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasToBeDrawn);
+        var xOffset:Float = atlasToDrawRect!=null ? atlasToDrawRect.right * 1.01 : 0;
         descriptor = new AtlasDescriptor(xOffset, 0);
 //        descriptor.reset();
     }
@@ -100,7 +95,7 @@ class FlashAtlas extends ContentSprite {
         if (subtextureObj.parent == null) addChild(subtextureObj);
     }
 
-    public function getSubtextureName(obj:DisplayObject):String {
+    public inline function getSubtextureName(obj:DisplayObject):String {
         var objName:String = ObjUtil.getClassName(obj);
         var _mc:flash.display.MovieClip = Std.instance(obj, MovieClip);
         if (!isMovieClip(_mc)) _mc = null;
@@ -429,7 +424,7 @@ class FlashAtlas extends ContentSprite {
     public var drawMAX_RECTAtlas:Bool = false;
 
     public function getAtlasToDrawRect(sourceAtlas:ITextureAtlasDynamic = null):Rectangle {
-        return correctAtlasToDrawRect(descriptor.textureAtlasRect);
+        return correctAtlasToDrawRect(descriptor.textureAtlasToBeDrawn);
     }
 
     public inline function correctAtlasToDrawRect(rect:Rectangle):Rectangle {
@@ -458,7 +453,7 @@ class FlashAtlas extends ContentSprite {
 
         if (debugAtlas) Handlers.functionCall(saveAtlasPngFunc, [descriptor.atlasAbstract.imagePath, atlasBmd]);
 
-        if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasRect, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
+        if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasToBeDrawn, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
         "\nlastSubtextureTargets-" + descriptor.subtextureTargets.length, debugAtlas ? "\n" + descriptor.atlasAbstract : "", "content scale-" + content.scaleX + "/" + content.scaleY]);
 
         AtlasDescriptor.savedAtlases++;

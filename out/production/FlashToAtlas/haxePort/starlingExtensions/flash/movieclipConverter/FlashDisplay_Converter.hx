@@ -123,10 +123,10 @@ class FlashDisplay_Converter extends FlashAtlas
 			}
 		}
 		
-		scaledRect = !scaleTexture && AtlasDescriptor.isBaselineExtended ? descriptor.textureAtlasRect : generateQuality(descriptor.textureAtlasRect,rect,removeGaps);
+		scaledRect = !scaleTexture && AtlasDescriptor.isBaselineExtended ? descriptor.textureAtlasToBeDrawn : generateQuality(descriptor.textureAtlasToBeDrawn,rect,removeGaps);
 		
-		var factorX:Float = scaledRect.width  / descriptor.textureAtlasRect.width;
-		var factorY:Float = scaledRect.height / descriptor.textureAtlasRect.height;
+		var factorX:Float = scaledRect.width  / descriptor.textureAtlasToBeDrawn.width;
+		var factorY:Float = scaledRect.height / descriptor.textureAtlasToBeDrawn.height;
 		
 		textureScale = factorX < factorY ? factorX : factorY;
 		descriptor.atlasAbstract.atlasRegionScale = textureScale;
@@ -232,11 +232,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	 */		
 	public function prepareForNextAtlas():Void
 	{
-		for(subtextObj in descriptor.subtextureTargets)
-		{
-			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
-			subtextObj.visible = false; 
-		}
+		hideAllSubtextureTargets();
 		
 		textureScale = content.scaleX = content.scaleY = 1;
 		resetDescriptor();
@@ -251,14 +247,19 @@ class FlashDisplay_Converter extends FlashAtlas
 		content.scaleX = content.scaleY = textureScale;
 		var bmd:BitmapData = super.drawAtlas(rect);   
 		
-		for(subtextObj in descriptor.subtextureTargets)
-		{
-			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
-			subtextObj.visible = false; 
-		}
+		hideAllSubtextureTargets();
 		
 		return bmd;
 	}
+
+	private inline function hideAllSubtextureTargets() {
+		for(subtextObj in descriptor.subtextureTargets)
+		{
+			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
+			subtextObj.visible = false;
+		}
+	}
+
 	public function redrawAtlas(atlas:ITextureAtlasDynamic,_atlasConfig:ObjectMap<Dynamic,Dynamic>):BitmapData
 	{ 
 		restoreAtlas(_atlasConfig); 
@@ -328,8 +329,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		AtlasDescriptor.isBaselineExtended = isBaselineExtended;
 		LogStack.addLog(this,"-------------------------------------- CONVERT " + object + " to " + mirror + " -------------------------------------------");
 		
-		object.visible = false;
-
 		var t:Float = debug ? getTimer() : 0;
 
 		try{

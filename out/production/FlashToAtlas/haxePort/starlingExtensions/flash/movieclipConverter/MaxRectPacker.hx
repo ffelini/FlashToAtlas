@@ -28,15 +28,36 @@ class MaxRectPacker
 	public var curentMaxW:Float;
 	public var curentMaxH:Float;
 	
-	public var textureAtlasRect:Rectangle = new Rectangle();
+	private var textureAtlasRect:Rectangle = new Rectangle();
 	public var regionPoint:Point = new Point();
 	
 	public var atlasRegionsGap:Float = 2;
 
-	public var xOffset:Float = 0;
-	public var yOffset:Float = 0;
-	
-	/**
+	@:isVar public var xOffset(get, null):Float;
+	@:isVar public var yOffset(get, null):Float;
+
+	function get_xOffset():Float {
+		return xOffset;
+	}
+
+	function get_yOffset():Float {
+		return yOffset;
+	}
+
+	public var textureAtlasToBeDrawn(get, null):Rectangle;
+	private var _textureAtlasToBeDrawn:Rectangle;
+	public inline function get_textureAtlasToBeDrawn():Rectangle {
+		if(_textureAtlasToBeDrawn==null) {
+			_textureAtlasToBeDrawn = textureAtlasRect.clone();
+		}
+		_textureAtlasToBeDrawn.width = textureAtlasRect.width;
+		_textureAtlasToBeDrawn.height = textureAtlasRect.height;
+		_textureAtlasToBeDrawn.x = xOffset;
+		_textureAtlasToBeDrawn.y = yOffset;
+		return _textureAtlasToBeDrawn;
+	}
+
+/**
 	 * if true - this flag will control the max. rectangle zie. It will start from the smallest possible and will increase each size twice till the maximum. This is useful because the content may be packed using the smalles possible size
 	 * if false - the max size will be fixed and algorithm will pack all regions in that size.
 	 */		
@@ -58,7 +79,7 @@ class MaxRectPacker
 	}
 	public var maximumWidth:Float;
 	public var maximumHeight:Float;
-	public function init(xOffset:Float, yOffset:Float, width:Float, height:Float):Void
+	function init(xOffset:Float, yOffset:Float, width:Float, height:Float):Void
 	{
 		_isFull = false;
 		maximumWidth = width;

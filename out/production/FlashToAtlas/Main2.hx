@@ -48,7 +48,8 @@ class Main2 extends Sprite {
         FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        converter.convert(target, cd, new FlashMirrorRoot(false), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.reuseAtlases = true;
+        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
         stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
         stage.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
         stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEvent);
@@ -59,10 +60,14 @@ class Main2 extends Sprite {
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
-        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY + "\n" +
-        " target.parent - " +target.parent +
-        " converter.parent - " + converter.parent +
-        " converter.x - " + converter.x);
+        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY +
+        " \nstage.width - " + stage.width +
+        " \nstage.height - " + stage.height +
+        " \nstage.fullScreenWidth - " + stage.fullScreenWidth+
+        " \nstage.fullScreenHeight - " + stage.fullScreenHeight+
+        " \nconverter.descriptor.xOffset - " + converter.descriptor.xOffset+
+        " \nconverter.atlasesPool.length - " + converter.atlasesPool.length);
+
         if (e.type == MouseEvent.MOUSE_DOWN) {
             converter.startDrag();
         }

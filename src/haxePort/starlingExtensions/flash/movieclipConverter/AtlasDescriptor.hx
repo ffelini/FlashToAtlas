@@ -15,7 +15,7 @@ class AtlasDescriptor extends MaxRectPacker
 	public var bestWidth:Float = 2048;
 	public var bestHeight:Float = 2048;
 
-	public var MAX_RECT:Rectangle;
+	public var MAX_RECT:Rectangle = new Rectangle();
 	public var atlasAbstract:TextureAtlasAbstract;
 	public var atlasVerticalPoint:Point = new Point();
 	public var atlasHorizontalPoint:Point = new Point();
@@ -41,10 +41,6 @@ class AtlasDescriptor extends MaxRectPacker
 
     public function new(xOffset:Float = 0, yOffset:Float = 0) {
         super(xOffset, yOffset, bestWidth, bestHeight);
-
-        MAX_RECT = new Rectangle(0, 0, bestWidth, bestHeight);
-        maxW = MAX_RECT.width / 8;
-        maxH = MAX_RECT.height / 8;
         reset();
     }
 
@@ -108,7 +104,7 @@ class AtlasDescriptor extends MaxRectPacker
 		atlasHorizontalPoint.x = regionPoint.x;
 		atlasHorizontalPoint.y = regionPoint.y;
 
-		regionPoint.x = textureAtlasRect.width;
+		regionPoint.x = xOffset + textureAtlasRect.width;
 		regionPoint.y = maxY = 0;
 		inColumn = true;
 
@@ -120,7 +116,7 @@ class AtlasDescriptor extends MaxRectPacker
 		atlasVerticalPoint.y = regionPoint.y;
 
 		regionPoint.x = maxX = 0;
-		regionPoint.y = textureAtlasRect.height;
+		regionPoint.y = yOffset + textureAtlasRect.height;
 		inColumn = false;
 
 		updatePoints(objRect);
