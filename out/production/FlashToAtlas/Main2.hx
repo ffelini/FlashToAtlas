@@ -23,16 +23,19 @@ import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Convert
 import flash.Lib;
 import ScreenHome;
 
+//-swf-header 640:960:10:CCCCCC
+
 class Main2 extends Sprite {
 
+    private var target:ScreenHome = new ScreenHome();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
+    private var shape = new Sprite();
 
     public function new() {
         super();
         var stage:Stage = Lib.current.stage;
 
 // create a center aligned rounded gray square
-        var shape = new Shape();
         shape.graphics.beginFill(0x333333);
         shape.graphics.drawRoundRect(0, 0, 100, 100, 10);
         shape.x = (stage.stageWidth - 100) / 2;
@@ -45,20 +48,21 @@ class Main2 extends Sprite {
         FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        stage.addChild(converter);
-
-        var target:ScreenHome = new ScreenHome();
-        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight), false, false);
+        converter.convert(target, cd, new FlashMirrorRoot(false), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
         stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
         stage.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
         stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEvent);
 
-        stage.addChild(shape);
-        stage.addChild(LogUI.inst());
+        addChild(converter);
+        addChild(shape);
+        addChild(LogUI.inst());
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
-        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY);
+        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY + "\n" +
+        " target.parent - " +target.parent +
+        " converter.parent - " + converter.parent +
+        " converter.x - " + converter.x);
         if (e.type == MouseEvent.MOUSE_DOWN) {
             converter.startDrag();
         }
@@ -74,11 +78,13 @@ class Main2 extends Sprite {
                 case Keyboard.CONTROL:
                     LogUI.inst().updateFromLogStack();
                 case Keyboard.LEFT:
+//                    stage.removeChild(converter);
                     converter.x -= 100;
-                    stage.addChild(converter);
+//                    stage.addChild(converter);
                 case Keyboard.RIGHT:
+//                    stage.removeChild(converter);
                     converter.x += 100;
-                    stage.addChild(converter);
+//                    stage.addChild(converter);
             }
         }
     }

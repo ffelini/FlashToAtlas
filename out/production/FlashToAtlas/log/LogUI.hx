@@ -20,7 +20,7 @@ class LogUI extends TextField {
     public function updateStyle():LogUI {
         setTextFormat(new TextFormat("", 50, 0xFFFFFF));
         selectable = false;
-        mouseWheelEnabled = true;
+        mouseWheelEnabled = false;
         return this;
     }
 
