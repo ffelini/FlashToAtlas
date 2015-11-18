@@ -35,7 +35,7 @@ class Main extends Sprite {
     public function new() {
         super();
         var stage:Stage = Lib.current.stage;
-        stage.color = 0;
+        stage.color = 0xCCCCCC;
 
 // create a center aligned rounded gray square
         shape.graphics.beginFill(0x333333);
@@ -54,10 +54,10 @@ class Main extends Sprite {
         converter.debug = converter.debugAtlas = true;
         new DragAndDrop(converter, onMouseEvent);
 
-//        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
-//        addChild(converter);
+        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        addChild(converter);
 
-        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+//        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
 
         addChild(shape);

@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="texture atlases and subTexture regions distribution made properly">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DragAndDrop.hx" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/Main2.hx" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Main2.hx" afterPath="$PROJECT_DIR$/src/Main.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
+    <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/test/FlashMirrorRoot.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/test/FlashMirrorRoot.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" afterPath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlashToAtlas.iml" afterPath="$PROJECT_DIR$/FlashToAtlas.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log/LogUI.hx" afterPath="$PROJECT_DIR$/src/log/LogUI.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/log/LogUI.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/log/LogUI.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/Main.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/Main.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/utils/MatrixUtil.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/utils/MatrixUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/utils/MatrixUtil.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/utils/MatrixUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.hx" afterPath="$PROJECT_DIR$/src/Main.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/utils/ObjUtil.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/utils/ObjUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/utils/ObjUtil.hx" afterPath="$PROJECT_DIR$/src/haxePort/utils/ObjUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/utils/RectangleUtil.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/utils/RectangleUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/utils/RectangleUtil.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/utils/RectangleUtil.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/stateMachine/StateMachine.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/stateMachine/StateMachine.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stateMachine/StateMachine.hx" afterPath="$PROJECT_DIR$/src/stateMachine/StateMachine.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlashToAtlas.iws" />
@@ -53,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="57" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -69,31 +53,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlashAtlas.hx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="420" column="4" selection-start-line="420" selection-start-column="4" selection-end-line="420" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogUI.hx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/log/LogUI.hx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlashDisplay_Converter.hx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlashDisplay_Converter.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.60181">
-              <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
+            <state vertical-scroll-proportion="-5.3333335">
+              <caret line="396" column="8" selection-start-line="396" selection-start-column="8" selection-end-line="396" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlashAtlas.hx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.13501647">
+              <caret line="186" column="22" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -102,8 +76,8 @@
       <file leaf-file-name="AtlasDescriptor.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.740741">
-              <caret line="146" column="24" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="24" />
+            <state vertical-scroll-proportion="-7.6296296">
+              <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -112,8 +86,8 @@
       <file leaf-file-name="MaxRectPacker.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.851852">
-              <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+            <state vertical-scroll-proportion="-1.7777778">
+              <caret line="116" column="33" selection-start-line="116" selection-start-column="33" selection-end-line="116" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -149,15 +123,15 @@
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/utils/GetNextPowerOfTwo.hx" />
         <option value="$PROJECT_DIR$/src/LogUI.java" />
         <option value="$PROJECT_DIR$/src/aaaa.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" />
         <option value="$PROJECT_DIR$/src/Main2.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
         <option value="$PROJECT_DIR$/src/DragAndDrop.hx" />
         <option value="$PROJECT_DIR$/src/log/LogUI.hx" />
         <option value="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
         <option value="$PROJECT_DIR$/src/Main.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
       </list>
     </option>
   </component>
@@ -809,7 +783,7 @@
       <workItem from="1447661201120" duration="850000" />
       <workItem from="1447662140257" duration="15901000" />
       <workItem from="1447748088272" duration="11926000" />
-      <workItem from="1447833291450" duration="7391000" />
+      <workItem from="1447833291450" duration="9065000" />
     </task>
     <task id="LOCAL-00001" summary="compilation issues fixed. Added gameAssets.swc (build with Adobe Flash CC that is parsed without issues)">
       <created>1447666588460</created>
@@ -847,11 +821,17 @@
       <option name="project" value="LOCAL" />
       <updated>1447776264709</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="texture atlases and subTexture regions distribution made properly">
+      <created>1447841999039</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1447841999039</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36257000" />
+    <option name="totallyTimeSpent" value="37931000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -910,7 +890,8 @@
     <MESSAGE value="stage size as compiler arguments" />
     <MESSAGE value="not adding atlas bitmaps on the stage in order to keep control over the real display list atlas state" />
     <MESSAGE value="not hiding atlas subTexture targets (display objects)" />
-    <option name="LAST_COMMIT_MESSAGE" value="not hiding atlas subTexture targets (display objects)" />
+    <MESSAGE value="texture atlases and subTexture regions distribution made properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="texture atlases and subTexture regions distribution made properly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1147,39 +1128,39 @@
     <entry file="file://$PROJECT_DIR$/src/Main.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.740741">
-          <caret line="146" column="24" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.851852">
-          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="420" column="4" selection-start-line="420" selection-start-column="4" selection-end-line="420" selection-end-column="4" />
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="57" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.60181">
-          <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
+        <state vertical-scroll-proportion="-5.3333335">
+          <caret line="396" column="8" selection-start-line="396" selection-start-column="8" selection-end-line="396" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7777778">
+          <caret line="116" column="33" selection-start-line="116" selection-start-column="33" selection-end-line="116" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.6296296">
+          <caret line="65" column="19" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13501647">
+          <caret line="186" column="22" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
           <folding />
         </state>
       </provider>

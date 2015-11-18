@@ -61,6 +61,10 @@ class AtlasDescriptor extends MaxRectPacker
 	}
 	public inline function quickRectInsert(objRect:Rectangle):Void
 	{
+		if(useMaxRectPackerAlgorythm) {
+			quickInsert(objRect.width, objRect.height);
+			return;
+		}
 		// calulating next atlas region top left point
 		while(regionPoint.x + objRect.width > maxW && regionPoint.y + objRect.height>maxH || objRect.height > maxH || objRect.width>maxW)
 		{
@@ -100,6 +104,9 @@ class AtlasDescriptor extends MaxRectPacker
 			newColumn(objRect);
 		}
 		updatePoints(objRect);
+
+		regionPoint.x += xOffset;
+		regionPoint.y += yOffset;
 	}
 	private inline function newColumn(objRect:Rectangle):Void
 	{

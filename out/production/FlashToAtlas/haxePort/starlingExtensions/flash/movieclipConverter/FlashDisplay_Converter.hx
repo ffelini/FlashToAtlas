@@ -134,6 +134,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		
 		LogStack.addLog(this,"getAtlasToDrawRect",["atlasRegionScale-"+textureScale]);
 
+		// saving drawRect offset
 		scaledRect.x = descriptor.xOffset * textureScale;
 		scaledRect.y = descriptor.yOffset * textureScale;
 		return scaledRect;

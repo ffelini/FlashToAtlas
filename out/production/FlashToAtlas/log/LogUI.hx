@@ -3,6 +3,7 @@ import haxePort.utils.LogStack;
 import flash.text.TextFormat;
 import flash.text.TextField;
 class LogUI extends TextField {
+
     public function new() {
         super();
         updateStyle();
