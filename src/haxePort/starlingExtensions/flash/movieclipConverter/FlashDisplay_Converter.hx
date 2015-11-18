@@ -255,8 +255,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic,_atlasConfig:ObjectMap<Dynamic,Dynamic>):BitmapData
 	{ 
-		restoreAtlas(_atlasConfig); 
-		
 		var atlasConf:Dynamic = _atlasConfig.get(atlas);
 		var rect:Rectangle = atlasConf[0];
 		textureScale = atlasConf[1];
@@ -264,44 +262,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		atlas.prepareForBitmapDataUpload(rect.width,rect.height);
 		
 		return drawAtlas(rect); 
-	}
-	public function restoreAtlas(_atlasConfig:ObjectMap<Dynamic,Dynamic>):Void
-	{
-		var objConfig:Dynamic;
-		var _mc:MovieClip;
-		
-		resetDescriptor();
-		
-		for(key in _atlasConfig.keys())
-		{
-			if(!Std.is(key,DisplayObject)) continue; 
-			objConfig = _atlasConfig.get(key);
-			
-			var parentMC:MovieClip = Std.is(key.parent, MovieClip) ? Std.instance(key.parent,MovieClip) : null;
-			if(parentMC!=null && parentMC.totalFrames>1) parentMC.gotoAndStop(1);
-			
-			key.visible = true;
-			_mc = Std.instance(key,MovieClip);
-			
-			if(isMovieClip(_mc))
-			{
-				var mcConfig:Vector<Float>;
-				var frames:Int = _mc.totalFrames;
-				for(frame in 1...frames+1)
-				{
-					mcConfig = objConfig[frame]; 
-					if(mcConfig==null) continue;
-					
-					prepareForAtlas(_mc,mcConfig,null,frame);
-				}
-				_mc.visible = false;
-			}
-			else 
-			{
-				processObjType(cast(key,DisplayObject));					
-				prepareForAtlas(cast(key,DisplayObject),objConfig); 
-			}
-		}			
 	}
 	private var convertDescriptor:ConvertDescriptor;
 	public var hierarchyParsingComplete:Bool = false;
