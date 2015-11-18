@@ -217,7 +217,9 @@ class FlashDisplay_Converter extends FlashAtlas
 			atlas.setAtlas(descriptor.atlasAbstract); 
 			atlas.setTexture(drawAtlasToTexture(atlasRect));
 		}
-					
+
+		var atlasConf:AtlasConf = new AtlasConf(atlas, atlasRect, textureScale, descriptor.regionPoint, descriptor.atlasAbstract);
+
 		descriptor.atlasConfig.set(atlas,[atlasRect,textureScale]);
 		descriptor.atlasConfig.set(atlasRect, [descriptor.regionPoint.x, descriptor.regionPoint.y]);
 		
@@ -249,14 +251,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		var bmd:BitmapData = super.drawAtlas(rect);   
 		
 		return bmd;
-	}
-
-	private inline function hideAllSubtextureTargets() {
-		for(subtextObj in descriptor.subtextureTargets)
-		{
-			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
-			subtextObj.visible = false;
-		}
 	}
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic,_atlasConfig:ObjectMap<Dynamic,Dynamic>):BitmapData
@@ -298,7 +292,7 @@ class FlashDisplay_Converter extends FlashAtlas
 					mcConfig = objConfig[frame]; 
 					if(mcConfig==null) continue;
 					
-					prepareForAtlas(_mc,mcConfig,null,frame);	
+					prepareForAtlas(_mc,mcConfig,null,frame);
 				}
 				_mc.visible = false;
 			}
@@ -542,7 +536,6 @@ class FlashDisplay_Converter extends FlashAtlas
 				} 
 			}
 			curentMirror.state.addSubtextures(mc, objBounds, _symbolName, subTextures);  
-			//mc.visible = false;
 			mc.stop();
 		}
 		else  

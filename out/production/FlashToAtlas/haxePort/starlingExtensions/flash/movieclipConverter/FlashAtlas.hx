@@ -78,7 +78,6 @@ class FlashAtlas extends ContentSprite {
         descriptor = new AtlasDescriptor();
         descriptor.xOffset = xOffset;
         descriptor.yOffset = 0;
-//        descriptor.reset();
     }
     public var symbolName:String;
     public var mc:MovieClip;
@@ -181,8 +180,7 @@ class FlashAtlas extends ContentSprite {
 
                 var t:Float = getTimer();
 
-                if (descriptor.useMaxRectPackerAlgorythm) descriptor.quickInsert(subtextureObjRect.width, subtextureObjRect.height);
-                else descriptor.quickRectInsert(subtextureObjRect);
+                descriptor.quickRectInsert(subtextureObjRect);
 
                 rectPackerAlgorithmDuration += (getTimer() - t);
                 if (descriptor.isFull) {
@@ -195,15 +193,13 @@ class FlashAtlas extends ContentSprite {
                         obj.width = localRect.width;
                         obj.height = localRect.height;
 
-                        if (descriptor.useMaxRectPackerAlgorythm) descriptor.quickInsert(subtextureObjRect.width, subtextureObjRect.height);
-                        else descriptor.quickRectInsert(subtextureObjRect);
+                        descriptor.quickRectInsert(subtextureObjRect);
                     }
                     else if (descriptor.isFull) {
                         onAtlasIsFull();
 
                         if (continueOnFull) {
-                            if (descriptor.useMaxRectPackerAlgorythm) descriptor.quickInsert(subtextureObjRect.width, subtextureObjRect.height);
-                            else descriptor.quickRectInsert(subtextureObjRect);
+                            descriptor.quickRectInsert(subtextureObjRect);
                         }
                     }
                 }

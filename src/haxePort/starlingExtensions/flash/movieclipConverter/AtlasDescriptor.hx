@@ -16,7 +16,7 @@ class AtlasDescriptor extends MaxRectPacker
 	public var bestHeight:Float = 2048;
 
 	public var MAX_RECT:Rectangle = new Rectangle();
-	public var atlasAbstract:TextureAtlasAbstract;
+	public var atlasAbstract:TextureAtlasAbstract = new TextureAtlasAbstract();
 	public var atlasVerticalPoint:Point = new Point();
 	public var atlasHorizontalPoint:Point = new Point();
 	public var originPoint:Point = new Point();

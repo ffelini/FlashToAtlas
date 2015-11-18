@@ -55,14 +55,7 @@ class MaxRectPacker
 	public var textureAtlasToBeDrawn(get, null):Rectangle;
 	private var _textureAtlasToBeDrawn:Rectangle;
 	public inline function get_textureAtlasToBeDrawn():Rectangle {
-		if(_textureAtlasToBeDrawn==null) {
-			_textureAtlasToBeDrawn = textureAtlasRect.clone();
-		}
-		_textureAtlasToBeDrawn.width = textureAtlasRect.width;
-		_textureAtlasToBeDrawn.height = textureAtlasRect.height;
-		_textureAtlasToBeDrawn.x = xOffset;
-		_textureAtlasToBeDrawn.y = yOffset;
-		return _textureAtlasToBeDrawn;
+		return textureAtlasRect;
 	}
 
 /**
