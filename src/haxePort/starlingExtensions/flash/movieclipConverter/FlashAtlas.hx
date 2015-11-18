@@ -14,7 +14,6 @@ import flash.display.PixelSnapping;
 import flash.geom.Matrix;
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import flash.utils.ByteArray;
 import haxe.ds.ObjectMap;
 import haxe.ds.Vector;
 import haxe.Timer;
