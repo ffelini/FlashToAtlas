@@ -47,8 +47,8 @@ class ObjUtil
 	{
 		System.pauseForGCIfCollectionImminent();
 		/*try {
-			new LocalConnection().connect('foo');
-			new LocalConnection().connect('foo');
+			Main LocalConnection().connect('foo');
+			Main LocalConnection().connect('foo');
 		} catch (e:*) {}*/
 		gcCount = 0;
 		//if(stage) stage.addEventListener(Event.ENTER_FRAME, doGC);

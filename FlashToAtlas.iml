@@ -4,7 +4,7 @@
     <option name="arguments" value="-swf-version 16 -swf-lib gameAssets.swc" />
     <option name="flexSdkName" value="AIRSDK_Compiler" />
     <option name="haxeTarget" value="Flash" />
-    <option name="mainClass" value="Main2" />
+    <option name="mainClass" value="Main" />
     <option name="outputFileName" value="FlashToAtlas.swf" />
     <option name="outputFolder" value="$MODULE_DIR$/out/production/FlashToAtlas" />
   </component>

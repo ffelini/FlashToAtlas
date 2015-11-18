@@ -25,7 +25,7 @@ class MatrixUtil
 	public function new() {}
 	
 	/** Converts a 2D matrix to a 3D matrix. If you pass a 'resultMatrix',  
-	 *  the result will be stored in this matrix instead of creating a new object. */
+	 *  the result will be stored in this matrix instead of creating a Main object. */
 	public inline static function convertTo3D(matrix:Matrix, resultMatrix:Matrix3D=null):Matrix3D
 	{
 		if (resultMatrix == null) resultMatrix = new Matrix3D();
@@ -42,7 +42,7 @@ class MatrixUtil
 	}
 	
 	/** Uses a matrix to transform 2D coordinates into a different space. If you pass a 
-	 *  'resultPoint', the result will be stored in this point instead of creating a new object.*/
+	 *  'resultPoint', the result will be stored in this point instead of creating a Main object.*/
 	public inline static function transformCoords(matrix:Matrix, x:Float, y:Float, resultPoint:Point=null):Point
 	{
 		if (resultPoint == null) resultPoint = new Point();   

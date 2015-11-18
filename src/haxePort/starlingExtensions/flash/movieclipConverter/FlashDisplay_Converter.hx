@@ -94,7 +94,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		descriptor.atlasConfig = new ObjectMap();
 	}
 	/**
-	 * if true and we reuse an existing atlas which texture will get a new content provided by converter then we use atlas texture size.  
+	 * if true and we reuse an existing atlas which texture will get a Main content provided by converter then we use atlas texture size.
 	 */		
 	public var useAtlasBiggestSize:Bool = false;
 	/**
@@ -133,7 +133,10 @@ class FlashDisplay_Converter extends FlashAtlas
 		atlas.textureScale = textureScale;
 		
 		LogStack.addLog(this,"getAtlasToDrawRect",["atlasRegionScale-"+textureScale]);
-		
+
+		// saving drawRect offset
+		scaledRect.x = descriptor.xOffset * textureScale;
+		scaledRect.y = descriptor.yOffset * textureScale;
 		return scaledRect;
 	}
 	/**
@@ -203,7 +206,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		{
 			atlasRect = getAtlasToDrawRect(atlas).clone();
 			
-			// preparing atlas for new bmd upload. This method dispose the texture if the size if different. It is important to be done before drawing new atlas
+			// preparing atlas for Main bmd upload. This method dispose the texture if the size if different. It is important to be done before drawing Main atlas
 			atlas.prepareForBitmapDataUpload(atlasRect.width,atlasRect.height);
 			
 			atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(atlasRect));
@@ -212,7 +215,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		{
 			atlasRect = getAtlasToDrawRect().clone();
 			atlas.setAtlas(descriptor.atlasAbstract); 
-			atlas.setTexture( drawAtlasToTexture(atlasRect));
+			atlas.setTexture(drawAtlasToTexture(atlasRect));
 		}
 					
 		descriptor.atlasConfig.set(atlas,[atlasRect,textureScale]);
@@ -232,8 +235,6 @@ class FlashDisplay_Converter extends FlashAtlas
 	 */		
 	public function prepareForNextAtlas():Void
 	{
-		hideAllSubtextureTargets();
-		
 		textureScale = content.scaleX = content.scaleY = 1;
 		resetDescriptor();
 		
@@ -247,17 +248,15 @@ class FlashDisplay_Converter extends FlashAtlas
 		content.scaleX = content.scaleY = textureScale;
 		var bmd:BitmapData = super.drawAtlas(rect);   
 		
-		hideAllSubtextureTargets();
-		
 		return bmd;
 	}
 
 	private inline function hideAllSubtextureTargets() {
-//		for(subtextObj in descriptor.subtextureTargets)
-//		{
-//			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
-//			subtextObj.visible = false;
-//		}
+		for(subtextObj in descriptor.subtextureTargets)
+		{
+			processObjType(subtextObj,curentMirror.getMirrorRect(subtextObj));
+			subtextObj.visible = false;
+		}
 	}
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic,_atlasConfig:ObjectMap<Dynamic,Dynamic>):BitmapData
@@ -476,7 +475,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			
 			if(_descriptor.ignore(child)) continue;
 			
-			// if resultSprite is from pool then all his children should be registered in new rootSprite
+			// if resultSprite is from pool then all his children should be registered in Main rootSprite
 			if(curentMirror.state.useObjPool)
 			{
 				if(Std.is(resultSprite,IFlashSpriteMirror)) childMirror = Std.instance(resultSprite,IFlashSpriteMirror).getMirrorChildAt(objIndex); 

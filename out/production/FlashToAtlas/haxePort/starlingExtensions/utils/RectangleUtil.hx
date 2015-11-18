@@ -139,7 +139,7 @@ class RectangleUtil
 
 	/** Calculates the bounds of a rectangle after transforming it by a matrix.
 	 *  If you pass a 'resultRect', the result will be stored in this rectangle
-	 *  instead of creating a new object. */
+	 *  instead of creating a Main object. */
 	public inline static function getBounds(rectangle:Rectangle, transformationMatrix:Matrix,
 									 resultRect:Rectangle=null):Rectangle
 	{

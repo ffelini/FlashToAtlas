@@ -33,16 +33,24 @@ class MaxRectPacker
 	
 	public var atlasRegionsGap:Float = 2;
 
-	@:isVar public var xOffset(get, null):Float;
-	@:isVar public var yOffset(get, null):Float;
+	@:isVar public var xOffset(get, set):Float;
+
+	function set_xOffset(value:Float) {
+		return this.xOffset = value;
+	}
 
 	function get_xOffset():Float {
 		return xOffset;
 	}
 
+	function set_yOffset(value:Float) {
+		return this.yOffset = value;
+	}
+
 	function get_yOffset():Float {
 		return yOffset;
 	}
+	@:isVar public var yOffset(get, set):Float;
 
 	public var textureAtlasToBeDrawn(get, null):Rectangle;
 	private var _textureAtlasToBeDrawn:Rectangle;
@@ -72,14 +80,15 @@ class MaxRectPacker
 	 */		
 	public var placeInSmallestFreeRect:Bool = true;
 		
-	public function new(xOffset:Float=0, yOffset:Float, maximumW:Float, maximumH:Float):Void
+	public function new(maximumW:Float, maximumH:Float):Void
 	{
 		freeRectangles = [];
-		init(xOffset, yOffset, maximumW, maximumH);
+		xOffset = yOffset = 0;
+		init(maximumW, maximumH);
 	}
 	public var maximumWidth:Float;
 	public var maximumHeight:Float;
-	function init(xOffset:Float, yOffset:Float, width:Float, height:Float):Void
+	function init(width:Float, height:Float):Void
 	{
 		_isFull = false;
 		maximumWidth = width;
@@ -90,9 +99,6 @@ class MaxRectPacker
 			width = width/8;
 			height = height/8;
 		}
-
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
 
 		regionPoint.x = regionPoint.y = 0;
 		textureAtlasRect.x = 0;
@@ -141,7 +147,7 @@ class MaxRectPacker
 					else curentMaxW = curentMaxW*smartSizeIncreaseFactor<maximumWidth ? curentMaxW*smartSizeIncreaseFactor : maximumWidth;
 				}
 				
-				// expanding free rectangles for new curent maximum size
+				// expanding free rectangles for Main curent maximum size
 				var numRectanglesToProcess:Int = freeRectangles.length;
 				var i:Int = 0;
 				
@@ -160,7 +166,7 @@ class MaxRectPacker
 					i++;
 				}
 				
-				// trying to add the rect using new size
+				// trying to add the rect using Main size
 				newNode = quickInsert(width,height); 
 			}
 		}

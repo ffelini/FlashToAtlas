@@ -1,4 +1,6 @@
 package test;
+import log.LogUI;
+import flash.events.MouseEvent;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
 import haxePort.starlingExtensions.flash.movieclipConverter.IFlashMirrorRoot;
 import flash.geom.Rectangle;
@@ -14,7 +16,11 @@ import flash.Lib;
 class FlashMirrorRoot implements IFlashMirrorRoot {
     private var addAtlasBitmapToStage:Bool = true;
 
-    public function new(addAtlasBitmapToStage:Bool = true) {
+    private var curentAtlasBitmap:Bitmap;
+
+    private var atlasesSprite:Sprite = new Sprite();
+
+    public function new(addAtlasBitmapToStage:Bool = false) {
         this.addAtlasBitmapToStage = addAtlasBitmapToStage;
     }
 
@@ -37,9 +43,18 @@ class FlashMirrorRoot implements IFlashMirrorRoot {
 
     public function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void {
         if (addAtlasBitmapToStage) {
-            var bmp:Bitmap = new Bitmap(bmd);
-            Lib.current.stage.addChild(bmp);
+            var atlasBitmapX:Float = curentAtlasBitmap!=null ? curentAtlasBitmap.x + curentAtlasBitmap.width : 0;
+            var sp:Sprite = new Sprite();
+            curentAtlasBitmap = new Bitmap(bmd);
+            curentAtlasBitmap.x = atlasBitmapX;
+            sp.addChild(curentAtlasBitmap);
+            atlasesSprite.addChild(sp);
+            Lib.current.stage.addChild(atlasesSprite);
+            new DragAndDrop(sp, onMouseEvent);
         }
+    }
+
+    private function onMouseEvent(e:MouseEvent):Void {
     }
 
     public function getMirror(mirror:Dynamic):Dynamic {

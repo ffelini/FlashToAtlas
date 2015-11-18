@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import log.LogUI;
 import flash.utils.Function;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -73,8 +74,10 @@ class FlashAtlas extends ContentSprite {
     }
     function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasToBeDrawn);
-        var xOffset:Float = atlasToDrawRect!=null ? atlasToDrawRect.right * 1.01 : 0;
-        descriptor = new AtlasDescriptor(xOffset, 0);
+        var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset * 1.1 + atlasToDrawRect.width : 0;
+        descriptor = new AtlasDescriptor();
+        descriptor.xOffset = xOffset;
+        descriptor.yOffset = 0;
 //        descriptor.reset();
     }
     public var symbolName:String;
@@ -214,7 +217,7 @@ class FlashAtlas extends ContentSprite {
                     subtextureObjRect.x = descriptor.regionPoint.x;
                     subtextureObjRect.y = descriptor.regionPoint.y;
 
-// calculating object position in the new texture atlas region considering his local position
+// calculating object position in the Main texture atlas region considering his local position
                     var localP:Point = subtextureObj.parent.globalToLocal(descriptor.regionPoint);
                     var localBounds:Rectangle = subtextureObj.getBounds(subtextureObj.parent);
 
@@ -444,8 +447,9 @@ class FlashAtlas extends ContentSprite {
 
         atlasBmd = new BitmapData(Std.int(rect.width), Std.int(rect.height), !debugAtlas, 0x000000);
 
-        if (drawWithQuality) atlasBmd.drawWithQuality(this, null, null, null, null, drawSmoothly, drawQuality);
-        else atlasBmd.draw(this, null, null, null, null, drawSmoothly);
+        var drawMatrix:Matrix = new Matrix( 1, 0, 0, 1, - rect.x, - rect.y );
+        if (drawWithQuality) atlasBmd.drawWithQuality(this, drawMatrix, null, null, null, drawSmoothly, drawQuality);
+        else atlasBmd.draw(this, drawMatrix, null, null, null, drawSmoothly);
 
         if (debug) {
             DRAWS ++;

@@ -39,9 +39,11 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public static var isBaselineExtended:Bool;
 
-    public function new(xOffset:Float = 0, yOffset:Float = 0) {
-        super(xOffset, yOffset, bestWidth, bestHeight);
+	public static var INSTANCES:Array<AtlasDescriptor> = [];
+    public function new() {
+        super(bestWidth, bestHeight);
         reset();
+		INSTANCES.push(this);
     }
 
 	public inline function updateMaxY(objRect:Rectangle):Void
@@ -88,7 +90,7 @@ class AtlasDescriptor extends MaxRectPacker
 
 		updatePoints(objRect);
 
-		// checking if a new row or column is possible
+		// checking if a Main row or column is possible
 		if (atlasRegionEnd.x - atlasRegionsGap > MAX_RECT.width && atlasRegionEnd.y - atlasRegionsGap < MAX_RECT.height)
 		{
 			newRow(objRect);
@@ -157,7 +159,7 @@ class AtlasDescriptor extends MaxRectPacker
 		maxW = MAX_RECT.width/8;
 		maxH = MAX_RECT.height/8;
 
-		init(xOffset, yOffset, MAX_RECT.width,MAX_RECT.height);
+		init(MAX_RECT.width,MAX_RECT.height);
 	}
 	public function clone():AtlasDescriptor
 	{
@@ -184,5 +186,12 @@ class AtlasDescriptor extends MaxRectPacker
 		c.inColumn = inColumn;
 
 		return c;
+	}
+
+	public function toString():String {
+		return "\nxOffset - " + xOffset +
+		" \nyOffset - " + yOffset +
+		"\ntextureAtlasToBeDrawn - " + textureAtlasToBeDrawn+
+		"\n-----------------------------------";
 	}
 }
