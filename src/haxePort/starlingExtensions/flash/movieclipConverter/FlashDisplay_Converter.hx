@@ -290,13 +290,9 @@ class FlashDisplay_Converter extends FlashAtlas
 		
 		var t:Float = debug ? getTimer() : 0;
 
-		try{
-			if(isDisplayObjectContainer(object)) Std.instance(object,DisplayObjectContainer).stopAllMovieClips();
-		}catch(msg:String){}
-
 		rectPackerAlgorithmDuration = 0;   
 		NUM_LOOPS = DRAWS = 0;
-		
+
 		setTarget(object,mirror);
 
 		// changing object size in case if it is bigger than the screen size, however big textures are not required for small screens			
@@ -307,9 +303,13 @@ class FlashDisplay_Converter extends FlashAtlas
 		atlas = getAtlas();
 		
 		hierarchyParsingComplete = false;
-		
+
+		stopAllMovieClips();
+
 		if (isDisplayObjectContainer(object)) convertSprite(Std.instance(object,DisplayObjectContainer), mirror, _descriptor);
 		else convertObject(object,0);
+
+		stopAllMovieClips();
 		
 		hierarchyParsingComplete = true;
 		
@@ -348,6 +348,9 @@ class FlashDisplay_Converter extends FlashAtlas
 		
 		return mirror;
 	}
+
+
+
 	public var target:DisplayObject;
 	public var curentMirror:IFlashMirrorRoot;
 	public function setTarget(object:DisplayObject,mirror:IFlashMirrorRoot):Void

@@ -54,10 +54,11 @@ class Main extends Sprite {
         converter.debug = converter.debugAtlas = true;
         new DragAndDrop(converter, onMouseEvent);
 
-//        addChild(converter);
-//        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        addChild(converter);
+        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.stopAllMovieClips();
 
-        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+//        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
 
         addChild(shape);
