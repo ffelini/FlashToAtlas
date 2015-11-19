@@ -25,6 +25,7 @@ import flash.Lib;
 import ScreenHome;
 
 //-swf-header 640:960:10:CCCCCC
+//-swf-version 16 -swf-lib gameAssets.swc --macro include('src')
 
 class Main extends Sprite {
 
@@ -52,7 +53,8 @@ class Main extends Sprite {
 
         converter.reuseAtlases = true;
         converter.debug = converter.debugAtlas = true;
-        converter.descriptor.atlasRegionsGap = 140;
+//        converter.descriptor.atlasRegionsGap = 140;
+        converter.descriptor.smartSizeIncrease = true;
         new DragAndDrop(converter, onMouseEvent);
 
 //        addChild(converter);
@@ -61,6 +63,7 @@ class Main extends Sprite {
 
         converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
+        converter.scaleX = converter.scaleY = 0.3;
 
         addChild(shape);
         addChild(LogUI.inst());
@@ -70,9 +73,9 @@ class Main extends Sprite {
         LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY +
         " \nstage.width - " + stage.width +
         " \nstage.height - " + stage.height +
-        " \nstage.fullScreenWidth - " + stage.fullScreenWidth+
-        " \nstage.fullScreenHeight - " + stage.fullScreenHeight+
-        " \nAtlasDescriptor.INSTANCES - " + AtlasDescriptor.INSTANCES+
+        " \nstage.fullScreenWidth - " + stage.fullScreenWidth +
+        " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
+        " \nAtlasDescriptor.INSTANCES - " + AtlasDescriptor.INSTANCES +
         " \nconverter.atlasesPool.length - " + converter.atlasesPool.length);
     }
 

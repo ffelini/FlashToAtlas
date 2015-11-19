@@ -35,7 +35,7 @@ class AtlasDescriptor extends MaxRectPacker
 	 */
 	public var useMaxRectPackerAlgorythm:Bool = true;
 
-	public var subtextureTargets:Array<DisplayObject> = new Array<DisplayObject>();
+	public var subtextureTargets:Array<DisplayObject> = [];
 
 	public var inColumn:Bool = false;
 
@@ -51,6 +51,10 @@ class AtlasDescriptor extends MaxRectPacker
     public function next():AtlasDescriptor {
         var nextAtlasDescriptor:AtlasDescriptor = new AtlasDescriptor();
         nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
+		nextAtlasDescriptor.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
+		nextAtlasDescriptor.smartSizeIncrease = smartSizeIncrease;
+		nextAtlasDescriptor.smartSizeIncreaseFactor = smartSizeIncreaseFactor;
+		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
         return nextAtlasDescriptor;
     }
 
@@ -174,7 +178,7 @@ class AtlasDescriptor extends MaxRectPacker
 		atlasAbstract = new TextureAtlasAbstract();
 		atlasAbstract.imagePath = savedAtlases + ".png";
 
-		subtextureTargets.splice(0, subtextureTargets.length);
+		subtextureTargets = [];
 
 		inColumn = false;
 		maxY = maxX = minX = minY = 0;

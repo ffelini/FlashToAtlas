@@ -32,7 +32,7 @@ class MaxRectPacker
 
 	public var textureAtlasRect:Rectangle = new Rectangle();
 	public var regionPoint:Point = new Point();
-	
+
 	public var atlasRegionsGap:Float = DEFAULT_ATLAS_REGIONS_GAP;
 
 	@:isVar public var xOffset(get, set):Float;
@@ -57,7 +57,7 @@ class MaxRectPacker
 /**
 	 * if true - this flag will control the max. rectangle zie. It will start from the smallest possible and will increase each size twice till the maximum. This is useful because the content may be packed using the smalles possible size
 	 * if false - the max size will be fixed and algorithm will pack all regions in that size.
-	 */		
+	 */
 	public var smartSizeIncrease:Bool = true;
 	/**
 	 * by this value the size of the rect will be increased 
@@ -82,22 +82,22 @@ class MaxRectPacker
 		_isFull = false;
 		maximumWidth = width;
 		maximumHeight = height;
+		curentMaxW = width;
+		curentMaxH = height;
 		
 		if(smartSizeIncrease)
 		{
-			width = width/8;
-			height = height/8;
+			curentMaxW = curentMaxW/8;
+			curentMaxH = curentMaxH/8;
 		}
 
 		regionPoint.x = regionPoint.y = 0;
 		textureAtlasRect.x = 0;
 		textureAtlasRect.y = 0;
 		textureAtlasRect.width = textureAtlasRect.height = 0;
-		curentMaxW = width;
-		curentMaxH = height;
 		
 		freeRectangles.splice(0,freeRectangles.length);
-		freeRectangles.push(new Rectangle(0, 0, width, height));
+		freeRectangles.push(new Rectangle(0, 0, curentMaxW, curentMaxH));
 	}
 
 	private var _isFull:Bool = false;
@@ -139,8 +139,8 @@ class MaxRectPacker
 				// expanding free rectangles for Main curent maximum size
 				var numRectanglesToProcess:Int = freeRectangles.length;
 				var i:Int = 0;
-				
-				while (i < numRectanglesToProcess) 
+
+				while (i < numRectanglesToProcess)
 				{
 					newFreeRect = freeRectangles[i];
 					if(curentMaxW>lastCurentMaxW)
@@ -151,9 +151,16 @@ class MaxRectPacker
 					{
 						if(newFreeRect.y+newFreeRect.height==lastCurentMaxH) newFreeRect.height = curentMaxH - newFreeRect.y;
 					}
-					
+
 					i++;
 				}
+
+				// adding new free recatangles if curent max size was increased
+//				if(curentMaxW>lastCurentMaxW) {
+//					freeRectangles.push(new Rectangle(curentMaxW - lastCurentMaxW + atlasRegionsGap, 0, curentMaxW - lastCurentMaxW, lastCurentMaxH));
+//				} else  if(curentMaxH>lastCurentMaxH) {
+//					freeRectangles.push(new Rectangle(0, curentMaxH - lastCurentMaxH + atlasRegionsGap, lastCurentMaxW, curentMaxH - lastCurentMaxH));
+//				}
 				
 				// trying to add the rect using Main size
 				newNode = quickInsert(width,height); 

@@ -189,8 +189,7 @@ class FlashAtlas extends ContentSprite {
                         obj.height = localRect.height;
 
                         descriptor.quickRectInsert(subtextureObjRect);
-                    }
-                    else if (descriptor.isFull) {
+                    } else if (descriptor.isFull) {
                         onAtlasIsFull();
 
                         if (continueOnFull) {

@@ -53,7 +53,8 @@ class Main extends Sprite {
 
         converter.reuseAtlases = true;
         converter.debug = converter.debugAtlas = true;
-        converter.descriptor.atlasRegionsGap = 140;
+//        converter.descriptor.atlasRegionsGap = 140;
+        converter.descriptor.smartSizeIncrease = true;
         new DragAndDrop(converter, onMouseEvent);
 
 //        addChild(converter);
@@ -62,6 +63,7 @@ class Main extends Sprite {
 
         converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
+        converter.scaleX = converter.scaleY = 0.3;
 
         addChild(shape);
         addChild(LogUI.inst());
