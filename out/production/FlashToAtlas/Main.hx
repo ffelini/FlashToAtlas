@@ -52,13 +52,14 @@ class Main extends Sprite {
 
         converter.reuseAtlases = true;
         converter.debug = converter.debugAtlas = true;
+        converter.descriptor.atlasRegionsGap = 140;
         new DragAndDrop(converter, onMouseEvent);
 
-        addChild(converter);
-        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
-        converter.stopAllMovieClips();
+//        addChild(converter);
+//        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+//        converter.stopAllMovieClips();
 
-//        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
 
         addChild(shape);

@@ -23,15 +23,17 @@ Author: Shawn Skinner (treefortress)
 
 class MaxRectPacker
 {
+	public static inline var DEFAULT_ATLAS_REGIONS_GAP:Float = 2;
+
 	public var freeRectangles:Array<Rectangle>;
 	
 	public var curentMaxW:Float;
 	public var curentMaxH:Float;
-	
-	private var textureAtlasRect:Rectangle = new Rectangle();
+
+	public var textureAtlasRect:Rectangle = new Rectangle();
 	public var regionPoint:Point = new Point();
 	
-	public var atlasRegionsGap:Float = 2;
+	public var atlasRegionsGap:Float = DEFAULT_ATLAS_REGIONS_GAP;
 
 	@:isVar public var xOffset(get, set):Float;
 
@@ -51,12 +53,6 @@ class MaxRectPacker
 		return yOffset;
 	}
 	@:isVar public var yOffset(get, set):Float;
-
-	public var textureAtlasToBeDrawn(get, null):Rectangle;
-	private var _textureAtlasToBeDrawn:Rectangle;
-	public inline function get_textureAtlasToBeDrawn():Rectangle {
-		return textureAtlasRect;
-	}
 
 /**
 	 * if true - this flag will control the max. rectangle zie. It will start from the smallest possible and will increase each size twice till the maximum. This is useful because the content may be packed using the smalles possible size
