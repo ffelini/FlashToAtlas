@@ -62,21 +62,17 @@ class FlashAtlas extends ContentSprite {
     public function new() {
         super();
 
-        resetAll();
+        resetDescriptor();
 
         atlas = getAtlas();
     }
-
-    public function resetAll():Void {
-        resetDescriptor();
-        content.scaleX = content.scaleY = 1;
-    }
     function resetDescriptor() {
-        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasToBeDrawn);
+        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
         var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset * 1.1 + atlasToDrawRect.width : 0;
-        descriptor = new AtlasDescriptor();
+        descriptor = descriptor.next();
         descriptor.xOffset = xOffset;
         descriptor.yOffset = 0;
+        content.scaleX = content.scaleY = descriptor.textureScale;
     }
     public var symbolName:String;
     public var mc:MovieClip;
@@ -422,7 +418,7 @@ class FlashAtlas extends ContentSprite {
     public var drawMAX_RECTAtlas:Bool = false;
 
     public function getAtlasToDrawRect(sourceAtlas:ITextureAtlasDynamic = null):Rectangle {
-        return correctAtlasToDrawRect(descriptor.textureAtlasToBeDrawn);
+        return correctAtlasToDrawRect(descriptor.textureAtlasRect);
     }
 
     public inline function correctAtlasToDrawRect(rect:Rectangle):Rectangle {
@@ -440,6 +436,7 @@ class FlashAtlas extends ContentSprite {
     public function drawAtlas(rect:Rectangle):BitmapData {
         var t:Float = debug ? getTimer() : 0;
 
+        content.scaleX = content.scaleY = descriptor.textureScale;
         atlasBmd = new BitmapData(Std.int(rect.width), Std.int(rect.height), !debugAtlas, 0x000000);
 
         var drawMatrix:Matrix = new Matrix( 1, 0, 0, 1, - rect.x, - rect.y );
@@ -452,7 +449,7 @@ class FlashAtlas extends ContentSprite {
 
         if (debugAtlas) Handlers.functionCall(saveAtlasPngFunc, [descriptor.atlasAbstract.imagePath, atlasBmd]);
 
-        if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasToBeDrawn, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
+        if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasRect, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
         "\nlastSubtextureTargets-" + descriptor.subtextureTargets.length, debugAtlas ? "\n" + descriptor.atlasAbstract : "", "content scale-" + content.scaleX + "/" + content.scaleY]);
 
         AtlasDescriptor.savedAtlases++;
@@ -484,9 +481,7 @@ class FlashAtlas extends ContentSprite {
 
     public function clear():Void {
         Reflect.callMethod(this, forEachChild, [this, removeAtlasContainerChild]);
-
-        scaleX = scaleY = 1;
-        content.scaleX = content.scaleY = 1;
+        resetDescriptor();
     }
 
     public inline function removeAtlasContainerChild(child:DisplayObject, childIndex:Int):Void {

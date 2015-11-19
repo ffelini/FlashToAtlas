@@ -55,6 +55,7 @@ class FlashMirrorRoot implements IFlashMirrorRoot {
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
+        LogUI.inst().setText(e.currentTarget+" size - " + e.currentTarget.width + "/" + e.currentTarget.height);
     }
 
     public function getMirror(mirror:Dynamic):Dynamic {

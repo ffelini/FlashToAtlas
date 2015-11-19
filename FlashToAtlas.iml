@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="HaxeModuleSettingsStorage">
-    <option name="arguments" value="-swf-version 16 -swf-lib gameAssets.swc" />
+    <option name="arguments" value="-swf-version 16 -swf-lib gameAssets.swc --macro include('src')" />
     <option name="flexSdkName" value="AIRSDK_Compiler" />
     <option name="haxeTarget" value="Flash" />
     <option name="mainClass" value="Main" />

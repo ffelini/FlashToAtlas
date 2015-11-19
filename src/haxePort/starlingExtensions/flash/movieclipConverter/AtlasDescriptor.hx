@@ -28,7 +28,9 @@ class AtlasDescriptor extends MaxRectPacker
 	public var maxW:Float;
 	public var maxH:Float;
 
-	/**
+	public var atlasConfig:ObjectMap<Dynamic,Dynamic> = new ObjectMap<Dynamic,Dynamic>();
+
+/**
 	 * flag that controls which packing algorythm to use. MaxRectPacker is much optional because it will fill all gaps but 30% slower because uses recursion for economic regions fit.
 	 */
 	public var useMaxRectPackerAlgorythm:Bool = true;
@@ -44,6 +46,12 @@ class AtlasDescriptor extends MaxRectPacker
         super(bestWidth, bestHeight);
         reset();
 		INSTANCES.push(this);
+    }
+
+    public function next():AtlasDescriptor {
+        var nextAtlasDescriptor:AtlasDescriptor = new AtlasDescriptor();
+        nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
+        return nextAtlasDescriptor;
     }
 
 	public inline function updateMaxY(objRect:Rectangle):Void
@@ -145,7 +153,19 @@ class AtlasDescriptor extends MaxRectPacker
 		return atlasRegionEnd.x - atlasRegionsGap > MAX_RECT.width || atlasRegionEnd.y - atlasRegionsGap > MAX_RECT.height ||
 					textureAtlasRect.width>=MAX_RECT.width || textureAtlasRect.height>=MAX_RECT.height;
 	}
-	public var atlasConfig:ObjectMap<Dynamic,Dynamic>;
+
+    /**
+	 * atlas content scale factor fo fitting the atlas content
+	 */
+    @:isVar public var textureScale(get, set):Float;
+
+    function set_textureScale(value:Float) {
+        return atlasAbstract.atlasRegionScale = value;
+    }
+
+    function get_textureScale():Float {
+        return atlasAbstract.atlasRegionScale;
+    }
 	public static var savedAtlases:Int = 0;
 	public inline function reset():Void
 	{
@@ -198,7 +218,7 @@ class AtlasDescriptor extends MaxRectPacker
 	public function toString():String {
 		return "\nxOffset - " + xOffset +
 		" \nyOffset - " + yOffset +
-		"\ntextureAtlasToBeDrawn - " + textureAtlasToBeDrawn+
+		"\ntextureAtlasRect - " + textureAtlasRect+
 		"\n-----------------------------------";
 	}
 }
