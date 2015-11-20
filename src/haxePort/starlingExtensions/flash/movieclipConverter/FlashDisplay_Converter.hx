@@ -249,7 +249,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		atlasConf.atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
 		return drawAtlas(atlasConf.atlasRect);
 	}
-	private var convertDescriptor:ConvertDescriptor;
+	public var convertDescriptor:ConvertDescriptor;
 	public var hierarchyParsingComplete:Bool = false;
 	/**
 	 * 

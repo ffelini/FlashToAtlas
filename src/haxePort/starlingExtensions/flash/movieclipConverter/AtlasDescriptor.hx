@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithms.RectanglePacker;
 import flash.display.DisplayObject;
 import flash.geom.Point;
 import flash.geom.Rectangle;
@@ -7,8 +8,10 @@ import flash.utils.Dictionary;
 import haxe.ds.ObjectMap;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 
-class AtlasDescriptor extends MaxRectPacker
+class AtlasDescriptor extends RectanglePacker
 {
+	public static var INSTANCES:Array<AtlasDescriptor> = [];
+
 	public var maxWidth:Float = 4096;
 	public var maxHeight:Float = 4096;
 
@@ -39,22 +42,43 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public var inColumn:Bool = false;
 
-	public static var isBaselineExtended:Bool;
+	public static var isBaselineExtended:Bool = false;
 
-	public static var INSTANCES:Array<AtlasDescriptor> = [];
     public function new() {
-        super(bestWidth, bestHeight);
-        reset();
+		super(isBaselineExtended ? maxWidth : bestWidth, isBaselineExtended ? maxHeight : bestHeight);
+
 		INSTANCES.push(this);
     }
 
-    public function next():AtlasDescriptor {
+	public override function init(width:Float, height:Float):Void {
+		super.init(width, height);
+
+		atlasConfig = new ObjectMap();
+
+		atlasAbstract = new TextureAtlasAbstract();
+		atlasAbstract.imagePath = savedAtlases + ".png";
+
+		subtextureTargets = [];
+
+		inColumn = false;
+		maxY = maxX = minX = minY = 0;
+		regionPoint.x = regionPoint.y = atlasRegionEnd.x = atlasRegionEnd.y = atlasHorizontalPoint.x = atlasHorizontalPoint.y = atlasVerticalPoint.x = atlasVerticalPoint.y = 0;
+
+		MAX_RECT.width = curentMaxW;
+		MAX_RECT.height = curentMaxH;
+
+		maxW = MAX_RECT.width/8;
+		maxH = MAX_RECT.height/8;
+	}
+
+
+	public function next():AtlasDescriptor {
         var nextAtlasDescriptor:AtlasDescriptor = new AtlasDescriptor();
-        nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
-		nextAtlasDescriptor.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
-		nextAtlasDescriptor.smartSizeIncrease = smartSizeIncrease;
-		nextAtlasDescriptor.smartSizeIncreaseFactor = smartSizeIncreaseFactor;
-		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
+//        nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
+//		nextAtlasDescriptor.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
+//		nextAtlasDescriptor.smartSizeIncrease = smartSizeIncrease;
+//		nextAtlasDescriptor.smartSizeIncreaseFactor = smartSizeIncreaseFactor;
+//		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
         return nextAtlasDescriptor;
     }
 
@@ -171,27 +195,6 @@ class AtlasDescriptor extends MaxRectPacker
         return atlasAbstract.atlasRegionScale;
     }
 	public static var savedAtlases:Int = 0;
-	public inline function reset():Void
-	{
-		atlasConfig = new ObjectMap();
-
-		atlasAbstract = new TextureAtlasAbstract();
-		atlasAbstract.imagePath = savedAtlases + ".png";
-
-		subtextureTargets = [];
-
-		inColumn = false;
-		maxY = maxX = minX = minY = 0;
-		regionPoint.x = regionPoint.y = atlasRegionEnd.x = atlasRegionEnd.y = atlasHorizontalPoint.x = atlasHorizontalPoint.y = atlasVerticalPoint.x = atlasVerticalPoint.y = 0;
-
-		MAX_RECT.width = isBaselineExtended ? maxWidth : bestWidth;
-		MAX_RECT.height = isBaselineExtended ? maxHeight : bestHeight;
-
-		maxW = MAX_RECT.width/8;
-		maxH = MAX_RECT.height/8;
-
-		init(MAX_RECT.width,MAX_RECT.height);
-	}
 	public function clone():AtlasDescriptor
 	{
 		var c:AtlasDescriptor = new AtlasDescriptor();

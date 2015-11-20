@@ -29,7 +29,7 @@ import ScreenHome;
 
 class Main extends Sprite {
 
-    private var target:ScreenHome = new ScreenHome();
+    private var target:ScreenPlay = new ScreenPlay();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var shape = new Sprite();
 
@@ -53,8 +53,6 @@ class Main extends Sprite {
 
         converter.reuseAtlases = true;
         converter.debug = converter.debugAtlas = true;
-//        converter.descriptor.atlasRegionsGap = 140;
-        converter.descriptor.smartSizeIncrease = true;
         new DragAndDrop(converter, onMouseEvent);
 
 //        addChild(converter);
@@ -76,7 +74,8 @@ class Main extends Sprite {
         " \nstage.fullScreenWidth - " + stage.fullScreenWidth +
         " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
         " \nAtlasDescriptor.INSTANCES - " + AtlasDescriptor.INSTANCES +
-        " \nconverter.atlasesPool.length - " + converter.atlasesPool.length);
+        " \nconverter.atlasesPool.length - " + converter.atlasesPool.length+
+        "\nconverter.convertDescriptor.convertDuration - " + converter.convertDescriptor.convertDuration);
     }
 
     private function textureFromBmdFunc(atlasBmd:BitmapData, textureScale:Float, onRestore:Function = null):Dynamic {
