@@ -173,7 +173,7 @@ class RectanglePacker extends TexturePacker {
          */
 
     private inline function getFreeAreaIndex(rectangle:Rectangle):Int {
-        var best:Rectangle = new Rectangle(curentMaxW + 1, 0, 0, 0);
+        var best:Rectangle = new Rectangle(curentMaxW, 0, 0, 0);
         var index:Int = -1;
         var i:Int = mFreeAreas.length;
         while (--i >= 0) {

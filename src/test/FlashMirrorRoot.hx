@@ -44,7 +44,7 @@ class FlashMirrorRoot implements IFlashMirrorRoot {
 
     public function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void {
         if (addAtlasBitmapToStage) {
-            var atlasBitmapX:Float = curentAtlasBitmap!=null ? curentAtlasBitmap.x + curentAtlasBitmap.width : 0;
+            var atlasBitmapX:Float = curentAtlasBitmap!=null ? curentAtlasBitmap.x + curentAtlasBitmap.width +20: 0;
             var sp:Sprite = new Sprite();
             curentAtlasBitmap = new Bitmap(bmd);
             curentAtlasBitmap.x = atlasBitmapX;
