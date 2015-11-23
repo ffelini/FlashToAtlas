@@ -179,7 +179,7 @@ class FlashAtlas extends ContentSprite {
 
                 rectPackerAlgorithmDuration += (getTimer() - t);
                 if (descriptor.isFull) {
-// checking if obj bounds fits at least max rect size
+                    // checking if obj bounds fits at least max rect size
                     subtextureObjRect = subtextureObj.getRect(this);
                     if (subtextureObjRect.width > descriptor.maximumWidth || subtextureObjRect.height > descriptor.maximumHeight) {
                         subtextureObjRect = RectangleUtil.fit(subtextureObjRect, descriptor.maxRect, ScaleMode.SHOW_ALL, false, subtextureObjRect);

@@ -60,6 +60,10 @@ class RectanglePacker extends TexturePacker {
         }
     }
 
+    override public function freeRectangle(r:Rectangle):Void {
+        mFreeAreas.unshift(r);
+    }
+
 /**
          * Tries to insert new rectangle into the packer
          * @param rectangle

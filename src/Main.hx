@@ -29,20 +29,13 @@ import ScreenHome;
 
 class Main extends Sprite {
 
-    private var target:ScreenPlay = new ScreenPlay();
+    private var target:ScreenFinish = new ScreenFinish();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
-    private var shape = new Sprite();
 
     public function new() {
         super();
         var stage:Stage = Lib.current.stage;
         stage.color = 0xCCCCCC;
-
-// create a center aligned rounded gray square
-        shape.graphics.beginFill(0x333333);
-        shape.graphics.drawRoundRect(0, 0, 100, 100, 10);
-        shape.x = (stage.stageWidth - 100) / 2;
-        shape.y = (stage.stageHeight - 100) / 2;
 
         var cd:ConvertDescriptor = new ConvertDescriptor();
 
@@ -59,11 +52,10 @@ class Main extends Sprite {
 //        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 //        converter.stopAllMovieClips();
 
-        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), true, false);
 
         converter.scaleX = converter.scaleY = 0.3;
 
-        addChild(shape);
         addChild(LogUI.inst());
     }
 
