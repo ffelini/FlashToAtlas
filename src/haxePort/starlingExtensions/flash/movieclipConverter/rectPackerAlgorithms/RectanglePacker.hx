@@ -37,6 +37,29 @@ class RectanglePacker extends TexturePacker {
         return newNode;
     }
 
+    public override function increaseCurentMaxRect() {
+        var lastCurentMaxW:Float = curentMaxW;
+        var lastCurentMaxH:Float = curentMaxH;
+        super.increaseCurentMaxRect();
+
+        var newFreeRect:Rectangle;
+        // expanding free rectangles for Main curent maximum size
+        var numRectanglesToProcess:Int = mFreeAreas.length;
+        var i:Int = 0;
+
+        while (i < numRectanglesToProcess) {
+            newFreeRect = mFreeAreas[i];
+            if (curentMaxW > lastCurentMaxW) {
+                if (newFreeRect.x + newFreeRect.width == lastCurentMaxW) newFreeRect.width = curentMaxW - newFreeRect.x;
+            }
+            else if (curentMaxH > lastCurentMaxH) {
+                if (newFreeRect.y + newFreeRect.height == lastCurentMaxH) newFreeRect.height = curentMaxH - newFreeRect.y;
+            }
+
+            i++;
+        }
+    }
+
 /**
          * Tries to insert new rectangle into the packer
          * @param rectangle
