@@ -50,7 +50,6 @@ class RectanglePacker extends TexturePacker {
         }
 
         var freeArea:Rectangle = mFreeAreas[index];
-//var target:Rectangle = new Rectangle(freeArea.left, freeArea.top, rectangle.width, rectangle.height);
         rectangle.x = freeArea.left;
         rectangle.y = freeArea.top;
 

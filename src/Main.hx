@@ -29,7 +29,7 @@ import ScreenHome;
 
 class Main extends Sprite {
 
-    private var target:ScreenPlay = new ScreenPlay();
+    private var target:ScreenHome = new ScreenHome();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var shape = new Sprite();
 

@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithms.MaxRectPacker;
 import haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithms.RectanglePacker;
 import flash.display.DisplayObject;
 import flash.geom.Point;
@@ -12,13 +13,12 @@ class AtlasDescriptor extends RectanglePacker
 {
 	public static var INSTANCES:Array<AtlasDescriptor> = [];
 
-	public var maxWidth:Float = 4096;
-	public var maxHeight:Float = 4096;
+	public var curentMaxWidth:Float = 4096;
+	public var curentMaxHeight:Float = 4096;
 
 	public var bestWidth:Float = 2048;
 	public var bestHeight:Float = 2048;
 
-	public var MAX_RECT:Rectangle = new Rectangle();
 	public var atlasAbstract:TextureAtlasAbstract = new TextureAtlasAbstract();
 	public var atlasVerticalPoint:Point = new Point();
 	public var atlasHorizontalPoint:Point = new Point();
@@ -28,8 +28,6 @@ class AtlasDescriptor extends RectanglePacker
 	public var maxX:Float = 0;
 	public var minX:Float = 0;
 	public var minY:Float = 0;
-	public var maxW:Float;
-	public var maxH:Float;
 
 	public var atlasConfig:ObjectMap<Dynamic,Dynamic> = new ObjectMap<Dynamic,Dynamic>();
 
@@ -45,7 +43,7 @@ class AtlasDescriptor extends RectanglePacker
 	public static var isBaselineExtended:Bool = false;
 
     public function new() {
-		super(isBaselineExtended ? maxWidth : bestWidth, isBaselineExtended ? maxHeight : bestHeight);
+		super(isBaselineExtended ? curentMaxWidth : bestWidth, isBaselineExtended ? curentMaxHeight : bestHeight);
 
 		INSTANCES.push(this);
     }
@@ -64,11 +62,6 @@ class AtlasDescriptor extends RectanglePacker
 		maxY = maxX = minX = minY = 0;
 		regionPoint.x = regionPoint.y = atlasRegionEnd.x = atlasRegionEnd.y = atlasHorizontalPoint.x = atlasHorizontalPoint.y = atlasVerticalPoint.x = atlasVerticalPoint.y = 0;
 
-		MAX_RECT.width = curentMaxW;
-		MAX_RECT.height = curentMaxH;
-
-		maxW = MAX_RECT.width/8;
-		maxH = MAX_RECT.height/8;
 	}
 
 
@@ -102,12 +95,12 @@ class AtlasDescriptor extends RectanglePacker
 			return;
 		}
 		// calulating next atlas region top left point
-		while(regionPoint.x + objRect.width > maxW && regionPoint.y + objRect.height>maxH || objRect.height > maxH || objRect.width>maxW)
+		while(regionPoint.x + objRect.width > curentMaxW && regionPoint.y + objRect.height>curentMaxH || objRect.height > curentMaxH || objRect.width>curentMaxW)
 		{
-			maxW = maxW*2<MAX_RECT.width ? (maxW*2+atlasRegionsGap) : MAX_RECT.width;
-			maxH = maxH*2<MAX_RECT.height ? (maxH*2+atlasRegionsGap) : MAX_RECT.height;
+			curentMaxW = curentMaxW*2<maximumWidth ? (curentMaxW*2+atlasRegionsGap) : maximumWidth;
+			curentMaxH = curentMaxH*2<maximumHeight ? (curentMaxH*2+atlasRegionsGap) : maximumHeight;
 
-			if(maxW>=MAX_RECT.width && maxH>=MAX_RECT.height) break;
+			if(curentMaxW>=maximumWidth && curentMaxH>=maximumHeight) break;
 		}
 		if(!inColumn && regionPoint.x + objRect.width > textureAtlasRect.width)// && textureAtlasRect.width + objRect.width <= textureAtlasRect.height)
 		{
@@ -119,23 +112,23 @@ class AtlasDescriptor extends RectanglePacker
 		}
 		else if(regionPoint.x + objRect.width > textureAtlasRect.width && maxY < textureAtlasRect.height && !inColumn)
 		{
-			if(objRect.width + textureAtlasRect.width < maxW) newColumn(objRect);
-			else if(objRect.height + textureAtlasRect.height < maxH) newRow(objRect);
+			if(objRect.width + textureAtlasRect.width < curentMaxW) newColumn(objRect);
+			else if(objRect.height + textureAtlasRect.height < curentMaxH) newRow(objRect);
 		}
 		else if(regionPoint.y + objRect.height > textureAtlasRect.height)
 		{
-			if(objRect.width + textureAtlasRect.width < maxW) newColumn(objRect);
-			else if(objRect.height + textureAtlasRect.height < maxH) newRow(objRect);
+			if(objRect.width + textureAtlasRect.width < curentMaxW) newColumn(objRect);
+			else if(objRect.height + textureAtlasRect.height < curentMaxH) newRow(objRect);
 		}
 
 		updatePoints(objRect);
 
 		// checking if a Main row or column is possible
-		if (atlasRegionEnd.x - atlasRegionsGap > MAX_RECT.width && atlasRegionEnd.y - atlasRegionsGap < MAX_RECT.height)
+		if (atlasRegionEnd.x - atlasRegionsGap > maximumWidth && atlasRegionEnd.y - atlasRegionsGap < maximumHeight)
 		{
 			newRow(objRect);
 		}
-		else if (atlasRegionEnd.y - atlasRegionsGap > MAX_RECT.height && atlasRegionEnd.x - atlasRegionsGap < MAX_RECT.width)
+		else if (atlasRegionEnd.y - atlasRegionsGap > maximumHeight && atlasRegionEnd.x - atlasRegionsGap < maximumWidth)
 		{
 			newColumn(objRect);
 		}
@@ -178,8 +171,8 @@ class AtlasDescriptor extends RectanglePacker
 	{
 		if(useMaxRectPackerAlgorythm) return super.isFull;
 
-		return atlasRegionEnd.x - atlasRegionsGap > MAX_RECT.width || atlasRegionEnd.y - atlasRegionsGap > MAX_RECT.height ||
-					textureAtlasRect.width>=MAX_RECT.width || textureAtlasRect.height>=MAX_RECT.height;
+		return atlasRegionEnd.x - atlasRegionsGap > maximumWidth || atlasRegionEnd.y - atlasRegionsGap > maximumHeight ||
+					textureAtlasRect.width>=maximumWidth || textureAtlasRect.height>=maximumHeight;
 	}
 
     /**
@@ -199,7 +192,7 @@ class AtlasDescriptor extends RectanglePacker
 	{
 		var c:AtlasDescriptor = new AtlasDescriptor();
 		c.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
-		c.MAX_RECT = MAX_RECT.clone();
+		c.maxRect = maxRect.clone();
 
 		c.atlasAbstract = atlasAbstract.clone();
 
@@ -212,8 +205,8 @@ class AtlasDescriptor extends RectanglePacker
 		c.maxX = maxX;
 		c.minX = minX;
 		c.minY = minY;
-		c.maxW = maxW;
-		c.maxH = maxH;
+		c.curentMaxW = curentMaxW;
+		c.curentMaxH = curentMaxH;
 		c.atlasRegionsGap = atlasRegionsGap;
 		c.textureAtlasRect = textureAtlasRect.clone();
 		c.subtextureTargets = subtextureTargets.concat(null);

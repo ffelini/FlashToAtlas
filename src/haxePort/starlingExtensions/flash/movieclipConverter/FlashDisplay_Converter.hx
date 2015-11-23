@@ -276,7 +276,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		setTarget(object,mirror);
 
 		// changing object size in case if it is bigger than the screen size, however big textures are not required for small screens
-		if(object.scaleX==1 && object.scaleY==1) RectangleUtil.scaleToContent(object,coordinateSystemRect,false,curentMirror.quality,descriptor.MAX_RECT);
+		if(object.scaleX==1 && object.scaleY==1) RectangleUtil.scaleToContent(object,coordinateSystemRect,false,curentMirror.quality,descriptor.maxRect);
 
 		curentMirror.state.mirrorRect = new Rectangle(object.x,object.y,object.width,object.height);
 
@@ -358,8 +358,8 @@ class FlashDisplay_Converter extends FlashAtlas
 		else // for converting and creating
 		{
 			var objRect:Rectangle = object.getBounds(object);
-			object.x = descriptor.MAX_RECT.width*1.1 - objRect.x;
-			object.y = descriptor.MAX_RECT.height*1.1 - objRect.y;
+			object.x = descriptor.maximumWidth*1.1 - objRect.x;
+			object.y = descriptor.maximumHeight*1.1 - objRect.y;
 		}
 
 		atlasPoolIndex = 0;

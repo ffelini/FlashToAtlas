@@ -5,6 +5,8 @@ class TexturePacker {
 
     public static inline var DEFAULT_ATLAS_REGIONS_GAP:Float = 2;
 
+    public var maxRect:Rectangle = new Rectangle();
+
     public var curentMaxW:Float;
     public var curentMaxH:Float;
 
@@ -60,6 +62,8 @@ class TexturePacker {
         _isFull = false;
         maximumWidth = width;
         maximumHeight = height;
+        maxRect.width = maximumWidth;
+        maxRect.height = maximumHeight;
         curentMaxW = width;
         curentMaxH = height;
 
@@ -83,14 +87,28 @@ class TexturePacker {
             regionPoint.x = newNode.x + xOffset;
             regionPoint.y = newNode.y + yOffset;
         }
+        else {
+            if (curentMaxW < maximumWidth || curentMaxH < maximumHeight) {
+                increaseCurentMaxRect();
+                // trying to add the rect using Main size
+                newNode = quickInsert(width, height);
+            }
+        }
 
         _isFull = newNode == null;
 
         return newNode;
     }
 
-    public function freeRectangle(r:Rectangle):Void
-    {
+    function increaseCurentMaxRect() {
+        if (curentMaxW == curentMaxH) curentMaxW = curentMaxW * smartSizeIncreaseFactor < maximumWidth ? curentMaxW * smartSizeIncreaseFactor : maximumWidth;
+        else {
+            if (curentMaxW > curentMaxH) curentMaxH = curentMaxH * smartSizeIncreaseFactor < maximumHeight ? curentMaxH * smartSizeIncreaseFactor : maximumHeight;
+            else curentMaxW = curentMaxW * smartSizeIncreaseFactor < maximumWidth ? curentMaxW * smartSizeIncreaseFactor : maximumWidth;
+        }
+    }
+
+    public function freeRectangle(r:Rectangle):Void {
     }
 
     function packRect(width:Float, height:Float):Rectangle {

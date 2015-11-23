@@ -181,8 +181,8 @@ class FlashAtlas extends ContentSprite {
                 if (descriptor.isFull) {
 // checking if obj bounds fits at least max rect size
                     subtextureObjRect = subtextureObj.getRect(this);
-                    if (subtextureObjRect.width > descriptor.MAX_RECT.width || subtextureObjRect.height > descriptor.MAX_RECT.height) {
-                        subtextureObjRect = RectangleUtil.fit(subtextureObjRect, descriptor.MAX_RECT, ScaleMode.SHOW_ALL, false, subtextureObjRect);
+                    if (subtextureObjRect.width > descriptor.maximumWidth || subtextureObjRect.height > descriptor.maximumHeight) {
+                        subtextureObjRect = RectangleUtil.fit(subtextureObjRect, descriptor.maxRect, ScaleMode.SHOW_ALL, false, subtextureObjRect);
 
                         var localRect:Rectangle = GlobalToContenRect.globalToContenRect(subtextureObjRect, obj.parent);
                         obj.width = localRect.width;
@@ -298,7 +298,7 @@ class FlashAtlas extends ContentSprite {
 	 */
 
     private function onAtlasIsFull():Void {
-        var fitsAtlas:Bool = descriptor.MAX_RECT.containsRect(subtextureObjRect);
+        var fitsAtlas:Bool = descriptor.maxRect.containsRect(subtextureObjRect);
         subtextureObj.visible = fitsAtlas;
 
         createTextureAtlass();
@@ -421,10 +421,10 @@ class FlashAtlas extends ContentSprite {
     }
 
     public inline function correctAtlasToDrawRect(rect:Rectangle):Rectangle {
-        var properRect:Rectangle = drawMAX_RECTAtlas ? descriptor.MAX_RECT : rect;
+        var properRect:Rectangle = drawMAX_RECTAtlas ? descriptor.maxRect : rect;
 
-        var w:Int = properRect.width >= descriptor.MAX_RECT.width ? Std.int(descriptor.MAX_RECT.width) : GetNextPowerOfTwo.getNextPowerOfTwo(Std.int(properRect.width));
-        var h:Int = properRect.height >= descriptor.MAX_RECT.height ? Std.int(descriptor.MAX_RECT.height) : GetNextPowerOfTwo.getNextPowerOfTwo(Std.int(properRect.height));
+        var w:Int = properRect.width >= descriptor.maximumWidth ? Std.int(descriptor.maximumWidth) : GetNextPowerOfTwo.getNextPowerOfTwo(Std.int(properRect.width));
+        var h:Int = properRect.height >= descriptor.maximumHeight ? Std.int(descriptor.maximumHeight) : GetNextPowerOfTwo.getNextPowerOfTwo(Std.int(properRect.height));
 
         return new Rectangle(0, 0, w, h);
     }
