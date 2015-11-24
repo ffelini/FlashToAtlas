@@ -23,6 +23,11 @@ import haxePort.starlingExtensions.flash.movieclipConverter.ConvertDescriptor;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
 import flash.Lib;
 
+import haxePort.utils.*;
+import haxePort.interfaces.*;
+import haxePort.managers.*;
+import haxePort.starlingExtensions.*;
+
 //-swf-header 640:960:10:CCCCCC
 //-swf-version 16 -swf-lib gameAssets.swc --macro include('src')
 

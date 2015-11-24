@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\FlashToAtlas.swc" />
+    <movie path="..\..\..\Fairy\FlashToStarlingExtension\libs\FlashToAtlas.swc" />
     <movie fps="60" />
     <movie width="960" />
     <movie height="640" />

@@ -9,7 +9,7 @@ class RectanglePacker2 {
     private var mPackedWidth:Int = 0;
     private var mPackedHeight:Int = 0;
 
-    private var mInsertList:Array<IntegerRectangle> = [];
+    private var mInsertList:Array<SortableSize> = [];
 
     private var mInsertedRectangles:Array<IntegerRectangle> = [];
     private var mFreeAreas:Array<IntegerRectangle> = [];
@@ -117,7 +117,7 @@ class RectanglePacker2 {
         }
 
         while (mInsertList.length > 0) {
-            var sortableSize:SortableSize = mInsertList.pop() as SortableSize;
+            var sortableSize:SortableSize = mInsertList.pop();
             var width:Int = sortableSize.width;
             var height:Int = sortableSize.height;
 
