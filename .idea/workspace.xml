@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" afterPath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" afterPath="$PROJECT_DIR$/out/production/FlashToAtlas/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.hx" afterPath="$PROJECT_DIR$/src/Main.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlashToAtlas.iws" />
@@ -32,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="35" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="35" />
+              <caret line="30" column="58" selection-start-line="30" selection-start-column="58" selection-end-line="30" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -58,31 +61,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MaxRectPacker.hx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="47" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AtlasDescriptor.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RectanglePacker.hx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MaxRectPacker.hx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2755214">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RectanglePacker.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07793634">
-              <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="179" column="20" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -92,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -142,16 +145,16 @@
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/TexturePacker.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MaxRectPacker.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/IntegerRectangle.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/SortableSize.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker2.hx" />
         <option value="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
         <option value="$PROJECT_DIR$/src/Main.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
       </list>
     </option>
   </component>
@@ -198,8 +201,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -408,7 +410,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,7 +747,8 @@
       <workItem from="1447925134930" duration="6671000" />
       <workItem from="1447940997520" duration="7812000" />
       <workItem from="1448006438912" duration="11992000" />
-      <workItem from="1448265846318" duration="11733000" />
+      <workItem from="1448265846318" duration="11770000" />
+      <workItem from="1448367393865" duration="2515000" />
     </task>
     <task id="LOCAL-00001" summary="compilation issues fixed. Added gameAssets.swc (build with Adobe Flash CC that is parsed without issues)">
       <created>1447666588460</created>
@@ -872,11 +876,17 @@
       <option name="project" value="LOCAL" />
       <updated>1448294069725</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="RectanglePacker optimizations IN PROGRESS">
+      <created>1448296499510</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1448296499510</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79097000" />
+    <option name="totallyTimeSpent" value="81649000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -902,7 +912,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32694355" sideWeight="0.5041141" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32694355" sideWeight="0.4958859" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32624868" sideWeight="0.4958859" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33013844" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -913,8 +923,8 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -948,7 +958,8 @@
     <MESSAGE value="increaseCurentMaxRect method implementation&#10;Optimizations and code refactoring" />
     <MESSAGE value="increaseCurentMaxRect() method implementation for RectanglePacker algorithm" />
     <MESSAGE value="RectanglePacker2 algorithm implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="RectanglePacker2 algorithm implemented" />
+    <MESSAGE value="RectanglePacker optimizations IN PROGRESS" />
+    <option name="LAST_COMMIT_MESSAGE" value="RectanglePacker optimizations IN PROGRESS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1288,14 +1299,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1315,7 +1318,15 @@
     <entry file="file://$PROJECT_DIR$/src/Main.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="35" />
+          <caret line="30" column="58" selection-start-line="30" selection-start-column="58" selection-end-line="30" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="20" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1323,23 +1334,23 @@
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="47" selection-start-line="87" selection-start-column="7" selection-end-line="87" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07793634">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2755214">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>

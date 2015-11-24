@@ -179,18 +179,10 @@ class RectanglePacker extends TexturePacker {
         while (--i >= 0) {
             var free:Rectangle = mFreeAreas[i];
             if (rectangle.width <= free.width && rectangle.height <= free.height) {
-//					if (i % free.y) {
                 if (free.x < best.x || (free.x == best.x && free.y < best.y)) {
                     index = i;
                     best = free;
                 }
-//					} else {
-//						if (free.y < best.y || (free.x < best.x && free.y == best.y))
-//						{
-//							index = i;
-//							best = free;
-//						}
-//					}
             }
         }
 

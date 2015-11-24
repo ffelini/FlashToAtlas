@@ -28,7 +28,7 @@ import flash.Lib;
 
 class Main extends Sprite {
 
-    private var target:ScreenFinish = new ScreenFinish();
+    private var target:ScreenSettings = new ScreenSettings();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
 
     public function new() {

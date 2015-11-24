@@ -39,10 +39,10 @@ class MaxRectPacker extends TexturePacker {
         freeRectangles.unshift(r);
     }
 
-    override public inline function packRect(width:Float, height:Float):Rectangle
-    {
+    override public inline function packRect(width:Float, height:Float):Rectangle {
         return quickFindPositionForNewNodeBestAreaFit(width, height);
     }
+
     override function increaseCurentMaxRect() {
         var lastCurentMaxW:Float = curentMaxW;
         var lastCurentMaxH:Float = curentMaxH;
@@ -51,7 +51,7 @@ class MaxRectPacker extends TexturePacker {
 
         var newFreeRect:Rectangle;
 
-        // expanding free rectangles for Main curent maximum size
+// expanding free rectangles for Main curent maximum size
         var numRectanglesToProcess:Int = freeRectangles.length;
         var i:Int = 0;
 
@@ -68,37 +68,40 @@ class MaxRectPacker extends TexturePacker {
         }
         removeRedundantRectangles();
 
-        // adding new free recatangles if curent max size was increased
-        //				if(curentMaxW>lastCurentMaxW) {
-        //					freeRectangles.push(new Rectangle(curentMaxW - lastCurentMaxW + atlasRegionsGap, 0, curentMaxW - lastCurentMaxW, lastCurentMaxH));
-        //				} else  if(curentMaxH>lastCurentMaxH) {
-        //					freeRectangles.push(new Rectangle(0, curentMaxH - lastCurentMaxH + atlasRegionsGap, lastCurentMaxW, curentMaxH - lastCurentMaxH));
-        //				}height);
+// adding new free recatangles if curent max size was increased
+//				if(curentMaxW>lastCurentMaxW) {
+//					freeRectangles.push(new Rectangle(curentMaxW - lastCurentMaxW + atlasRegionsGap, 0, curentMaxW - lastCurentMaxW, lastCurentMaxH));
+//				} else  if(curentMaxH>lastCurentMaxH) {
+//					freeRectangles.push(new Rectangle(0, curentMaxH - lastCurentMaxH + atlasRegionsGap, lastCurentMaxW, curentMaxH - lastCurentMaxH));
+//				}height);
     }
 
     private inline function quickFindPositionForNewNodeBestAreaFit(width:Float, height:Float):Rectangle {
-        var r:Rectangle;
+        var free:Rectangle;
         var numRectanglesToProcess:Int = freeRectangles.length;
         var score:Float = 1000000000;
         var areaFit:Float;
 
         var bestNode:Rectangle = null;
+        var best:Rectangle = new Rectangle(curentMaxW, 0, 0, 0);
 
 // Try to place the rectangle in upright (non-flipped) orientation.
         for (j in 0...numRectanglesToProcess) {
-            r = freeRectangles[j];
-            if (r.width >= width && r.height >= height) {
-                areaFit = r.width * r.height - width * height;
-                if (areaFit < score) {
-                    if (bestNode == null) bestNode = new Rectangle();
+            free = freeRectangles[j];
 
-                    bestNode.x = r.x;
-                    bestNode.y = r.y;
+            if (free.width >= width && free.height >= height) {
+                areaFit = free.width * free.height - width * height;
+
+                if ((placeInSmallestFreeRect && areaFit < score) ||
+                (free.x < best.x || (free.x == best.x && free.y < best.y))) {
+                    best = free;
+
+                    if (bestNode == null) bestNode = new Rectangle();
+                    bestNode.x = free.x;
+                    bestNode.y = free.y;
                     bestNode.width = width + atlasRegionsGap;
                     bestNode.height = height + atlasRegionsGap;
                     score = areaFit;
-
-                    if (!placeInSmallestFreeRect) break;
                 }
             }
         }

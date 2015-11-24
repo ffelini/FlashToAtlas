@@ -50,7 +50,7 @@ class TexturePacker {
 	 * if true - algorithm will place the rect in the smallest free rectangle
 	 * if flase - algorithm will place the rect in the first found proper rectangle (a bit faster because will not go through all free rectangles)
 	 */
-    public var placeInSmallestFreeRect:Bool = true;
+    public var placeInSmallestFreeRect:Bool = false;
 
     public function new(maximumW:Float, maximumH:Float) {
         xOffset = yOffset = 0;

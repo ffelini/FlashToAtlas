@@ -9,7 +9,7 @@ import flash.utils.Dictionary;
 import haxe.ds.ObjectMap;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 
-class AtlasDescriptor extends RectanglePacker
+class AtlasDescriptor extends MaxRectPacker
 {
 	public static var INSTANCES:Array<AtlasDescriptor> = [];
 
