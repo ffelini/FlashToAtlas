@@ -318,8 +318,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		return mirror;
 	}
 
-
-
 	public var target:DisplayObject;
 	public var curentMirror:IFlashMirrorRoot;
 	public function setTarget(object:DisplayObject,mirror:IFlashMirrorRoot):Void
