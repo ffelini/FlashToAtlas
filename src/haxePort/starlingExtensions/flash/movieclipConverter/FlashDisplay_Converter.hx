@@ -14,6 +14,7 @@ import haxe.ds.ObjectMap;
 import haxe.ds.Vector;
 import haxe.Timer;
 import haxePort.starlingExtensions.flash.textureAtlas.SubtextureRegion;
+import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 import haxePort.starlingExtensions.interfaces.IDisplayObjectContainer;
 import haxePort.utils.LogStack;
 
@@ -192,16 +193,13 @@ class FlashDisplay_Converter extends FlashAtlas
 		else
 		{
 			atlasRect = getAtlasToDrawRect().clone();
-			atlas.setAtlas(descriptor.atlasAbstract);
+			atlas.atlas = descriptor.atlasAbstract;
 			atlas.setTexture(drawAtlasToTexture(atlasRect));
 		}
 
-		var atlasConf:AtlasConf = new AtlasConf(atlas, atlasRect, descriptor.textureScale, descriptor.regionPoint, descriptor.atlasAbstract);
+		descriptor.atlasAbstract.atlasConf = new AtlasConf(atlasRect, descriptor.textureScale, descriptor.regionPoint);
 
-		descriptor.atlasConfig.set(atlas,[atlasRect,descriptor.textureScale]);
-		descriptor.atlasConfig.set(atlasRect, [descriptor.regionPoint.x, descriptor.regionPoint.y]);
-
-		curentMirror.state.storeAtlas(atlas,descriptor.atlasConfig,descriptor.atlasAbstract);
+		curentMirror.state.storeAtlas(atlas,descriptor.atlasAbstract);
 		curentMirror.storeAtlas(atlas, atlasBmd);
 
 		prepareForNextAtlas();
@@ -223,20 +221,10 @@ class FlashDisplay_Converter extends FlashAtlas
 		}
 	}
 
-	public function redrawAtlas(atlas:ITextureAtlasDynamic,_atlasConfig:ObjectMap<Dynamic,Dynamic>):BitmapData
-	{
-		var atlasConf:Dynamic = _atlasConfig.get(atlas);
-		var rect:Rectangle = atlasConf[0];
-		descriptor.textureScale = atlasConf[1];
-
-		atlas.prepareForBitmapDataUpload(rect.width,rect.height);
-
-		return drawAtlas(rect);
-	}
-
-	public function redrawAtlasForConf(atlasConf:AtlasConf):BitmapData {
+	public function redrawAtlas(atlas:ITextureAtlasDynamic):BitmapData {
+		var atlasConf:AtlasConf = atlas.atlas.atlasConf;
 		descriptor.textureScale = atlasConf.textureScale;
-		atlasConf.atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
+		atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
 		return drawAtlas(atlasConf.atlasRect);
 	}
 	public var convertDescriptor:ConvertDescriptor;

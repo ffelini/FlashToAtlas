@@ -23,7 +23,6 @@ class Mirror_State
 	
 	public var atlasesConf:ObjectMap<Dynamic,Dynamic>;
 	public var textureAtlases:Array<ITextureAtlasDynamic>;
-	public var atlasesConfig:Array<ObjectMap<Dynamic,Dynamic>>;		
 	
 	public var mirrorsCreationStack:Array<DisplayObject>;
 	private var flashMirrors:Array<DisplayObject>;
@@ -34,7 +33,6 @@ class Mirror_State
 	{
 		atlasesConf = new ObjectMap();
 		textureAtlases = new Array<ITextureAtlasDynamic>();
-		atlasesConfig = new Array();
 		mirrorsCreationStack = new Array<DisplayObject>();
 		flashMirrors = new Array<DisplayObject>();
 		mirrorRects = new ObjectMap();
@@ -92,12 +90,11 @@ class Mirror_State
 		if(!atlasesConf.exists(_subtextureName)) atlasesConf.set(_subtextureName, atlas); 
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
-	public inline function storeAtlas(tatlas:ITextureAtlasDynamic, config:ObjectMap<Dynamic,Dynamic>, atlas:TextureAtlasAbstract):Void
+	public inline function storeAtlas(tatlas:ITextureAtlasDynamic, atlas:TextureAtlasAbstract):Void
 	{
 		if(!atlasesConf.exists(tatlas))
 		{
 			textureAtlases.push(tatlas);
-			atlasesConfig.push(config); 
 			atlasesConf.set(tatlas,atlas);
 			atlasesConf.set(atlas,tatlas);
 		}

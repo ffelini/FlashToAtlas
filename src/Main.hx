@@ -33,7 +33,7 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:ScreenFinish = new ScreenFinish();
+    private var target:DisplayObject;// = new ScreenFinish();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
 
     public function new() {

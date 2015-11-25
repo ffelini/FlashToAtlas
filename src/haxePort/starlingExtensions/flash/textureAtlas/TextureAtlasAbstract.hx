@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.textureAtlas;
 import haxe.ds.Vector;
+import haxePort.starlingExtensions.flash.movieclipConverter.AtlasConf;
 
 /**
  * ...
@@ -39,4 +40,16 @@ class TextureAtlasAbstract {
         c.subtextures = subtextures.copy();
         return c;
     }
+
+    private var _atlasConf:AtlasConf;
+    @isVar public var atlasConf(get, set):AtlasConf;
+	function get_atlasConf():AtlasConf 
+	{
+		return _atlasConf;
+	}
+	
+	function set_atlasConf(value:AtlasConf):AtlasConf 
+	{
+		return _atlasConf = value;
+	}
 }

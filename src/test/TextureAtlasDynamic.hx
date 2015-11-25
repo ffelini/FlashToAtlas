@@ -84,9 +84,12 @@ class TextureAtlasDynamic implements ITextureAtlasDynamic
 		
 	}
 	
-	public function setAtlas(value:TextureAtlasAbstract):Void
-	{
-		
+	public var atlas(get, set):TextureAtlasAbstract;
+	public function get_atlas():TextureAtlasAbstract {
+		return null;
+	}
+	public function set_atlas(value:TextureAtlasAbstract):TextureAtlasAbstract {
+		return null;
 	}
 	public function curentTexture():Dynamic
 	{

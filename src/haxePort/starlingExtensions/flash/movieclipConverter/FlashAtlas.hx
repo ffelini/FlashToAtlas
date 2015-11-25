@@ -250,7 +250,7 @@ class FlashAtlas extends ContentSprite {
 
                     if (!descriptor.useMaxRectPackerAlgorythm) descriptor.updateAtlasPoint(subtextureObjRect);
 
-                    atlas.setAtlas(descriptor.atlasAbstract);
+                    atlas.atlas = descriptor.atlasAbstract;
                     atlas.addRegion(subTextureName + "", subtextureObjRect, subTexture.frameRect);
 
                     if (isMovieClip(mc)) {
