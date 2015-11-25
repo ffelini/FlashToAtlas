@@ -33,7 +33,7 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:ScreenSettings = new ScreenSettings();
+    private var target:ScreenFinish = new ScreenFinish();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
 
     public function new() {
@@ -58,7 +58,7 @@ class Main extends Sprite {
 
         converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
-        converter.scaleX = converter.scaleY = 0.3;
+        converter.scaleX = converter.scaleY = 0.5;
 
         addChild(LogUI.inst());
     }

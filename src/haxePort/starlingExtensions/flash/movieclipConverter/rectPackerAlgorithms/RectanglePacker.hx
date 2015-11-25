@@ -2,31 +2,8 @@ package haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithm
 import flash.geom.Rectangle;
 class RectanglePacker extends TexturePacker {
 
-    private var mInsertedRectangles:Array<Rectangle> = [];
-    private var mFreeAreas:Array<Rectangle> = [];
-
-    public function get_rectangleCount():Int { return mInsertedRectangles.length; }
-
-
     public function new(width:Float, height:Float) {
         super(width, height);
-        mFreeAreas.push(new Rectangle(0, 0, curentMaxW, curentMaxH));
-    }
-
-/**
-         * Gets the position of the rectangle in given index in the main rectangle
-         * @param index the index of the rectangle
-         * @param rectangle an instance where to set the rectangle's values
-         * @return
-         */
-
-    private inline function getRectangle(index:Int, rectangle:Rectangle):Rectangle {
-        if (rectangle != null) {
-            rectangle.copyFrom(mInsertedRectangles[index]);
-            return rectangle;
-        }
-
-        return mInsertedRectangles[index].clone();
     }
 
     public override function packRect(width:Float, height:Float):Rectangle {
@@ -35,33 +12,6 @@ class RectanglePacker extends TexturePacker {
             newNode = null;
         }
         return newNode;
-    }
-
-    public override function increaseCurentMaxRect() {
-        var lastCurentMaxW:Float = curentMaxW;
-        var lastCurentMaxH:Float = curentMaxH;
-        super.increaseCurentMaxRect();
-
-        var newFreeRect:Rectangle;
-        // expanding free rectangles for Main curent maximum size
-        var numRectanglesToProcess:Int = mFreeAreas.length;
-        var i:Int = 0;
-
-        while (i < numRectanglesToProcess) {
-            newFreeRect = mFreeAreas[i];
-            if (curentMaxW > lastCurentMaxW) {
-                if (newFreeRect.x + newFreeRect.width == lastCurentMaxW) newFreeRect.width = curentMaxW - newFreeRect.x;
-            }
-            else if (curentMaxH > lastCurentMaxH) {
-                if (newFreeRect.y + newFreeRect.height == lastCurentMaxH) newFreeRect.height = curentMaxH - newFreeRect.y;
-            }
-
-            i++;
-        }
-    }
-
-    override public function freeRectangle(r:Rectangle):Void {
-        mFreeAreas.unshift(r);
     }
 
 /**
@@ -76,19 +26,17 @@ class RectanglePacker extends TexturePacker {
             return false;
         }
 
-        var freeArea:Rectangle = mFreeAreas[index];
+        var freeArea:Rectangle = freeAreas[index];
         rectangle.x = freeArea.left;
         rectangle.y = freeArea.top;
 
 // Get the new free areas, these are parts of the old ones intersected by the target
-        var newFreeAreas:Array<Rectangle> = generateNewSubAreas(rectangle, mFreeAreas);
-        filterSubAreas(newFreeAreas, mFreeAreas, true);
+        var newFreeAreas:Array<Rectangle> = generateNewSubAreas(rectangle, freeAreas);
+        filterSubAreas(newFreeAreas, freeAreas, true);
         var i:Int = newFreeAreas.length;
         while (--i >= 0) {
-            mFreeAreas.push(newFreeAreas[i]);
+            freeAreas.push(newFreeAreas[i]);
         }
-
-        mInsertedRectangles.push(rectangle);
         return true;
     }
 
@@ -175,11 +123,11 @@ class RectanglePacker extends TexturePacker {
     private inline function getFreeAreaIndex(rectangle:Rectangle):Int {
         var best:Rectangle = new Rectangle(curentMaxW, 0, 0, 0);
         var index:Int = -1;
-        var i:Int = mFreeAreas.length;
+        var i:Int = freeAreas.length;
         while (--i >= 0) {
-            var free:Rectangle = mFreeAreas[i];
+            var free:Rectangle = freeAreas[i];
             if (rectangle.width <= free.width && rectangle.height <= free.height) {
-                if (free.x < best.x || (free.x == best.x && free.y < best.y)) {
+                if (free.x < best.x || (free.x <= best.x && free.y < best.y)) {
                     index = i;
                     best = free;
                 }

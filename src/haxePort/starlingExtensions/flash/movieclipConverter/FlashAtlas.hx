@@ -68,7 +68,8 @@ class FlashAtlas extends ContentSprite {
     }
     function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
-        var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset * 1.1 + atlasToDrawRect.width : 0;
+        var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
+        xOffset *= 1.1;
         descriptor = descriptor.next();
         descriptor.xOffset = xOffset;
         descriptor.yOffset = 0;
@@ -436,6 +437,11 @@ class FlashAtlas extends ContentSprite {
         var t:Float = debug ? getTimer() : 0;
 
         content.scaleX = content.scaleY = descriptor.textureScale;
+
+        if (debugAtlas) {
+            drawFreeRectangles();
+        }
+
         atlasBmd = new BitmapData(Std.int(rect.width), Std.int(rect.height), !debugAtlas, 0x000000);
 
         var drawMatrix:Matrix = new Matrix( 1, 0, 0, 1, - rect.x, - rect.y );
@@ -453,6 +459,14 @@ class FlashAtlas extends ContentSprite {
 
         AtlasDescriptor.savedAtlases++;
         return atlasBmd;
+    }
+
+    function drawFreeRectangles() {
+        for(i in 0...descriptor.freeAreas.length) {
+            var r:Rectangle = descriptor.freeAreas[i];
+            content.graphics.lineStyle(2,0x00ff00);
+            content.graphics.drawRect(r.x + descriptor.xOffset, r.y+descriptor.yOffset, r.width, r.height);
+        }
     }
 
     public function isMovieClip(value:MovieClip):Bool {

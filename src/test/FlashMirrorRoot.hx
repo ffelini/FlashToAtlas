@@ -22,7 +22,7 @@ class FlashMirrorRoot implements IFlashMirrorRoot {
 
     public function new(addAtlasBitmapToStage:Bool = false) {
         this.addAtlasBitmapToStage = addAtlasBitmapToStage;
-        atlasesSprite.scaleX = atlasesSprite.scaleY = 0.3;
+        atlasesSprite.scaleX = atlasesSprite.scaleY = 0.5;
     }
 
     public var quality(get, set):Float;

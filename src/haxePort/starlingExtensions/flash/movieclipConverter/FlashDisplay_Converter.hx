@@ -89,12 +89,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	/**
 	 * if true and we reuse an existing atlas which texture will get a Main content provided by converter then we use atlas texture size.
 	 */
-	public var useAtlasBiggestSize:Bool = false;
-	/**
-	 * if true atlas is scaled up or down depend on removeGaps variable 
-	 * if false and the context profile is baseLine extended -> atlas is drawn using his default size
-	 */
-	public var scaleTexture:Bool = false;
+	public var useAtlasBiggestSize:Bool = true;
 
 	public var scaledRect:Rectangle = new Rectangle();
 	override public function getAtlasToDrawRect(sourceAtlas:ITextureAtlasDynamic=null):Rectangle
@@ -105,14 +100,16 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(useAtlasBiggestSize && sourceAtlas!=null)
 		{
 			var sourceTexture:Dynamic = sourceAtlas.curentTexture();
-			if(rect.width!=sourceTexture.nativeWidth || rect.height!=sourceTexture.nativeHeight)
-			{
-				rect.width = rect.width>sourceTexture.nativeWidth ? rect.width : sourceTexture.nativeWidth;
-				rect.height = rect.height>sourceTexture.nativeHeight ? rect.height : sourceTexture.nativeHeight;
+			if(sourceTexture!=null) {
+				if(rect.width!=sourceTexture.nativeWidth || rect.height!=sourceTexture.nativeHeight)
+				{
+					rect.width = rect.width>sourceTexture.nativeWidth ? rect.width : sourceTexture.nativeWidth;
+					rect.height = rect.height>sourceTexture.nativeHeight ? rect.height : sourceTexture.nativeHeight;
+				}
 			}
 		}
 
-		scaledRect = !scaleTexture && AtlasDescriptor.isBaselineExtended ? descriptor.textureAtlasRect : generateQuality(descriptor.textureAtlasRect,rect,removeGaps);
+		scaledRect = generateQuality(descriptor.textureAtlasRect,rect,removeGaps);
 
 		var factorX:Float = scaledRect.width  / descriptor.textureAtlasRect.width;
 		var factorY:Float = scaledRect.height / descriptor.textureAtlasRect.height;
@@ -132,25 +129,18 @@ class FlashDisplay_Converter extends FlashAtlas
 	 * if false atlas content is scaled to the power of two size
 	 */
 	public var removeGaps:Bool = true;
-	/**
-	 * if true atlas content is scaled down when needed. Required for low end devices for memory enconomy. 
-	 */
-	public var enableAutoDownScale:Bool = true;
 
-	public var properRect:Rectangle = new Rectangle();
+	public var differenceToScaleDownAtlas = 1.3;
+
+	var properRect:Rectangle = new Rectangle();
 	public function generateQuality(atlasRect:Rectangle,rect:Rectangle,calculateBestSize:Bool):Rectangle
 	{
 		var initialW:Float = calculateBestSize ? scaledRect.width : atlasRect.width;
 		var initialH:Float = calculateBestSize ? scaledRect.height : atlasRect.height;
 
 		// choosing the proper atlas content size to fit the power of two size. It may scale up(better quality) or down(lower quality) depend on the size
-		properRect.width = atlasRect.width/(rect.width/2)<1.5 && removeGaps ? rect.width/2 : rect.width;
-		properRect.height = atlasRect.height/(rect.height/2)<1.5 && removeGaps ? rect.height/2 : rect.height;
-
-		// if enableAutDownScale is false return from the method te target rectangle
-		if(properRect.width<rect.width || properRect.height<rect.height)
-			if(!enableAutoDownScale)
-				return rect;
+		properRect.width = removeGaps && atlasRect.width/(rect.width/2)<differenceToScaleDownAtlas ? rect.width/2 : rect.width;
+		properRect.height = removeGaps && atlasRect.height/(rect.height/2)<differenceToScaleDownAtlas ? rect.height/2 : rect.height;
 
 		scaledRect = RectangleUtil.fit(atlasRect,properRect,ScaleMode.SHOW_ALL,false,scaledRect);
 
@@ -165,7 +155,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		var newRect:Rectangle = new Rectangle(0,0,atlasRect.width*descriptor.textureScale,atlasRect.height*descriptor.textureScale);
 
-		LogStack.addLog(this,"generateQuality",["enableAutoDownScale-"+enableAutoDownScale,curentMirror,descriptor.textureScale,initialW,initialH,newRect,scaledRect]);
+		LogStack.addLog(this,"generateQuality",[curentMirror,descriptor.textureScale,initialW,initialH,newRect,scaledRect]);
 
 		if(calculateBestSize || descriptor.textureScale>1) scaledRect = generateQuality(newRect,scaledRect,false);
 

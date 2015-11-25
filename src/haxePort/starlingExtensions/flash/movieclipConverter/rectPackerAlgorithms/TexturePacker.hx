@@ -57,6 +57,9 @@ class TexturePacker {
         init(maximumW, maximumH);
     }
 
+    @:isVar public var insertedRectangles(get, null):Array<Rectangle> = [];
+    @:isVar public var freeAreas(get, null):Array<Rectangle> = [];
+
     function init(width:Float, height:Float):Void {
 
         _isFull = false;
@@ -76,6 +79,9 @@ class TexturePacker {
         textureAtlasRect.x = 0;
         textureAtlasRect.y = 0;
         textureAtlasRect.width = textureAtlasRect.height = 0;
+
+        freeAreas.splice(0, freeAreas.length);
+        freeAreas.push(new Rectangle(0, 0, curentMaxW, curentMaxH));
     }
 
     public function quickInsert(width:Float, height:Float):Rectangle {
@@ -86,11 +92,13 @@ class TexturePacker {
             textureAtlasRect.height = newNode.y + height > textureAtlasRect.height ? newNode.y + height : textureAtlasRect.height;
             regionPoint.x = newNode.x + xOffset;
             regionPoint.y = newNode.y + yOffset;
+
+            insertedRectangles.push(newNode);
         }
         else {
             if (curentMaxW < maximumWidth || curentMaxH < maximumHeight) {
                 increaseCurentMaxRect();
-                // trying to add the rect using Main size
+// trying to add the rect using Main size
                 newNode = quickInsert(width, height);
             }
         }
@@ -101,14 +109,34 @@ class TexturePacker {
     }
 
     function increaseCurentMaxRect() {
+        var lastCurentMaxW:Float = curentMaxW;
+        var lastCurentMaxH:Float = curentMaxH;
         if (curentMaxW == curentMaxH) curentMaxW = curentMaxW * smartSizeIncreaseFactor < maximumWidth ? curentMaxW * smartSizeIncreaseFactor : maximumWidth;
         else {
             if (curentMaxW > curentMaxH) curentMaxH = curentMaxH * smartSizeIncreaseFactor < maximumHeight ? curentMaxH * smartSizeIncreaseFactor : maximumHeight;
             else curentMaxW = curentMaxW * smartSizeIncreaseFactor < maximumWidth ? curentMaxW * smartSizeIncreaseFactor : maximumWidth;
         }
+
+        var newFreeRect:Rectangle;
+// expanding free rectangles for Main curent maximum size
+        var numRectanglesToProcess:Int = freeAreas.length;
+        var i:Int = 0;
+
+        while (i < numRectanglesToProcess) {
+            newFreeRect = freeAreas[i];
+            if (curentMaxW > lastCurentMaxW) {
+                if (newFreeRect.x + newFreeRect.width == lastCurentMaxW) newFreeRect.width = curentMaxW - newFreeRect.x;
+            }
+            else if (curentMaxH > lastCurentMaxH) {
+                if (newFreeRect.y + newFreeRect.height == lastCurentMaxH) newFreeRect.height = curentMaxH - newFreeRect.y;
+            }
+
+            i++;
+        }
     }
 
     public function freeRectangle(r:Rectangle):Void {
+        freeAreas.unshift(r);
     }
 
     function packRect(width:Float, height:Float):Rectangle {
@@ -120,5 +148,32 @@ class TexturePacker {
 
     public function get_isFull():Bool {
         return _isFull;
+    }
+
+    public function get_rectangleCount():Int { return insertedRectangles.length; }
+
+    function get_insertedRectangles():Array<Rectangle> {
+        return insertedRectangles;
+    }
+
+    function get_freeAreas():Array<Rectangle> {
+        return freeAreas;
+    }
+
+
+/**
+         * Gets the position of the rectangle in given index in the main rectangle
+         * @param index the index of the rectangle
+         * @param rectangle an instance where to set the rectangle's values
+         * @return
+         */
+
+    public inline function getRectangle(index:Int, rectangle:Rectangle):Rectangle {
+        if (rectangle != null) {
+            rectangle.copyFrom(insertedRectangles[index]);
+            return rectangle;
+        }
+
+        return insertedRectangles[index].clone();
     }
 }
