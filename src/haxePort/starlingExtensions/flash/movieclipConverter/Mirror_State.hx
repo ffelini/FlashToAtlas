@@ -94,7 +94,7 @@ class Mirror_State
 	{
 		if(!atlasesConf.exists(tatlas))
 		{
-			textureAtlases.push(tatlas);
+			if(textureAtlases.indexOf(tatlas)<0) textureAtlases.push(tatlas);
 			atlasesConf.set(tatlas,atlas);
 			atlasesConf.set(atlas,tatlas);
 		}
