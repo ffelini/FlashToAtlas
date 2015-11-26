@@ -159,7 +159,7 @@ class FlashAtlas extends ContentSprite {
 
             if (subTexture != null) {
                 var bestSizeChoosed:Bool = false;
-                if (chooseBestRegionSizes && descriptor.useMaxRectPackerAlgorythm) {
+                if (chooseBestRegionSizes) {
                     if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
                         descriptor.freeRectangle(subTexture.regionRect);
                         subTexture.object.visible = false;
@@ -198,7 +198,6 @@ class FlashAtlas extends ContentSprite {
                         }
                     }
                 }
-                if (!descriptor.useMaxRectPackerAlgorythm) descriptor.updateMaxY(subtextureObjRect);
 
                 if (descriptor.isFull && !continueOnFull) coninueFunc = false;
                 if (coninueFunc) {
@@ -247,8 +246,6 @@ class FlashAtlas extends ContentSprite {
                     subTexture.object = subtextureObj;
 
                     descriptor.atlasAbstract.add(subTexture);
-
-                    if (!descriptor.useMaxRectPackerAlgorythm) descriptor.updateAtlasPoint(subtextureObjRect);
 
                     atlas.atlas = descriptor.atlasAbstract;
                     atlas.addRegion(subTextureName + "", subtextureObjRect, subTexture.frameRect);

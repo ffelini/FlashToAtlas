@@ -277,7 +277,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		mirror.registerMirror(mirror,object);
 
 		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+_descriptor.convertDuration,"chooseBestRegionSizes-"+chooseBestRegionSizes,
-			"useMaxRectPackerAlgorythm-"+descriptor.useMaxRectPackerAlgorythm,
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
 			"packerRectAlgorithmDuration-"+rectPackerAlgorithmDuration, "num loops-"+NUM_LOOPS]);
 
