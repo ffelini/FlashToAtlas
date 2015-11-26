@@ -1,4 +1,5 @@
 package test;
+import flash.display.Sprite;
 import log.LogUI;
 import flash.events.MouseEvent;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
@@ -13,16 +14,16 @@ import flash.Lib;
  * ...
  * @author val
  */
-class FlashMirrorRoot implements IFlashMirrorRoot {
-    private var addAtlasBitmapToStage:Bool = true;
+class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
 
     private var curentAtlasBitmap:Bitmap;
 
-    private var atlasesSprite:Sprite = new Sprite();
 
-    public function new(addAtlasBitmapToStage:Bool = false) {
-        this.addAtlasBitmapToStage = addAtlasBitmapToStage;
-        atlasesSprite.scaleX = atlasesSprite.scaleY = 0.5;
+    public var atlases:Array<ITextureAtlasDynamic> = [];
+
+    public function new() {
+        super();
+        scaleX = scaleY = 0.3;
     }
 
     public var quality(get, set):Float;
@@ -43,20 +44,28 @@ class FlashMirrorRoot implements IFlashMirrorRoot {
     }
 
     public function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void {
-        if (addAtlasBitmapToStage) {
-            var atlasBitmapX:Float = curentAtlasBitmap!=null ? curentAtlasBitmap.x + curentAtlasBitmap.width +20: 0;
-            var sp:Sprite = new Sprite();
-            curentAtlasBitmap = new Bitmap(bmd);
-            curentAtlasBitmap.x = atlasBitmapX;
-            sp.addChild(curentAtlasBitmap);
-            atlasesSprite.addChild(sp);
-            Lib.current.stage.addChild(atlasesSprite);
-            new DragAndDrop(sp, onMouseEvent);
-        }
+        if (atlases.indexOf(atlas) < 0) atlases.push(atlas);
+
+        addBitmap(bmd);
+    }
+
+    public function addBitmap(bmd:BitmapData):Void {
+        var atlasBitmapX:Float = curentAtlasBitmap != null ? curentAtlasBitmap.x + curentAtlasBitmap.width + 20 : 0;
+        var sp:Sprite = new Sprite();
+        curentAtlasBitmap = new Bitmap(bmd);
+        curentAtlasBitmap.x = atlasBitmapX;
+        sp.addChild(curentAtlasBitmap);
+        addChild(sp);
+        new DragAndDrop(sp, onMouseEvent);
+    }
+
+    public function clear() {
+        removeChildren(0, numChildren-1);
+        curentAtlasBitmap = null;
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
-        LogUI.inst().setText(e.currentTarget+" size - " + e.currentTarget.width + "/" + e.currentTarget.height);
+        LogUI.inst().setText(e.currentTarget + " size - " + e.currentTarget.width + "/" + e.currentTarget.height);
     }
 
     public function getMirror(mirror:Dynamic):Dynamic {

@@ -33,8 +33,9 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:DisplayObject;// = new ScreenFinish();
+    private var target:ScreenHome = new ScreenHome();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
+    private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
     public function new() {
         super();
@@ -50,20 +51,29 @@ class Main extends Sprite {
 
         converter.reuseAtlases = true;
         converter.debug = converter.debugAtlas = true;
+        converter.removeGaps = false;
         new DragAndDrop(converter, onMouseEvent);
 
-//        addChild(converter);
-//        converter.convert(target, cd, new FlashMirrorRoot(), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
-//        converter.stopAllMovieClips();
+        addChild(converter);
+//        addChild(flashMirror);
 
-        converter.convert(target, cd, new FlashMirrorRoot(true), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
 
         converter.scaleX = converter.scaleY = 0.5;
+
 
         addChild(LogUI.inst());
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
+        flashMirror.clear();
+        addChild(flashMirror);
+        removeChild(converter);
+
+        converter.setTarget(target, flashMirror);
+        for(atlas in flashMirror.atlases) {
+            flashMirror.addBitmap(converter.redrawAtlas(atlas));
+        }
         LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY +
         " \nstage.width - " + stage.width +
         " \nstage.height - " + stage.height +

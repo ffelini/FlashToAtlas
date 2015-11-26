@@ -67,11 +67,11 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public function next():AtlasDescriptor {
         var nextAtlasDescriptor:AtlasDescriptor = new AtlasDescriptor();
-//        nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
-//		nextAtlasDescriptor.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
-//		nextAtlasDescriptor.smartSizeIncrease = smartSizeIncrease;
-//		nextAtlasDescriptor.smartSizeIncreaseFactor = smartSizeIncreaseFactor;
-//		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
+        nextAtlasDescriptor.atlasRegionsGap = atlasRegionsGap;
+		nextAtlasDescriptor.useMaxRectPackerAlgorythm = useMaxRectPackerAlgorythm;
+		nextAtlasDescriptor.smartSizeIncrease = smartSizeIncrease;
+		nextAtlasDescriptor.smartSizeIncreaseFactor = smartSizeIncreaseFactor;
+		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
         return nextAtlasDescriptor;
     }
 
