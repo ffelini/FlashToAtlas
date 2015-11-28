@@ -219,21 +219,17 @@ class FlashAtlas extends ContentSprite {
 
                         subTexture.name = this.subTextureName;
                         subTexture.symbolName = this.symbolName;
-                        subTexture.x = subtextureObjRect.x;
-                        subTexture.y = subtextureObjRect.y;
-                        subTexture.width = subtextureObjRect.width;
-                        subTexture.height = subtextureObjRect.height;
                         subTexture.frame = this.frame;
                         subTexture.frameRect = new Rectangle(0, 0, subtextureObjRect.width, subtextureObjRect.height);
                     }
                     else {
-                        subTexture.x = subtextureObjRect.x;
-                        subTexture.y = subtextureObjRect.y;
-                        subTexture.width = subtextureObjRect.width;
-                        subTexture.height = subtextureObjRect.height;
                         subTexture.frameRect.width = subtextureObjRect.width;
                         subTexture.frameRect.height = subtextureObjRect.height;
                     }
+                    subTexture.x = subtextureObjRect.x;
+                    subTexture.y = subtextureObjRect.y;
+                    subTexture.width = subtextureObjRect.width;
+                    subTexture.height = subtextureObjRect.height;
 
                     if (mc != null) {
                         var globalBounds:Rectangle = mc.getRect(this);

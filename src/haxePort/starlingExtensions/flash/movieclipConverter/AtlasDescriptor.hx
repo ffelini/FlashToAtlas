@@ -24,11 +24,6 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public var atlasConfig:ObjectMap<Dynamic,Dynamic> = new ObjectMap<Dynamic,Dynamic>();
 
-/**
-	 * flag that controls which packing algorythm to use. MaxRectPacker is much optional because it will fill all gaps but 30% slower because uses recursion for economic regions fit.
-	 */
-	public var useMaxRectPackerAlgorythm:Bool = true;
-
 	public var subtextureTargets:Array<DisplayObject> = [];
 
 	public static var isBaselineExtended:Bool = false;
