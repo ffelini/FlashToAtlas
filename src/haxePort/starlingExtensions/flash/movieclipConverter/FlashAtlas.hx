@@ -489,7 +489,7 @@ class FlashAtlas extends ContentSprite {
         return atlas != null ? atlas.getTexturesObj(name, result) : null;
     }
 
-    public function clear():Void {
+    function clear():Void {
         Reflect.callMethod(this, forEachChild, [this, removeAtlasContainerChild]);
         resetDescriptor();
     }

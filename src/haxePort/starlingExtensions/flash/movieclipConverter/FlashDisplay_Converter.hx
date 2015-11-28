@@ -238,7 +238,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	 * 
 	 */
 	public function convert(object:DisplayObject, _descriptor:ConvertDescriptor, mirror:IFlashMirrorRoot, coordinateSystemRect:Rectangle,
-							isBaselineExtended:Bool=false,autoReset:Bool=true):IFlashMirrorRoot
+							isBaselineExtended:Bool=false):IFlashMirrorRoot
 	{
 		if(object==null) return null;
 		convertDescriptor = _descriptor;
@@ -288,11 +288,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		mirror.onCreateChildrenComplete();
 
 		_reuseAtlases = atlasesPool!=null;
-
-		if (autoReset)
-		{
-			clear();
-		}
 
 		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
 		_descriptor.totalConvertDuration = getTimer() -t;

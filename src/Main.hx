@@ -57,7 +57,7 @@ class Main extends Sprite {
         addChild(converter);
 //        addChild(flashMirror);
 
-        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false, false);
+        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
 
         converter.scaleX = converter.scaleY = 0.5;
 
