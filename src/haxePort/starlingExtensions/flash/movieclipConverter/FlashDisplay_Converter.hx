@@ -371,10 +371,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(resultSprite==null)
 		{
 			var spClass:Class<Dynamic> = convertDescriptor.getObjClassToConvert(sprite);
-
-			// getting instance from pool
-			resultSprite = curentMirror.state.useObjPool ? Std.instance(ObjPool.inst.get(spClass,false),IDisplayObjectContainer) : null;
-			if(resultSprite==null) resultSprite = curentMirror.convertSprite(sprite,spClass);
+			resultSprite = curentMirror.convertSprite(sprite,spClass);
 		}
 
 		var _numChildren:Int = sprite.numChildren;
@@ -390,14 +387,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 			if(_descriptor.ignore(child)) continue;
 
-			// if resultSprite is from pool then all his children should be registered in Main rootSprite
-			if(curentMirror.state.useObjPool)
-			{
-				if(Std.is(resultSprite,IFlashSpriteMirror)) childMirror = Std.instance(resultSprite,IFlashSpriteMirror).getMirrorChildAt(objIndex);
-				else childMirror = resultSprite!=null && objIndex<resultSprite.numChildrens() ? resultSprite.getChildAtIndex(objIndex) : null;
-
-				if(childMirror) curentMirror.registerMirror(childMirror,child);
-			}
 			// converting child
 			if (isDisplayObjectContainer(child))
 			{

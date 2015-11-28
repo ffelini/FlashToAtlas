@@ -33,7 +33,7 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:ScreenHome = new ScreenHome();
+    private var target:DisplayObject;// = new ScreenHome();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
