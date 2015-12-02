@@ -33,7 +33,7 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:DisplayObject = new ScreenPlayPaid();
+    private var target:DisplayObject = new SkyParalax();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
@@ -49,18 +49,32 @@ class Main extends Sprite {
         FlashAtlas.helpTexture = {a:1};
         FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
 
-        converter.reuseAtlases = true;
-        converter.debug = converter.debugAtlas = true;
-        converter.removeGaps = false;
-        new DragAndDrop(converter, onMouseEvent);
+
+        converter = getConverter();
+        converter.shareAtlases = true;
 
         addChild(converter);
-//        addChild(flashMirror);
 
         converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
+        converter.scaleX = converter.scaleY = 0.3;
 
-        converter.scaleX = converter.scaleY = 0.5;
 
+        target = new ScreenPlay();
+        flashMirror = new FlashMirrorRoot();
+        converter = getConverter();
+        converter.reUseGlobalSharedAtlases = true;
+        addChild(converter);
+        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
+        converter.y = 1000;
+        converter.scaleX = converter.scaleY = 0.3;
+    }
+
+    private function getConverter():FlashDisplay_Converter {
+        converter = new FlashDisplay_Converter();
+        converter.debug = converter.debugAtlas = true;
+        converter.removeGaps = true;
+        new DragAndDrop(converter, onMouseEvent);
+        return converter;
     }
 
     private function onMouseEvent(e:MouseEvent):Void {

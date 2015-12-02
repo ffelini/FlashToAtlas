@@ -39,13 +39,13 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		super();
 	}
-	override public inline function checkSubtexture(obj:DisplayObject,name:String="", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion
-	{
-		name = name!="" ? name : getSubtextureName(obj);
-		var subTexture:SubtextureRegion = descriptor.atlasAbstract.getSubtextureByName(name);
-		if (subTexture==null) subTexture = curentMirror.descriptor.getSubtexture(name, symbolName);
-		return subTexture;
-	}
+//	override public inline function checkSubtexture(obj:DisplayObject,name:String="", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion
+//	{
+//		name = name!="" ? name : getSubtextureName(obj);
+//		var subTexture:SubtextureRegion = descriptor.atlasAbstract.getSubtextureByName(name);
+//		if (subTexture==null) subTexture = curentMirror.descriptor.getSubtexture(name, symbolName);
+//		return subTexture;
+//	}
 	override public inline function restoreObject(obj:DisplayObject):Void
 	{
 		super.restoreObject(obj);

@@ -20,7 +20,7 @@ class TextureAtlasAbstract {
 
     public inline function add(value:SubtextureRegion):Void {
         value.parent = this;
-        subtextures.push(value);
+        if(subtextures.indexOf(value)<0) subtextures.push(value);
         map.set(value.name, value);
     }
 

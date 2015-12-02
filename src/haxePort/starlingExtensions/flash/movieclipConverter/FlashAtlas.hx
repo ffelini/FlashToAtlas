@@ -62,8 +62,10 @@ class FlashAtlas extends ContentSprite {
 /**
 * Using global shared atlases as texture providers. Bee 100% that those atlases will not dipose or loose their textures unexpectedly
 **/
-    public var reUseGlobalSharedAtlases:Bool = false;
+    public var reUseGlobalSharedAtlases:Bool = true;
 
+    public var chooseBestRegionSizeDifference:Float = 2;
+    public var globalSharedAtlasRegionSizeDifference:Float = 1.5;
     public var debug:Bool = true;
 
     public var descriptor:AtlasDescriptor = new AtlasDescriptor();
@@ -82,7 +84,7 @@ class FlashAtlas extends ContentSprite {
     public function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
         var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
-        xOffset *= 1.1;
+        xOffset *= 1.05;
         descriptor = descriptor.next();
         descriptor.xOffset = xOffset;
         descriptor.yOffset = 0;
@@ -150,7 +152,7 @@ class FlashAtlas extends ContentSprite {
         obj.visible = mc == null;
     }
 
-    private function checkSubtexture(obj:DisplayObject, name:String = "", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion {
+    public function checkSubtexture(obj:DisplayObject, name:String = "", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion {
         name = name != "" ? name : getSubtextureName(obj);
         descriptors = descriptors!=null ? descriptors : this.descriptors;
         var subtexture:SubtextureRegion;
@@ -161,7 +163,6 @@ class FlashAtlas extends ContentSprite {
         return null;
     }
 
-    public var chooseBestRegionSizeDifference:Float = 2;
     public var continueOnFull:Bool = true;
     public var subtextureObjRect:Rectangle;
     public var rectPackerAlgorithmDuration:Float = 0;
@@ -181,21 +182,20 @@ class FlashAtlas extends ContentSprite {
             subtextureObjRect = subtextureObj.getBounds(this);
 
             if (subTexture != null) {
-                var bestSizeChoosed:Bool = false;
+                // checking if subtextureObjRect is bigger than existent subtexture so there is a reason to replace it with a new one (biger wiht a better final quality)
                 if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
                     descriptor.freeRectangle(subTexture.regionRect);
                     subTexture.object.visible = false;
                     descriptor.atlasConfig.remove(subTexture.object);
-                    bestSizeChoosed = true;
-                }
-                if (!bestSizeChoosed) {
+                } else {
                     obj.visible = false;
                     coninueFunc = false;
                 }
             } else if(reUseGlobalSharedAtlases) {
                 subTexture = checkSubtexture(obj, subTextureName, sharedDescriptors);
                 if (subTexture != null) {
-                    if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
+                    subTexture = subTexture.cloneInstance();
+                    if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) <= globalSharedAtlasRegionSizeDifference) {
                         obj.visible = false;
                         coninueFunc = false;
                     }
@@ -345,8 +345,8 @@ class FlashAtlas extends ContentSprite {
 
         return addChild(obj);
     }
-    private static var movieClipsRectsByFrame:ObjectMap<Dynamic, Dynamic> = new ObjectMap<Dynamic, Dynamic>();
-    private static var movieClipsByFrame:ObjectMap<Dynamic, Dynamic> = new ObjectMap<Dynamic, Dynamic>();
+    private var movieClipsRectsByFrame:ObjectMap<Dynamic, Dynamic> = new ObjectMap<Dynamic, Dynamic>();
+    private var movieClipsByFrame:ObjectMap<Dynamic, Dynamic> = new ObjectMap<Dynamic, Dynamic>();
 
     public function cloneFrame(mc:MovieClip, mcRect:Rectangle = null, cloneFrameGraphics:Bool = false, _frame:Int = -1):DisplayObject {
         var mcClassName:String = Type.getClassName(Type.getClass(mc));
