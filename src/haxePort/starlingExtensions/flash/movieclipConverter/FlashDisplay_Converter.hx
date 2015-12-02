@@ -43,7 +43,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		name = name!="" ? name : getSubtextureName(obj);
 		var subTexture:SubtextureRegion = descriptor.atlasAbstract.getSubtextureByName(name);
-		if (subTexture==null) subTexture = curentMirror.state.getSubtexture(name, symbolName);
+		if (subTexture==null) subTexture = curentMirror.descriptor.getSubtexture(name, symbolName);
 		return subTexture;
 	}
 	override public inline function restoreObject(obj:DisplayObject):Void
@@ -199,7 +199,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		descriptor.atlasAbstract.atlasConf = new AtlasConf(atlasRect, descriptor.textureScale, descriptor.regionPoint);
 
-		curentMirror.state.storeAtlas(atlas,descriptor.atlasAbstract);
+		curentMirror.descriptor.storeAtlas(atlas,descriptor.atlasAbstract);
 		curentMirror.storeAtlas(atlas, atlasBmd);
 
 		prepareForNextAtlas();
@@ -256,7 +256,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		// changing object size in case if it is bigger than the screen size, however big textures are not required for small screens
 		if(object.scaleX==1 && object.scaleY==1) RectangleUtil.scaleToContent(object,coordinateSystemRect,false,curentMirror.quality,descriptor.maxRect);
 
-		curentMirror.state.mirrorRect = new Rectangle(object.x,object.y,object.width,object.height);
+		curentMirror.descriptor.mirrorRect = new Rectangle(object.x,object.y,object.width,object.height);
 
 		atlas = getAtlas();
 
@@ -320,10 +320,10 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		addChild(object);
 		// for redrawing we set the same flash display object position for proper mathing
-		if(mirror!=null && mirror.state.mirrorRect!=null)
+		if(mirror!=null && mirror.descriptor.mirrorRect!=null)
 		{
-			object.x = mirror.state.mirrorRect.x;
-			object.y = mirror.state.mirrorRect.y;
+			object.x = mirror.descriptor.mirrorRect.x;
+			object.y = mirror.descriptor.mirrorRect.y;
 		}
 		else // for converting and creating
 		{
@@ -358,7 +358,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		Reflect.setField(sprite,ConvertUtils.FIELD_DEFAULT_SCALEY,defaultScaleY);
 
 		var objRect:Rectangle = sprite.getBounds(sprite.parent);
-		curentMirror.state.storeMirrorRect(sprite,objRect);
+		curentMirror.descriptor.storeMirrorRect(sprite,objRect);
 
 		processFlashObjQuality(sprite);
 
@@ -426,7 +426,7 @@ class FlashDisplay_Converter extends FlashAtlas
 				objBounds.y = mc.y;
 			}
 			var _symbolName:String = Type.getClassName(Type.getClass(child));
-			var subTextures:Vector<SubtextureRegion> = curentMirror.state.getSubtextures(_symbolName);
+			var subTextures:Vector<SubtextureRegion> = curentMirror.descriptor.getSubtextures(_symbolName);
 
 			if(subTextures==null)
 			{
@@ -440,7 +440,7 @@ class FlashDisplay_Converter extends FlashAtlas
 					subTextures.set(i-1,subTexture);
 				}
 			}
-			curentMirror.state.addSubtextures(mc, objBounds, _symbolName, subTextures);
+			curentMirror.descriptor.addSubtextures(mc, objBounds, _symbolName, subTextures);
 			mc.stop();
 		}
 		else
@@ -448,7 +448,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			if (Std.is(child,TextField))
 			{
 				child.visible = drawTextFields;
-				if(drawTextFields) subTexture = addSubTexture(child);
+				if(child.visible) subTexture = addSubTexture(child);
 			}
 			else
 			{
@@ -459,7 +459,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 				subTexture = addSubTexture(child, objName);
 			}
-			curentMirror.state.addSubtexture(child, objBounds, subTexture, descriptor.atlasAbstract);
+			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture, descriptor.atlasAbstract);
 		}
 	}
 	private function processObjType(obj:DisplayObject,rect:Rectangle=null):Void

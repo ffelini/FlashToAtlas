@@ -1,7 +1,7 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
 import haxe.ds.ObjectMap;
-import haxePort.starlingExtensions.flash.movieclipConverter.Mirror_State;
+import haxePort.starlingExtensions.flash.movieclipConverter.MirrorDescriptor;
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.geom.Rectangle;
@@ -16,8 +16,8 @@ interface IFlashMirrorRoot extends IDisplayObjectContainer
 	var quality(get, set):Float;
 	function get_quality():Float;
 	function set_quality(value:Float):Float;
-	var state(get, null):Mirror_State;
-	function get_state():Mirror_State;
+	var descriptor(get, null):MirrorDescriptor;
+	function get_descriptor():MirrorDescriptor;
 		
 	function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void;
 	function getMirror(mirror:Dynamic):Dynamic;

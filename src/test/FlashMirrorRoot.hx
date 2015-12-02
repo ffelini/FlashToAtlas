@@ -7,7 +7,7 @@ import haxePort.starlingExtensions.flash.movieclipConverter.IFlashMirrorRoot;
 import flash.geom.Rectangle;
 import flash.display.*;
 import haxePort.starlingExtensions.flash.movieclipConverter.IFlashSpriteMirror;
-import haxePort.starlingExtensions.flash.movieclipConverter.Mirror_State;
+import haxePort.starlingExtensions.flash.movieclipConverter.MirrorDescriptor;
 import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
 import flash.Lib;
 /**
@@ -35,12 +35,12 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
     public function set_quality(value:Float):Float {
         return 1.0;
     }
-    private var _state:Mirror_State;
-    public var state(get, null):Mirror_State;
+    private var _descriptor:MirrorDescriptor;
+    public var descriptor(get, null):MirrorDescriptor;
 
-    public function get_state():Mirror_State {
-        if (_state == null) _state = new Mirror_State();
-        return _state;
+    public function get_descriptor():MirrorDescriptor {
+        if (_descriptor == null) _descriptor = new MirrorDescriptor();
+        return _descriptor;
     }
 
     public function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void {

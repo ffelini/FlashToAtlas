@@ -10,9 +10,9 @@ import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
 import haxePort.starlingExtensions.flash.textureAtlas.SubtextureRegion;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 
-class Mirror_State
+class MirrorDescriptor
 {
-	public var useObjPool:Bool = false;
+	public var shareAtlases:Bool = false;
 	
 	public var key:Dynamic;
 	public var active:Bool = false;
