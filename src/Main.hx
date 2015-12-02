@@ -61,8 +61,6 @@ class Main extends Sprite {
 
         converter.scaleX = converter.scaleY = 0.5;
 
-
-        addChild(LogUI.inst());
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
@@ -79,7 +77,6 @@ class Main extends Sprite {
         " \nstage.height - " + stage.height +
         " \nstage.fullScreenWidth - " + stage.fullScreenWidth +
         " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
-        " \nAtlasDescriptor.INSTANCES - " + AtlasDescriptor.INSTANCES +
         " \nconverter.atlasesPool.length - " + converter.atlasesPool.length+
         "\nconverter.convertDescriptor.convertDuration - " + converter.convertDescriptor.convertDuration);
     }

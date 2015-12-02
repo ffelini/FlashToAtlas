@@ -1,4 +1,5 @@
 package log;
+import flash.Lib;
 import haxePort.utils.LogStack;
 import flash.text.TextFormat;
 import flash.text.TextField;
@@ -30,6 +31,8 @@ class LogUI extends TextField {
     }
 
     public function setText(value:String):Void {
+        Lib.current.stage.addChild(this);
+
         if (stage != null) {
             width = stage.stageWidth;
             height = stage.stageHeight;

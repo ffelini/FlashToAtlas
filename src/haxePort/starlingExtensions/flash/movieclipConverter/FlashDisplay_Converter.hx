@@ -39,7 +39,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		super();
 	}
-	override public inline function checkSubtexture(obj:DisplayObject,name:String=""):SubtextureRegion
+	override public inline function checkSubtexture(obj:DisplayObject,name:String="", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion
 	{
 		name = name!="" ? name : getSubtextureName(obj);
 		var subTexture:SubtextureRegion = descriptor.atlasAbstract.getSubtextureByName(name);
@@ -276,7 +276,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		mirror.registerMirror(mirror,object);
 
-		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+_descriptor.convertDuration,"chooseBestRegionSizes-"+chooseBestRegionSizes,
+		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+_descriptor.convertDuration,
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
 			"packerRectAlgorithmDuration-"+rectPackerAlgorithmDuration, "num loops-"+NUM_LOOPS]);
 

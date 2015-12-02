@@ -11,8 +11,6 @@ import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 
 class AtlasDescriptor extends MaxRectPacker
 {
-	public static var INSTANCES:Array<AtlasDescriptor> = [];
-
 	public var curentMaxWidth:Float = 4096;
 	public var curentMaxHeight:Float = 4096;
 
@@ -31,8 +29,6 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public function new() {
 		super(isBaselineExtended ? curentMaxWidth : bestWidth, isBaselineExtended ? curentMaxHeight : bestHeight);
-
-		INSTANCES.push(this);
     }
 
 	public override function init(width:Float, height:Float):Void {

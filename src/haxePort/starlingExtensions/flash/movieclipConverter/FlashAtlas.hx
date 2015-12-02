@@ -53,10 +53,23 @@ class FlashAtlas extends ContentSprite {
 	 */
     public var drawMovieClipFrames:Bool = false;
 
+/**
+	* All texture atlases of this mirror will be shared globally with other mirrors so if they will find appropriate subtextures for reuse they will reuse them.
+	* Be carefully, this means that other mirrors will depend them so those atlases should not dispose unexpectedly.
+**/
+    public var shareAtlases:Bool = false;
+
+/**
+* Using global shared atlases as texture providers. Bee 100% that those atlases will not dipose or loose their textures unexpectedly
+**/
+    public var reUseGlobalSharedAtlases:Bool = false;
+
     public var debug:Bool = true;
 
     public var descriptor:AtlasDescriptor = new AtlasDescriptor();
+    private var descriptors:Array<AtlasDescriptor> = [];
 
+    private static var sharedDescriptors:Array<AtlasDescriptor> = [];
     public static var helpTexture:Dynamic;
 
     public function new() {
@@ -66,7 +79,7 @@ class FlashAtlas extends ContentSprite {
 
         atlas = getAtlas();
     }
-    function resetDescriptor() {
+    public function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
         var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
         xOffset *= 1.1;
@@ -74,6 +87,11 @@ class FlashAtlas extends ContentSprite {
         descriptor.xOffset = xOffset;
         descriptor.yOffset = 0;
         content.scaleX = content.scaleY = descriptor.textureScale;
+
+        descriptors.push(descriptor);
+        if(shareAtlases) {
+            sharedDescriptors.push(descriptor);
+        }
     }
     public var symbolName:String;
     public var mc:MovieClip;
@@ -127,23 +145,23 @@ class FlashAtlas extends ContentSprite {
     }
 
     public function restoreObject(obj:DisplayObject):Void {
-// only movieclips should be hidden as their frames are cloned to same movieclip with the corresponding frame and
-// original movieclip should be hidden
+        // only movieclips should be hidden as their frames are cloned to same movieclip with the corresponding frame and
+        // original movieclip should be hidden
         obj.visible = mc == null;
     }
 
-    public function checkSubtexture(obj:DisplayObject, name:String = ""):SubtextureRegion {
+    private function checkSubtexture(obj:DisplayObject, name:String = "", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion {
         name = name != "" ? name : getSubtextureName(obj);
-        return descriptor.atlasAbstract.getSubtextureByName(name);
-    }
-
-    public function checkSubtextureInSharedAtlases(obj:DisplayObject, name:String = ""):SubtextureRegion {
-        var subTexture:SubtextureRegion = null;
-        return subTexture;
+        descriptors = descriptors!=null ? descriptors : this.descriptors;
+        var subtexture:SubtextureRegion;
+        for (descriptor in descriptors) {
+            subtexture = descriptor.atlasAbstract.getSubtextureByName(name);
+            if (subtexture != null) return subtexture;
+        }
+        return null;
     }
 
     public var chooseBestRegionSizeDifference:Float = 2;
-    public var chooseBestRegionSizes:Bool = true;
     public var continueOnFull:Bool = true;
     public var subtextureObjRect:Rectangle;
     public var rectPackerAlgorithmDuration:Float = 0;
@@ -158,27 +176,25 @@ class FlashAtlas extends ContentSprite {
 
             var subTextureName:String = setCurentOject(obj, name);
 
-            subTexture = checkSubtexture(obj, subTextureName);
+            subTexture = checkSubtexture(obj, subTextureName, descriptors);
 
             subtextureObjRect = subtextureObj.getBounds(this);
 
             if (subTexture != null) {
                 var bestSizeChoosed:Bool = false;
-                if (chooseBestRegionSizes) {
-                    if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
-                        descriptor.freeRectangle(subTexture.regionRect);
-                        subTexture.object.visible = false;
-                        descriptor.atlasConfig.remove(subTexture.object);
-                        bestSizeChoosed = true;
-                    }
+                if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
+                    descriptor.freeRectangle(subTexture.regionRect);
+                    subTexture.object.visible = false;
+                    descriptor.atlasConfig.remove(subTexture.object);
+                    bestSizeChoosed = true;
                 }
                 if (!bestSizeChoosed) {
                     obj.visible = false;
                     coninueFunc = false;
                 }
-            } else {
-                subTexture = checkSubtextureInSharedAtlases(obj, subTextureName);
-                if(subTexture != null) {
+            } else if(reUseGlobalSharedAtlases) {
+                subTexture = checkSubtexture(obj, subTextureName, sharedDescriptors);
+                if (subTexture != null) {
                     if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
                         obj.visible = false;
                         coninueFunc = false;
