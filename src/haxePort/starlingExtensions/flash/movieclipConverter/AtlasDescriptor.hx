@@ -27,8 +27,9 @@ class AtlasDescriptor extends MaxRectPacker
 	public var subtextureTargets:Array<DisplayObject> = [];
 
 	public static var isBaselineExtended:Bool = false;
+	public static var savedAtlases:Int = 0;
 
-    public function new() {
+	public function new() {
 		super(isBaselineExtended ? curentMaxWidth : bestWidth, isBaselineExtended ? curentMaxHeight : bestHeight);
 
 		INSTANCES.push(this);
@@ -71,24 +72,6 @@ class AtlasDescriptor extends MaxRectPacker
     function get_textureScale():Float {
         return atlasAbstract.atlasRegionScale;
     }
-	public static var savedAtlases:Int = 0;
-	public function clone():AtlasDescriptor
-	{
-		var c:AtlasDescriptor = new AtlasDescriptor();
-		c.maxRect = maxRect.clone();
-
-		c.atlasAbstract = atlasAbstract.clone();
-
-		c.regionPoint = regionPoint.clone();
-		c.originPoint = originPoint.clone();
-		c.curentMaxW = curentMaxW;
-		c.curentMaxH = curentMaxH;
-		c.atlasRegionsGap = atlasRegionsGap;
-		c.textureAtlasRect = textureAtlasRect.clone();
-		c.subtextureTargets = subtextureTargets.concat(null);
-
-		return c;
-	}
 
 	public function toString():String {
 		return "\nxOffset - " + xOffset +

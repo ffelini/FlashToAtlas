@@ -78,19 +78,18 @@ class FlashAtlas extends ContentSprite {
     public var symbolName:String;
     public var mc:MovieClip;
     public var frame:Int;
-    public var subTextureName:String;
     public var subtextureObj:DisplayObject;
 
-    public inline function setCurentOject(obj:DisplayObject, name:String = ""):Void {
+    public inline function setCurentOject(obj:DisplayObject, name:String = ""):String {
         subtextureObj = obj;
         symbolName = ObjUtil.getClassName(subtextureObj);
         mc = Std.instance(subtextureObj, MovieClip);
         frame = mc != null ? mc.currentFrame : 1;
 
-// generating frameName depend on number of frames for proper Array.CASEINSENSITIVE starling internal sorting of TextureAtlas.getTextures method
-        subTextureName = name != "" ? name : getSubtextureName(subtextureObj);
-
         if (subtextureObj.parent == null) addChild(subtextureObj);
+
+        // generating frameName depend on number of frames for proper Array.CASEINSENSITIVE starling internal sorting of TextureAtlas.getTextures method
+        return name != "" ? name : getSubtextureName(subtextureObj);
     }
 
     public inline function getSubtextureName(obj:DisplayObject):String {
@@ -137,6 +136,12 @@ class FlashAtlas extends ContentSprite {
         name = name != "" ? name : getSubtextureName(obj);
         return descriptor.atlasAbstract.getSubtextureByName(name);
     }
+
+    public function checkSubtextureInSharedAtlases(obj:DisplayObject, name:String = ""):SubtextureRegion {
+        var subTexture:SubtextureRegion = null;
+        return subTexture;
+    }
+
     public var chooseBestRegionSizeDifference:Float = 2;
     public var chooseBestRegionSizes:Bool = true;
     public var continueOnFull:Bool = true;
@@ -151,7 +156,7 @@ class FlashAtlas extends ContentSprite {
             subtextureObj = null;
             subtextureObjRect = null;
 
-            setCurentOject(obj, name);
+            var subTextureName:String = setCurentOject(obj, name);
 
             subTexture = checkSubtexture(obj, subTextureName);
 
@@ -170,6 +175,14 @@ class FlashAtlas extends ContentSprite {
                 if (!bestSizeChoosed) {
                     obj.visible = false;
                     coninueFunc = false;
+                }
+            } else {
+                subTexture = checkSubtextureInSharedAtlases(obj, subTextureName);
+                if(subTexture != null) {
+                    if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
+                        obj.visible = false;
+                        coninueFunc = false;
+                    }
                 }
             }
             if (coninueFunc) {
@@ -191,7 +204,7 @@ class FlashAtlas extends ContentSprite {
 
                         descriptor.quickRectInsert(subtextureObjRect);
                     } else if (descriptor.isFull) {
-                        onAtlasIsFull();
+                        onAtlasIsFull(subtextureObj, subTextureName);
 
                         if (continueOnFull) {
                             descriptor.quickRectInsert(subtextureObjRect);
@@ -217,7 +230,7 @@ class FlashAtlas extends ContentSprite {
                     if (subTexture == null) {
                         subTexture = new SubtextureRegion();
 
-                        subTexture.name = this.subTextureName;
+                        subTexture.name = subTextureName;
                         subTexture.symbolName = this.symbolName;
                         subTexture.frame = this.frame;
                         subTexture.frameRect = new Rectangle(0, 0, subtextureObjRect.width, subtextureObjRect.height);
@@ -291,7 +304,7 @@ class FlashAtlas extends ContentSprite {
 	 *
 	 */
 
-    private function onAtlasIsFull():Void {
+    private function onAtlasIsFull(subtextureObj:DisplayObject, subTextureName:String):Void {
         var fitsAtlas:Bool = descriptor.maxRect.containsRect(subtextureObjRect);
         subtextureObj.visible = fitsAtlas;
 
