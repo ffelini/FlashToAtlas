@@ -55,33 +55,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		obj.visible = _mc==null && !isEconomicBtn;
 	}
-	/**
-	 * existing  textureAtlasses
-	 */
-	public var atlasesPool:Array<ITextureAtlasDynamic>;
-	public var atlasPoolIndex:Int = 0;
-
-	public var reuseAtlases(null, set):Bool;
-	private var _reuseAtlases:Bool = false;
-	/**
-	 * If this instance of converter is common for many instances of converted display objects then converter will save all atlases that will be reused for other
-	 * convertion. The point is that converter may be reused only sequential. It means that last instance that used it should be hidden.
-	 * Most common cases on converter reuse is for app. UI layers with a lot of graphics data.  
-	 * @param value
-	 * 
-	 */
-	public function set_reuseAtlases(value:Bool):Bool
-	{
-		if(value && atlasesPool!=null) return false;
-
-		if(value && atlasesPool==null) atlasesPool = [];
-		else
-		{
-			atlasesPool = null;
-			_reuseAtlases = false;
-		}
-		return _reuseAtlases;
-	}
 	override public function resetDescriptor():Void
 	{
 		super.resetDescriptor();
@@ -161,20 +134,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(calculateBestSize || descriptor.textureScale>1) scaledRect = generateQuality(newRect,scaledRect,false);
 
 		return scaledRect;
-	}
-	override public function getAtlas():ITextureAtlasDynamic
-	{
-		var a:ITextureAtlasDynamic = _reuseAtlases && atlasesPool!=null && atlasPoolIndex<atlasesPool.length ? atlasesPool[atlasPoolIndex] : null;
-
-		atlasPoolIndex ++;
-
-		if(a!=null) return a;
-
-		a = super.getAtlas();
-
-		if(atlasesPool!=null && atlasesPool.indexOf(a)<0) atlasesPool.push(a);
-
-		return a;
 	}
 	override public function createTextureAtlass():ITextureAtlasDynamic
 	{
@@ -287,8 +246,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		mirror.createChildren();
 		mirror.onCreateChildrenComplete();
 
-		_reuseAtlases = atlasesPool!=null;
-
 		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
 		_descriptor.totalConvertDuration = getTimer() -t;
 
@@ -331,8 +288,6 @@ class FlashDisplay_Converter extends FlashAtlas
 			object.x = descriptor.maximumWidth*1.1 - objRect.x;
 			object.y = descriptor.maximumHeight*1.1 - objRect.y;
 		}
-
-		atlasPoolIndex = 0;
 	}
 	public inline function processFlashObjQuality(obj:DisplayObject):Void
 	{
