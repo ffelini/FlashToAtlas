@@ -176,7 +176,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		if(!hierarchyParsingComplete)
 		{
-			atlas = getAtlas();
+			atlas = getAtlas(descriptor);
 		}
 	}
 
@@ -217,7 +217,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		curentMirror.descriptor.mirrorRect = new Rectangle(object.x,object.y,object.width,object.height);
 
-		atlas = getAtlas();
+		atlas = getAtlas(descriptor);
 
 		hierarchyParsingComplete = false;
 
@@ -390,7 +390,7 @@ class FlashDisplay_Converter extends FlashAtlas
 				for(i in 1...mc.totalFrames+1)
 				{
 					mc.gotoAndStop(i);
-					subTexture = addSubTexture(mc, "");
+					subTexture = addSubTexture(descriptor, mc, "");
 
 					subTextures.set(i-1,subTexture);
 				}
@@ -403,7 +403,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			if (Std.is(child,TextField))
 			{
 				child.visible = drawTextFields;
-				if(child.visible) subTexture = addSubTexture(child);
+				if(child.visible) subTexture = addSubTexture(descriptor, child);
 			}
 			else
 			{
@@ -412,7 +412,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 				var objName:String = _isEconomicButton || Std.is(child, DisplayObjectContainer) ? "" : Type.getClassName(Type.getClass(child.parent)) + "_" + objIndex;
 
-				subTexture = addSubTexture(child, objName);
+				subTexture = addSubTexture(descriptor, child, objName);
 			}
 			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture, descriptor.atlasAbstract);
 		}

@@ -80,7 +80,7 @@ class FlashAtlas extends ContentSprite {
 
         resetDescriptor();
 
-        atlas = getAtlas();
+//        atlas = getAtlas();
     }
     public function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
@@ -136,11 +136,11 @@ class FlashAtlas extends ContentSprite {
         return objName;
     }
 
-    public function addMovieClip(mc:MovieClip):Void {
+    public function addMovieClip(descriptor:AtlasDescriptor, mc:MovieClip):Void {
         var frame:Int = mc.currentFrame;
         for (i in 1...mc.totalFrames + 1) {
             mc.gotoAndStop(i);
-            addSubTexture(mc, "");
+            addSubTexture(descriptor, mc, "");
         }
         mc.visible = false;
         mc.gotoAndStop(frame);
@@ -169,7 +169,7 @@ class FlashAtlas extends ContentSprite {
     public var rectPackerAlgorithmDuration:Float = 0;
     public var subTexture:SubtextureRegion;
 
-    public function addSubTexture(obj:DisplayObject, name:String = ""):SubtextureRegion {
+    public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = ""):SubtextureRegion {
         subTexture = null;
         var coninueFunc:Bool = obj != null;
         if (coninueFunc) {
@@ -222,7 +222,7 @@ class FlashAtlas extends ContentSprite {
                         descriptor.quickRectInsert(subtextureObjRect);
                     } else if (descriptor.isFull) {
                         onAtlasIsFull(descriptor, subtextureObj, subTextureName);
-
+                        descriptor = this.descriptor;
                         if (continueOnFull) {
                             descriptor.quickRectInsert(subtextureObjRect);
                         }
@@ -412,7 +412,7 @@ class FlashAtlas extends ContentSprite {
     }
     public static var getAtlasFunc:Function;
 
-    public function getAtlas():ITextureAtlasDynamic {
+    public function getAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
         return Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
     }
     public var atlas:ITextureAtlasDynamic;
