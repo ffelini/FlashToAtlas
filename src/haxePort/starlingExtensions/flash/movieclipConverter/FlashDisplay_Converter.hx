@@ -66,9 +66,9 @@ class FlashDisplay_Converter extends FlashAtlas
 	public var useAtlasBiggestSize:Bool = true;
 
 	public var scaledRect:Rectangle = new Rectangle();
-	override public function getAtlasToDrawRect(sourceAtlas:ITextureAtlasDynamic=null):Rectangle
+	override public function getAtlasToDrawRect(descriptor:AtlasDescriptor, sourceAtlas:ITextureAtlasDynamic=null):Rectangle
 	{
-		var rect:Rectangle = super.getAtlasToDrawRect(sourceAtlas);
+		var rect:Rectangle = super.getAtlasToDrawRect(descriptor, sourceAtlas);
 		if(rect==null) return null;
 
 		if(useAtlasBiggestSize && sourceAtlas!=null)
@@ -83,7 +83,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			}
 		}
 
-		scaledRect = generateQuality(descriptor.textureAtlasRect,rect,removeGaps);
+		scaledRect = generateQuality(descriptor, descriptor.textureAtlasRect,rect,removeGaps);
 
 		var factorX:Float = scaledRect.width  / descriptor.textureAtlasRect.width;
 		var factorY:Float = scaledRect.height / descriptor.textureAtlasRect.height;
@@ -107,7 +107,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	public var differenceToScaleDownAtlas = 1.3;
 
 	var properRect:Rectangle = new Rectangle();
-	public function generateQuality(atlasRect:Rectangle,rect:Rectangle,calculateBestSize:Bool):Rectangle
+	public function generateQuality(descriptor:AtlasDescriptor, atlasRect:Rectangle,rect:Rectangle,calculateBestSize:Bool):Rectangle
 	{
 		var initialW:Float = calculateBestSize ? scaledRect.width : atlasRect.width;
 		var initialH:Float = calculateBestSize ? scaledRect.height : atlasRect.height;
@@ -118,7 +118,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		scaledRect = RectangleUtil.fit(atlasRect,properRect,ScaleMode.SHOW_ALL,false,scaledRect);
 
-		scaledRect = correctAtlasToDrawRect(scaledRect);
+		scaledRect = correctAtlasToDrawRect(descriptor, scaledRect);
 
 		var factorX:Float = scaledRect.width  / atlasRect.width;
 		var factorY:Float = scaledRect.height / atlasRect.height;
@@ -131,29 +131,29 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		LogStack.addLog(this,"generateQuality",[curentMirror,descriptor.textureScale,initialW,initialH,newRect,scaledRect]);
 
-		if(calculateBestSize || descriptor.textureScale>1) scaledRect = generateQuality(newRect,scaledRect,false);
+		if(calculateBestSize || descriptor.textureScale>1) scaledRect = generateQuality(descriptor, newRect,scaledRect,false);
 
 		return scaledRect;
 	}
-	override public function createTextureAtlass():ITextureAtlasDynamic
+	override public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic
 	{
 		var t:Float = getTimer();
 
 		var atlasRect:Rectangle;
 		if(atlas.textureSource!=FlashAtlas.helpTexture)
 		{
-			atlasRect = getAtlasToDrawRect(atlas).clone();
+			atlasRect = getAtlasToDrawRect(descriptor, atlas).clone();
 
 			// preparing atlas for Main bmd upload. This method dispose the texture if the size if different. It is important to be done before drawing Main atlas
 			atlas.prepareForBitmapDataUpload(atlasRect.width,atlasRect.height);
 
-			atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(atlasRect));
+			atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(descriptor, atlasRect));
 		}
 		else
 		{
-			atlasRect = getAtlasToDrawRect().clone();
+			atlasRect = getAtlasToDrawRect(descriptor).clone();
 			atlas.atlas = descriptor.atlasAbstract;
-			atlas.setTexture(drawAtlasToTexture(atlasRect));
+			atlas.setTexture(drawAtlasToTexture(descriptor, atlasRect));
 		}
 
 		descriptor.atlasAbstract.atlasConf = new AtlasConf(atlasRect, descriptor.textureScale, descriptor.regionPoint);
@@ -184,7 +184,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		var atlasConf:AtlasConf = atlas.atlas.atlasConf;
 		descriptor.textureScale = atlasConf.textureScale;
 		atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
-		return drawAtlas(atlasConf.atlasRect);
+		return drawAtlas(descriptor, atlasConf.atlasRect);
 	}
 	public var convertDescriptor:ConvertDescriptor;
 	public var hierarchyParsingComplete:Bool = false;
@@ -239,7 +239,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
 			"packerRectAlgorithmDuration-"+rectPackerAlgorithmDuration, "num loops-"+NUM_LOOPS]);
 
-		createTextureAtlass();
+		createTextureAtlass(descriptor);
 
 		var createChildrenTimeStamp:Float = getTimer();
 

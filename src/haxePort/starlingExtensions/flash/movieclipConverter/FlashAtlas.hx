@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import log.LogUI;
 import flash.utils.Function;
 import flash.display.Bitmap;
@@ -82,7 +83,7 @@ class FlashAtlas extends ContentSprite {
         atlas = getAtlas();
     }
     public function resetDescriptor() {
-        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor.textureAtlasRect);
+        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
         var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
         xOffset *= 1.05;
         descriptor = descriptor.next();
@@ -220,7 +221,7 @@ class FlashAtlas extends ContentSprite {
 
                         descriptor.quickRectInsert(subtextureObjRect);
                     } else if (descriptor.isFull) {
-                        onAtlasIsFull(subtextureObj, subTextureName);
+                        onAtlasIsFull(descriptor, subtextureObj, subTextureName);
 
                         if (continueOnFull) {
                             descriptor.quickRectInsert(subtextureObjRect);
@@ -230,7 +231,7 @@ class FlashAtlas extends ContentSprite {
 
                 if (descriptor.isFull && !continueOnFull) coninueFunc = false;
                 if (coninueFunc) {
-                    subtextureObj = prepareForAtlas(subtextureObj, null, subtextureObjRect);
+                    subtextureObj = prepareForAtlas(descriptor, subtextureObj, null, subtextureObjRect);
 
 // storing region
                     subtextureObjRect.x = descriptor.regionPoint.x;
@@ -290,7 +291,7 @@ class FlashAtlas extends ContentSprite {
         return subTexture;
     }
 
-    public function prepareForAtlas(obj:DisplayObject, config:Vector<Float> = null, objRect:Rectangle = null, _frame:Int = -1):DisplayObject {
+    public function prepareForAtlas(descriptor:AtlasDescriptor, obj:DisplayObject, config:Vector<Float> = null, objRect:Rectangle = null, _frame:Int = -1):DisplayObject {
         var mc:MovieClip = Std.instance(obj, MovieClip);
 
         if (mc != null && isMovieClip(mc)) {
@@ -320,11 +321,11 @@ class FlashAtlas extends ContentSprite {
 	 *
 	 */
 
-    private function onAtlasIsFull(subtextureObj:DisplayObject, subTextureName:String):Void {
+    private function onAtlasIsFull(descriptor:AtlasDescriptor, subtextureObj:DisplayObject, subTextureName:String):Void {
         var fitsAtlas:Bool = descriptor.maxRect.containsRect(subtextureObjRect);
         subtextureObj.visible = fitsAtlas;
 
-        createTextureAtlass();
+        createTextureAtlass(descriptor);
         if (onFullHandler != null) Handlers.functionCall(onFullHandler, [subtextureObj, subTextureName]);
 
         if (!fitsAtlas) restoreObject(subtextureObj);
@@ -418,9 +419,9 @@ class FlashAtlas extends ContentSprite {
     public var useMipMaps:Bool = false;
     public var atlasBmd:BitmapData;
 
-    public function createTextureAtlass():ITextureAtlasDynamic {
+    public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
         if (width == 0 || height == 0) return null;
-        atlas.setTexture(drawAtlasToTexture(getAtlasToDrawRect()));
+        atlas.setTexture(drawAtlasToTexture(descriptor, getAtlasToDrawRect(descriptor)));
         return atlas;
     }
     public static var textureFromBmdFunc:Dynamic;
@@ -431,19 +432,19 @@ class FlashAtlas extends ContentSprite {
 	 * 
 	 */
 
-    public function drawAtlasToTexture(rect:Rectangle):Dynamic {
+    public function drawAtlasToTexture(descriptor:AtlasDescriptor, rect:Rectangle):Dynamic {
         if (width == 0 || height == 0) return null;
-        atlasBmd = drawAtlas(rect);
+        atlasBmd = drawAtlas(descriptor, rect);
 
         return Handlers.functionCall(textureFromBmdFunc, [atlasBmd, atlas.textureScale]);
     }
     public var drawMAX_RECTAtlas:Bool = false;
 
-    public function getAtlasToDrawRect(sourceAtlas:ITextureAtlasDynamic = null):Rectangle {
-        return correctAtlasToDrawRect(descriptor.textureAtlasRect);
+    public function getAtlasToDrawRect(descriptor:AtlasDescriptor, sourceAtlas:ITextureAtlasDynamic = null):Rectangle {
+        return correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
     }
 
-    public inline function correctAtlasToDrawRect(rect:Rectangle):Rectangle {
+    public inline function correctAtlasToDrawRect(descriptor:AtlasDescriptor, rect:Rectangle):Rectangle {
         var properRect:Rectangle = drawMAX_RECTAtlas ? descriptor.maxRect : rect;
 
         var w:Int = properRect.width >= descriptor.maximumWidth ? Std.int(descriptor.maximumWidth) : GetNextPowerOfTwo.getNextPowerOfTwo(Std.int(properRect.width));
@@ -455,13 +456,13 @@ class FlashAtlas extends ContentSprite {
     public var DRAWS:Int = 0;
     public static var saveAtlasPngFunc:Function;
 
-    public function drawAtlas(rect:Rectangle):BitmapData {
+    public function drawAtlas(descriptor:AtlasDescriptor, rect:Rectangle):BitmapData {
         var t:Float = debug ? getTimer() : 0;
 
         content.scaleX = content.scaleY = descriptor.textureScale;
 
         if (debugAtlas) {
-            drawFreeRectangles();
+            drawFreeRectangles(descriptor);
         }
 
         atlasBmd = new BitmapData(Std.int(rect.width), Std.int(rect.height), !debugAtlas, 0x000000);
@@ -483,7 +484,7 @@ class FlashAtlas extends ContentSprite {
         return atlasBmd;
     }
 
-    function drawFreeRectangles() {
+    function drawFreeRectangles(descriptor:AtlasDescriptor) {
         for(i in 0...descriptor.freeAreas.length) {
             var r:Rectangle = descriptor.freeAreas[i];
             content.graphics.lineStyle(2,0x00ff00);
