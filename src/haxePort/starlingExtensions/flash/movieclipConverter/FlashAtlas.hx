@@ -80,7 +80,7 @@ class FlashAtlas extends ContentSprite {
 
         resetDescriptor();
 
-//        atlas = getAtlas();
+        atlas = getAtlas(descriptor);
     }
     public function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
@@ -413,7 +413,9 @@ class FlashAtlas extends ContentSprite {
     public static var getAtlasFunc:Function;
 
     public function getAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
-        return Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
+        var atlas:ITextureAtlasDynamic =  Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
+        atlas.atlas = descriptor.atlasAbstract;
+        return atlas;
     }
     public var atlas:ITextureAtlasDynamic;
     public var useMipMaps:Bool = false;
