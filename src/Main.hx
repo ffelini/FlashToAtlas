@@ -91,6 +91,7 @@ class Main extends Sprite {
         " \nstage.height - " + stage.height +
         " \nstage.fullScreenWidth - " + stage.fullScreenWidth +
         " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
+        " \nconverter.descriptors.length - " + converter.descriptors.length+
         "\nconverter.convertDescriptor.convertDuration - " + converter.convertDescriptor.convertDuration);
     }
 

@@ -61,8 +61,6 @@ class TexturePacker {
     @:isVar public var freeAreas(get, null):Array<Rectangle> = [];
 
     function init(width:Float, height:Float):Void {
-
-        _isFull = false;
         maximumWidth = width;
         maximumHeight = height;
         maxRect.width = maximumWidth;
@@ -103,8 +101,6 @@ class TexturePacker {
             }
         }
 
-        _isFull = newNode == null;
-
         return newNode;
     }
 
@@ -141,13 +137,6 @@ class TexturePacker {
 
     function packRect(width:Float, height:Float):Rectangle {
         return null;
-    }
-
-    private var _isFull:Bool = false;
-    public var isFull(get, null):Bool = false;
-
-    public function get_isFull():Bool {
-        return _isFull;
     }
 
     public function get_rectangleCount():Int { return insertedRectangles.length; }

@@ -53,9 +53,9 @@ class AtlasDescriptor extends MaxRectPacker
 		nextAtlasDescriptor.placeInSmallestFreeRect = placeInSmallestFreeRect;
         return nextAtlasDescriptor;
     }
-	public inline function quickRectInsert(objRect:Rectangle):Void
+	public inline function quickRectInsert(objRect:Rectangle):Rectangle
 	{
-		quickInsert(objRect.width, objRect.height);
+		return quickInsert(objRect.width, objRect.height);
 	}
 
     /**

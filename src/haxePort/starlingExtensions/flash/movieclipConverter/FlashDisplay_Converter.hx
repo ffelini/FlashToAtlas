@@ -48,10 +48,11 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		obj.visible = _mc==null && !isEconomicBtn;
 	}
-	override public function resetDescriptor():Void
+	override public function resetDescriptor():AtlasDescriptor
 	{
 		super.resetDescriptor();
 		descriptor.atlasAbstract.imagePath = curentMirror+"_"+descriptor.atlasAbstract.imagePath;
+		return descriptor;
 	}
 	/**
 	 * if true and we reuse an existing atlas which texture will get a Main content provided by converter then we use atlas texture size.
@@ -127,6 +128,11 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		return scaledRect;
 	}
+	private function createTextureAtlasses() {
+		for(descriptor in descriptors) {
+			createTextureAtlass(descriptor);
+		}
+	}
 	override public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic
 	{
 		var t:Float = getTimer();
@@ -152,18 +158,9 @@ class FlashDisplay_Converter extends FlashAtlas
 		curentMirror.descriptor.storeAtlas(descriptor);
 		curentMirror.storeAtlas(descriptor.atlas, atlasBmd);
 
-		prepareForNextAtlas();
-
 		LogStack.addLog(this, "createTextureAtlass", ["duration-"+(getTimer() - t)]);
 
 		return descriptor.atlas;
-	}
-	/**
-	 * preparind content for next atlas creation. Hidding all existent texture regions and resetting descriptor. 
-	 */
-	public function prepareForNextAtlas():Void
-	{
-		resetDescriptor();
 	}
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic):BitmapData {
@@ -218,7 +215,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
 			"packerRectAlgorithmDuration-"+rectPackerAlgorithmDuration, "num loops-"+NUM_LOOPS]);
 
-		createTextureAtlass(descriptor);
+		createTextureAtlasses();
 
 		var createChildrenTimeStamp:Float = getTimer();
 
