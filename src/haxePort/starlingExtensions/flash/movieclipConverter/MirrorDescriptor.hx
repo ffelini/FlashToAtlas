@@ -88,13 +88,13 @@ class MirrorDescriptor
 		if(!atlasesConf.exists(_subtextureName)) atlasesConf.set(_subtextureName, atlas); 
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
-	public inline function storeAtlas(tatlas:ITextureAtlasDynamic, atlas:TextureAtlasAbstract):Void
+	public inline function storeAtlas(descriptor:AtlasDescriptor):Void
 	{
-		if(!atlasesConf.exists(tatlas))
+		if(!atlasesConf.exists(descriptor.atlas))
 		{
-			if(textureAtlases.indexOf(tatlas)<0) textureAtlases.push(tatlas);
-			atlasesConf.set(tatlas,atlas);
-			atlasesConf.set(atlas,tatlas);
+			if(textureAtlases.indexOf(descriptor.atlas)<0) textureAtlases.push(descriptor.atlas);
+			atlasesConf.set(descriptor.atlas,descriptor.atlasAbstract);
+			atlasesConf.set(descriptor.atlasAbstract,descriptor.atlas);
 		}
 	}
 	public inline function getAtlas(subtextureName:String,subtextureSymbolName:String):ITextureAtlasDynamic

@@ -39,13 +39,6 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		super();
 	}
-//	override public inline function checkSubtexture(obj:DisplayObject,name:String="", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion
-//	{
-//		name = name!="" ? name : getSubtextureName(obj);
-//		var subTexture:SubtextureRegion = descriptor.atlasAbstract.getSubtextureByName(name);
-//		if (subTexture==null) subTexture = curentMirror.descriptor.getSubtexture(name, symbolName);
-//		return subTexture;
-//	}
 	override public inline function restoreObject(obj:DisplayObject):Void
 	{
 		super.restoreObject(obj);
@@ -89,7 +82,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		var factorY:Float = scaledRect.height / descriptor.textureAtlasRect.height;
 
 		descriptor.textureScale = factorX < factorY ? factorX : factorY;
-		atlas.textureScale = descriptor.textureScale;
 
 		LogStack.addLog(this,"getAtlasToDrawRect",["atlasRegionScale-"+descriptor.textureScale]);
 
@@ -140,32 +132,31 @@ class FlashDisplay_Converter extends FlashAtlas
 		var t:Float = getTimer();
 
 		var atlasRect:Rectangle;
-		if(atlas.textureSource!=FlashAtlas.helpTexture)
+		if(descriptor.atlas.textureSource!=FlashAtlas.helpTexture)
 		{
-			atlasRect = getAtlasToDrawRect(descriptor, atlas).clone();
+			atlasRect = getAtlasToDrawRect(descriptor, descriptor.atlas).clone();
 
 			// preparing atlas for Main bmd upload. This method dispose the texture if the size if different. It is important to be done before drawing Main atlas
-			atlas.prepareForBitmapDataUpload(atlasRect.width,atlasRect.height);
+			descriptor.atlas.prepareForBitmapDataUpload(atlasRect.width,atlasRect.height);
 
-			atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(descriptor, atlasRect));
+			descriptor.atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(descriptor, atlasRect));
 		}
 		else
 		{
 			atlasRect = getAtlasToDrawRect(descriptor).clone();
-			atlas.atlas = descriptor.atlasAbstract;
-			atlas.setTexture(drawAtlasToTexture(descriptor, atlasRect));
+			descriptor.atlas.setTexture(drawAtlasToTexture(descriptor, atlasRect));
 		}
 
 		descriptor.atlasAbstract.atlasConf = new AtlasConf(atlasRect, descriptor.textureScale, descriptor.regionPoint);
 
-		curentMirror.descriptor.storeAtlas(atlas,descriptor.atlasAbstract);
-		curentMirror.storeAtlas(atlas, atlasBmd);
+		curentMirror.descriptor.storeAtlas(descriptor);
+		curentMirror.storeAtlas(descriptor.atlas, atlasBmd);
 
 		prepareForNextAtlas();
 
 		LogStack.addLog(this, "createTextureAtlass", ["duration-"+(getTimer() - t)]);
 
-		return atlas;
+		return descriptor.atlas;
 	}
 	/**
 	 * preparind content for next atlas creation. Hidding all existent texture regions and resetting descriptor. 
@@ -173,11 +164,6 @@ class FlashDisplay_Converter extends FlashAtlas
 	public function prepareForNextAtlas():Void
 	{
 		resetDescriptor();
-
-		if(!hierarchyParsingComplete)
-		{
-			atlas = getAtlas(descriptor);
-		}
 	}
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic):BitmapData {
@@ -187,7 +173,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		return drawAtlas(descriptor, atlasConf.atlasRect);
 	}
 	public var convertDescriptor:ConvertDescriptor;
-	public var hierarchyParsingComplete:Bool = false;
 	/**
 	 * 
 	 * @param object - flash display intance
@@ -217,18 +202,12 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		curentMirror.descriptor.mirrorRect = new Rectangle(object.x,object.y,object.width,object.height);
 
-		atlas = getAtlas(descriptor);
-
-		hierarchyParsingComplete = false;
-
 		stopAllMovieClips();
 
 		if (isDisplayObjectContainer(object)) convertSprite(Std.instance(object,DisplayObjectContainer), mirror, _descriptor);
 		else convertObject(object,0);
 
 		stopAllMovieClips();
-
-		hierarchyParsingComplete = true;
 
 		_descriptor.convertDuration = getTimer() - t;
 		_descriptor.maxRectPackerAlgorithDuration = rectPackerAlgorithmDuration;
@@ -390,7 +369,7 @@ class FlashDisplay_Converter extends FlashAtlas
 				for(i in 1...mc.totalFrames+1)
 				{
 					mc.gotoAndStop(i);
-					subTexture = addSubTexture(descriptor, mc, "");
+					subTexture = addSubTextureSomewhere(mc, "");
 
 					subTextures.set(i-1,subTexture);
 				}
@@ -403,7 +382,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			if (Std.is(child,TextField))
 			{
 				child.visible = drawTextFields;
-				if(child.visible) subTexture = addSubTexture(descriptor, child);
+				if(child.visible) subTexture = addSubTextureSomewhere(child);
 			}
 			else
 			{
@@ -412,7 +391,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 				var objName:String = _isEconomicButton || Std.is(child, DisplayObjectContainer) ? "" : Type.getClassName(Type.getClass(child.parent)) + "_" + objIndex;
 
-				subTexture = addSubTexture(descriptor, child, objName);
+				subTexture = addSubTextureSomewhere(child, objName);
 			}
 			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture, descriptor.atlasAbstract);
 		}

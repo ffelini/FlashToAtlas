@@ -79,8 +79,6 @@ class FlashAtlas extends ContentSprite {
         super();
 
         resetDescriptor();
-
-        atlas = getAtlas(descriptor);
     }
     public function resetDescriptor() {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
@@ -95,6 +93,7 @@ class FlashAtlas extends ContentSprite {
         if(shareAtlases) {
             sharedDescriptors.push(descriptor);
         }
+        descriptor.atlas = getAtlas(descriptor);
     }
     public var symbolName:String;
     public var mc:MovieClip;
@@ -164,15 +163,29 @@ class FlashAtlas extends ContentSprite {
         return null;
     }
 
-    public var continueOnFull:Bool = true;
     public var subtextureObjRect:Rectangle;
     public var rectPackerAlgorithmDuration:Float = 0;
     public var subTexture:SubtextureRegion;
+    public var continueOnFull:Bool = true;
 
-    public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = ""):SubtextureRegion {
+    public function addSubTextureSomewhere(obj:DisplayObject, name:String = ""):SubtextureRegion {
+        return addSubTexture(descriptor, obj, name);
+
+//        var i:Int = descriptors.length;
+//        while(--i>=0) {
+//            var descriptor:AtlasDescriptor = descriptors[i];
+//            var subTexture:SubtextureRegion = addSubTexture(descriptor, obj, name, i==0);
+//            if (subTexture != null) {
+//                return subTexture;
+//            }
+//        }
+//        return null;
+    }
+
+    public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = "", onAtlasIsFullCall:Bool=true):SubtextureRegion {
         subTexture = null;
-        var coninueFunc:Bool = obj != null;
-        if (coninueFunc) {
+        var continueFunc:Bool = obj != null;
+        if (continueFunc) {
             subtextureObj = null;
             subtextureObjRect = null;
 
@@ -190,7 +203,7 @@ class FlashAtlas extends ContentSprite {
                     descriptor.atlasConfig.remove(subTexture.object);
                 } else {
                     obj.visible = false;
-                    coninueFunc = false;
+                    continueFunc = false;
                 }
             } else if(reUseGlobalSharedAtlases) {
                 subTexture = checkSubtexture(obj, subTextureName, sharedDescriptors);
@@ -198,11 +211,11 @@ class FlashAtlas extends ContentSprite {
                     subTexture = subTexture.cloneInstance();
                     if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) <= globalSharedAtlasRegionSizeDifference) {
                         obj.visible = false;
-                        coninueFunc = false;
+                        continueFunc = false;
                     }
                 }
             }
-            if (coninueFunc) {
+            if (continueFunc) {
 
                 var t:Float = getTimer();
 
@@ -221,16 +234,20 @@ class FlashAtlas extends ContentSprite {
 
                         descriptor.quickRectInsert(subtextureObjRect);
                     } else if (descriptor.isFull) {
-                        onAtlasIsFull(descriptor, subtextureObj, subTextureName);
-                        descriptor = this.descriptor;
-                        if (continueOnFull) {
-                            descriptor.quickRectInsert(subtextureObjRect);
+                        if(onAtlasIsFullCall) {
+                            onAtlasIsFull(descriptor, subtextureObj, subTextureName);
+                            descriptor = this.descriptor;
+                            if (continueOnFull) {
+                                descriptor.quickRectInsert(subtextureObjRect);
+                            }
+                        } else {
+                            continueFunc = false;
                         }
                     }
                 }
 
-                if (descriptor.isFull && !continueOnFull) coninueFunc = false;
-                if (coninueFunc) {
+                if (descriptor.isFull && !continueOnFull) continueFunc = false;
+                if (continueFunc) {
                     subtextureObj = prepareForAtlas(descriptor, subtextureObj, null, subtextureObjRect);
 
 // storing region
@@ -271,10 +288,7 @@ class FlashAtlas extends ContentSprite {
                     subTexture.regionRect = subtextureObjRect;
                     subTexture.object = subtextureObj;
 
-                    descriptor.atlasAbstract.add(subTexture);
-
-                    atlas.atlas = descriptor.atlasAbstract;
-                    atlas.addRegion(subTextureName + "", subtextureObjRect, subTexture.frameRect);
+                    descriptor.addSubtextureRegion(subTexture);
 
                     if (isMovieClip(mc)) {
                         var frames:Array<Vector<Float>> = descriptor.atlasConfig.get(mc);
@@ -413,18 +427,19 @@ class FlashAtlas extends ContentSprite {
     public static var getAtlasFunc:Function;
 
     public function getAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
-        var atlas:ITextureAtlasDynamic =  Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
-        atlas.atlas = descriptor.atlasAbstract;
+        var atlas:ITextureAtlasDynamic = Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
+        if (atlas != null) {
+            atlas.atlas = descriptor.atlasAbstract;
+        }
         return atlas;
     }
-    public var atlas:ITextureAtlasDynamic;
     public var useMipMaps:Bool = false;
     public var atlasBmd:BitmapData;
 
     public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
         if (width == 0 || height == 0) return null;
-        atlas.setTexture(drawAtlasToTexture(descriptor, getAtlasToDrawRect(descriptor)));
-        return atlas;
+        descriptor.atlas.setTexture(drawAtlasToTexture(descriptor, getAtlasToDrawRect(descriptor)));
+        return descriptor.atlas;
     }
     public static var textureFromBmdFunc:Dynamic;
 /**
@@ -438,7 +453,7 @@ class FlashAtlas extends ContentSprite {
         if (width == 0 || height == 0) return null;
         atlasBmd = drawAtlas(descriptor, rect);
 
-        return Handlers.functionCall(textureFromBmdFunc, [atlasBmd, atlas.textureScale]);
+        return Handlers.functionCall(textureFromBmdFunc, [atlasBmd, descriptor.atlas.textureScale]);
     }
     public var drawMAX_RECTAtlas:Bool = false;
 
@@ -506,15 +521,15 @@ class FlashAtlas extends ContentSprite {
     }
 
     public inline function getSubtexture(name:String, region:Rectangle = null, frame:Rectangle = null, extrusionFactor:Float = 100):Dynamic {
-        if (atlas != null) {
-            if (region != null || frame != null || extrusionFactor < 100) return atlas.getExtrudedTexture(name, region, frame, extrusionFactor);
-            else return atlas.getTextureObjByName(name);
+        if (descriptor.atlas != null) {
+            if (region != null || frame != null || extrusionFactor < 100) return descriptor.atlas.getExtrudedTexture(name, region, frame, extrusionFactor);
+            else return descriptor.atlas.getTextureObjByName(name);
         }
         return null;
     }
 
     public inline function getSubtextures(name:String, result:Dynamic):Dynamic {
-        return atlas != null ? atlas.getTexturesObj(name, result) : null;
+        return descriptor.atlas != null ? descriptor.atlas.getTexturesObj(name, result) : null;
     }
 
     function clear():Void {

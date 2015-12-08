@@ -33,7 +33,7 @@ import haxePort.starlingExtensions.*;
 
 class Main extends Sprite {
 
-    private var target:DisplayObject = new SkyParalax();
+    private var target:DisplayObject = new ScreenPlay();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
@@ -59,14 +59,14 @@ class Main extends Sprite {
         converter.scaleX = converter.scaleY = 0.3;
 
 
-        target = new ScreenPlay();
-        flashMirror = new FlashMirrorRoot();
-        converter = getConverter();
-        converter.reUseGlobalSharedAtlases = true;
-        addChild(converter);
-        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
-        converter.y = 1000;
-        converter.scaleX = converter.scaleY = 0.3;
+//        target = new ScreenPlay();
+//        flashMirror = new FlashMirrorRoot();
+//        converter = getConverter();
+//        converter.reUseGlobalSharedAtlases = true;
+//        addChild(converter);
+//        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
+//        converter.y = 1000;
+//        converter.scaleX = converter.scaleY = 0.3;
     }
 
     private function getConverter():FlashDisplay_Converter {

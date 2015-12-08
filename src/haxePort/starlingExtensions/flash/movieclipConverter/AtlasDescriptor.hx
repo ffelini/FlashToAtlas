@@ -1,5 +1,7 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
+import haxePort.starlingExtensions.flash.textureAtlas.SubtextureRegion;
 import haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithms.MaxRectPacker;
 import haxePort.starlingExtensions.flash.movieclipConverter.rectPackerAlgorithms.RectanglePacker;
 import flash.display.DisplayObject;
@@ -62,12 +64,27 @@ class AtlasDescriptor extends MaxRectPacker
     @:isVar public var textureScale(get, set):Float;
 
     function set_textureScale(value:Float) {
-        return atlasAbstract.atlasRegionScale = value;
+        return atlas.textureScale = atlasAbstract.atlasRegionScale = value;
     }
 
     function get_textureScale():Float {
         return atlasAbstract.atlasRegionScale;
     }
+
+	public function addSubtextureRegion(subTexture:SubtextureRegion):Void {
+		atlasAbstract.add(subTexture);
+		atlas.atlas = atlasAbstract;
+		atlas.addRegion(subTexture.name, subTexture.regionRect, subTexture.frameRect);
+	}
+
+	@:isVar public var atlas(get, set):ITextureAtlasDynamic;
+	function set_atlas(value:ITextureAtlasDynamic) {
+		return this.atlas = value;
+	}
+
+	function get_atlas():ITextureAtlasDynamic {
+		return atlas;
+	}
 
 	public function toString():String {
 		return "\nxOffset - " + xOffset +
