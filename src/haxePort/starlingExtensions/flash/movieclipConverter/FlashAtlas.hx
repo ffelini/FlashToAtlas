@@ -153,13 +153,13 @@ class FlashAtlas extends ContentSprite {
         obj.visible = mc == null;
     }
 
-    public function checkSubtexture(obj:DisplayObject, name:String = "", descriptors:Array<AtlasDescriptor>=null):SubtextureRegion {
+    public function checkSubtexture(obj:DisplayObject, name:String = "", descriptors:Array<AtlasDescriptor>=null):AtlasDescriptor {
         name = name != "" ? name : getSubtextureName(obj);
         descriptors = descriptors!=null ? descriptors : this.descriptors;
         var subtexture:SubtextureRegion;
         for (descriptor in descriptors) {
             subtexture = descriptor.atlasAbstract.getSubtextureByName(name);
-            if (subtexture != null) return subtexture;
+            if (subtexture != null) return descriptor;
         }
         return null;
     }
@@ -190,22 +190,24 @@ class FlashAtlas extends ContentSprite {
 
             var subTextureName:String = setCurentOject(obj, name);
 
-            subTexture = checkSubtexture(obj, subTextureName, descriptors);
+            var subTextureDescriptor:AtlasDescriptor = checkSubtexture(obj, subTextureName, descriptors);
+            subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
 
             var subtextureObjRect:Rectangle = subtextureObj.getBounds(this);
 
             if (subTexture != null) {
                 // checking if subtextureObjRect is bigger than existent subtexture so there is a reason to replace it with a new one (biger wiht a better final quality)
                 if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
-//                    descriptor.freeRectangle(subTexture.regionRect);
+                    subTextureDescriptor.freeRectangle(subTexture.regionRect);
                     subTexture.object.visible = false;
-//                    descriptor.atlasConfig.remove(subTexture.object);
+                    subTextureDescriptor.atlasConfig.remove(subTexture.object);
                 } else {
                     obj.visible = false;
                     continueFunc = false;
                 }
             } else if(reUseGlobalSharedAtlases) {
-                subTexture = checkSubtexture(obj, subTextureName, sharedDescriptors);
+                subTextureDescriptor = checkSubtexture(obj, subTextureName, sharedDescriptors);
+                subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
                 if (subTexture != null) {
                     subTexture = subTexture.cloneInstance();
                     if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) <= globalSharedAtlasRegionSizeDifference) {
@@ -236,6 +238,7 @@ class FlashAtlas extends ContentSprite {
                     }
                     if (isFull) {
                         if(onAtlasIsFullCall) {
+                            // trying to insert in a new/next atlas
                             descriptor = resetDescriptor();
                             if (continueOnFull) {
                                 isFull = descriptor.quickRectInsert(subtextureObjRect) == null;
@@ -260,6 +263,7 @@ class FlashAtlas extends ContentSprite {
 
                     subtextureObj.x -= localBounds.x - localP.x;// - (localBounds.x * subtextureObj.scaleX);
                     subtextureObj.y -= localBounds.y - localP.y;// - (localBounds.y * subtextureObj.scaleY);
+                    subtextureObj.visible = true;
 
                     if (subTexture == null) {
                         subTexture = new SubtextureRegion();
