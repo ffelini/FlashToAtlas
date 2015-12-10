@@ -200,7 +200,6 @@ class FlashAtlas extends ContentSprite {
                 if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
                     subTextureDescriptor.freeRectangle(subTexture.regionRect);
                     subTexture.object.visible = false;
-                    subTextureDescriptor.atlasConfig.remove(subTexture.object);
                 } else {
                     obj.visible = false;
                     continueFunc = false;
@@ -293,16 +292,6 @@ class FlashAtlas extends ContentSprite {
                     subTexture.object = subtextureObj;
 
                     descriptor.addSubtextureRegion(subTexture);
-
-                    if (isMovieClip(mc)) {
-                        var frames:Array<Vector<Float>> = descriptor.atlasConfig.get(mc);
-                        if (frames == null) {
-                            frames = [];
-                            descriptor.atlasConfig.set(mc, frames);
-                        }
-                        frames[mc.currentFrame] = Vector.fromArrayCopy([subtextureObj.x, subtextureObj.y, subtextureObj.width, subtextureObj.height]);
-                    }
-                    else descriptor.atlasConfig.set(subtextureObj, Vector.fromArrayCopy([subtextureObj.x, subtextureObj.y, subtextureObj.width, subtextureObj.height]));
                 }
             }
         }

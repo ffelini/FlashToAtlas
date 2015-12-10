@@ -22,8 +22,6 @@ class AtlasDescriptor extends MaxRectPacker
 	public var atlasAbstract:TextureAtlasAbstract = new TextureAtlasAbstract();
 	public var originPoint:Point = new Point();
 
-	public var atlasConfig:ObjectMap<Dynamic,Dynamic> = new ObjectMap<Dynamic,Dynamic>();
-
 	public var subtextureTargets:Array<DisplayObject> = [];
 
 	public static var isBaselineExtended:Bool = false;
@@ -35,8 +33,6 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public override function init(width:Float, height:Float):Void {
 		super.init(width, height);
-
-		atlasConfig = new ObjectMap();
 
 		atlasAbstract = new TextureAtlasAbstract();
 		atlasAbstract.imagePath = savedAtlases + ".png";
