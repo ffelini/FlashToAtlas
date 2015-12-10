@@ -65,7 +65,7 @@ class FlashAtlas extends ContentSprite {
 **/
     public var reUseGlobalSharedAtlases:Bool = false;
 
-    public var chooseBestRegionSizeDifference:Float = 2;
+    public var chooseBestRegionSizeDifference:Float = 1.75;
     public var globalSharedAtlasRegionSizeDifference:Float = 1.5;
     public var debug:Bool = true;
 
@@ -182,7 +182,7 @@ class FlashAtlas extends ContentSprite {
         return null;
     }
 
-    public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = "", onAtlasIsFullCall:Bool=true):SubtextureRegion {
+    public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = "", addToNextAtlasOnFull:Bool=true):SubtextureRegion {
         subTexture = null;
         var continueFunc:Bool = obj != null;
         if (continueFunc) {
@@ -236,10 +236,10 @@ class FlashAtlas extends ContentSprite {
                         isFull = descriptor.quickRectInsert(subtextureObjRect) == null;
                     }
                     if (isFull) {
-                        if(onAtlasIsFullCall) {
-                            // trying to insert in a new/next atlas
-                            descriptor = resetDescriptor();
+                        if(addToNextAtlasOnFull) {
                             if (continueOnFull) {
+                                // trying to insert in a new/next atlas
+                                descriptor = resetDescriptor();
                                 isFull = descriptor.quickRectInsert(subtextureObjRect) == null;
                             }
                         } else {
