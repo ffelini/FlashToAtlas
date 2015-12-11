@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="optimizations">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" />
+    <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlashToAtlas.iws" />
-    <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="out/" />
     <ignored path="bin/" />
@@ -353,7 +349,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;TexturePa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx&#10;debug&#9;ACTION&#9;Debug&#10;Function&#9;null&#9;null&#10;LogU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/log/LogUI.hx&#10;Main&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/Main2.hx&#10;Display&#9;FILE&#9;file:///usr/local/lib/haxe/std/flash/display/DisplayObject.hx&#10;Content&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ContentSprite.hx" />
+    <property name="SearchEverywhereHistoryKey" value="works&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/.idea/workspace.xml&#10;workspa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/.idea/workspace.xml&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;TexturePa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx&#10;debug&#9;ACTION&#9;Debug&#10;Function&#9;null&#9;null&#10;LogU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/log/LogUI.hx&#10;Main&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/Main2.hx&#10;Display&#9;FILE&#9;file:///usr/local/lib/haxe/std/flash/display/DisplayObject.hx&#10;Content&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ContentSprite.hx" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -694,7 +690,7 @@
       <workItem from="1449577156622" duration="12189000" />
       <workItem from="1449740341448" duration="7718000" />
       <workItem from="1449764624638" duration="202000" />
-      <workItem from="1449837934942" duration="3661000" />
+      <workItem from="1449837934942" duration="3838000" />
     </task>
     <task id="LOCAL-00001" summary="compilation issues fixed. Added gameAssets.swc (build with Adobe Flash CC that is parsed without issues)">
       <created>1447666588460</created>
@@ -924,11 +920,17 @@
       <option name="project" value="LOCAL" />
       <updated>1449759367654</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="atlasDescriptor recycling bug fixed + some code cleanups">
+      <created>1449843194979</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1449843194979</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143138000" />
+    <option name="totallyTimeSpent" value="143315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -941,7 +943,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="23" width="1865" height="1057" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -960,7 +962,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14975315" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14975315" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -982,7 +984,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="AtlasConf implementation" />
     <MESSAGE value="restoreAtlas method removed as it became useless" />
     <MESSAGE value="redrawAtlasForConf method implementation" />
     <MESSAGE value="bitmaps are drawn properly" />
@@ -1007,7 +1008,8 @@
     <MESSAGE value="optimizations" />
     <MESSAGE value="code cleaning" />
     <MESSAGE value="minor optimizations" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor optimizations" />
+    <MESSAGE value="atlasDescriptor recycling bug fixed + some code cleanups" />
+    <option name="LAST_COMMIT_MESSAGE" value="atlasDescriptor recycling bug fixed + some code cleanups" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1020,22 +1022,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="59" selection-start-line="116" selection-start-column="59" selection-end-line="116" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="451" column="98" selection-start-line="451" selection-start-column="98" selection-end-line="451" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1391,6 +1377,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="392" column="78" selection-start-line="392" selection-start-column="78" selection-end-line="392" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8935236">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
