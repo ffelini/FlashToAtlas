@@ -390,7 +390,7 @@ class FlashDisplay_Converter extends FlashAtlas
 
 				subTexture = addSubTextureSomewhere(child, objName);
 			}
-			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture, descriptor.atlasAbstract);
+			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture);
 		}
 	}
 

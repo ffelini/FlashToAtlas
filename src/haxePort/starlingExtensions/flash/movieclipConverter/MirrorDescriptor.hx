@@ -71,7 +71,7 @@ class MirrorDescriptor
 		atlasesConf.set(mirror,subTextures);
 		atlasesConf.set(_symbolName,subTextures); 
 	}
-	public inline function addSubtexture(mirror:DisplayObject, rect:Rectangle, subTexture:SubtextureRegion,atlas:TextureAtlasAbstract):Void
+	public inline function addSubtexture(mirror:DisplayObject, rect:Rectangle, subTexture:SubtextureRegion):Void
 	{
 		storeMirrorRect(mirror,rect);
 		if (mirrorsCreationStack.indexOf(mirror) < 0) mirrorsCreationStack.push(mirror);
@@ -85,7 +85,6 @@ class MirrorDescriptor
 		atlasesConf.set(_symbolName,subTexture); 
 		
 		// storing subtexture childs and parent atlas objects. Linking together
-		if(!atlasesConf.exists(_subtextureName)) atlasesConf.set(_subtextureName, atlas); 
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
 	public inline function storeAtlas(descriptor:AtlasDescriptor):Void

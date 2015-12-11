@@ -65,7 +65,7 @@ class FlashAtlas extends ContentSprite {
 **/
     public var reUseGlobalSharedAtlases:Bool = false;
 
-    public var chooseBestRegionSizeDifference:Float = 1.75;
+    public var chooseBestRegionSizeDifference:Float = 1.5;
     public var globalSharedAtlasRegionSizeDifference:Float = 1.5;
     public var debug:Bool = true;
 
@@ -197,7 +197,7 @@ class FlashAtlas extends ContentSprite {
 
             if (subTexture != null) {
                 // checking if subtextureObjRect is bigger than existent subtexture so there is a reason to replace it with a new one (biger wiht a better final quality)
-                if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) >= chooseBestRegionSizeDifference) {
+                if (subtextureObjRect.width/subTexture.width >= chooseBestRegionSizeDifference ||  subtextureObjRect.height/subTexture.height >= chooseBestRegionSizeDifference) {
                     subTextureDescriptor.freeRectangle(subTexture.regionRect);
                     subTexture.object.visible = false;
                 } else {
@@ -209,7 +209,7 @@ class FlashAtlas extends ContentSprite {
                 subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
                 if (subTexture != null) {
                     subTexture = subTexture.cloneInstance();
-                    if (((subtextureObjRect.width + subtextureObjRect.height) / (subTexture.width + subTexture.height)) <= globalSharedAtlasRegionSizeDifference) {
+                    if (subtextureObjRect.width/subTexture.width <= globalSharedAtlasRegionSizeDifference ||  subtextureObjRect.height/subTexture.height <= globalSharedAtlasRegionSizeDifference) {
                         obj.visible = false;
                         continueFunc = false;
                     }
@@ -244,6 +244,7 @@ class FlashAtlas extends ContentSprite {
                             }
                         } else {
                             continueFunc = false;
+                            subTexture = null;
                         }
                     }
                 }
