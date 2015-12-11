@@ -690,7 +690,7 @@
       <workItem from="1449577156622" duration="12189000" />
       <workItem from="1449740341448" duration="7718000" />
       <workItem from="1449764624638" duration="202000" />
-      <workItem from="1449837934942" duration="3838000" />
+      <workItem from="1449837934942" duration="3959000" />
     </task>
     <task id="LOCAL-00001" summary="compilation issues fixed. Added gameAssets.swc (build with Adobe Flash CC that is parsed without issues)">
       <created>1447666588460</created>
@@ -926,11 +926,17 @@
       <option name="project" value="LOCAL" />
       <updated>1449843194979</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="workspace added to version control">
+      <created>1449843350172</created>
+      <option name="number" value="00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1449843350172</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143315000" />
+    <option name="totallyTimeSpent" value="143436000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -984,7 +990,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="restoreAtlas method removed as it became useless" />
     <MESSAGE value="redrawAtlasForConf method implementation" />
     <MESSAGE value="bitmaps are drawn properly" />
     <MESSAGE value="stopAllMovieClips() called before and after converting" />
@@ -1009,7 +1014,8 @@
     <MESSAGE value="code cleaning" />
     <MESSAGE value="minor optimizations" />
     <MESSAGE value="atlasDescriptor recycling bug fixed + some code cleanups" />
-    <option name="LAST_COMMIT_MESSAGE" value="atlasDescriptor recycling bug fixed + some code cleanups" />
+    <MESSAGE value="workspace added to version control" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace added to version control" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
