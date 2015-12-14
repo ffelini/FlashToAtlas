@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.utils.DisplayUtil;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import log.LogUI;
 import flash.utils.Function;
@@ -54,19 +55,15 @@ class FlashAtlas extends ContentSprite {
 	 */
     public var drawMovieClipFrames:Bool = false;
 
-/**
-	* All texture atlases of this mirror will be shared globally with other mirrors so if they will find appropriate subtextures for reuse they will reuse them.
-	* Be carefully, this means that other mirrors will depend them so those atlases should not dispose unexpectedly.
-**/
-    public var shareAtlases:Bool = false;
+    private var _shareAtlases = false;
 
 /**
 * Using global shared atlases as texture providers. Bee 100% that those atlases will not dipose or loose their textures unexpectedly
 **/
     public var reUseGlobalSharedAtlases:Bool = false;
 
-    public var chooseBestRegionSizeDifference:Float = 1.5;
-    public var globalSharedAtlasRegionSizeDifference:Float = 1.5;
+    public var acceptableRegionQuality:Float = 1.5;
+    public var acceptableSharedRegionQuality:Float = 0.75;
     public var debug:Bool = true;
 
     public var descriptor:AtlasDescriptor = new AtlasDescriptor();
@@ -90,11 +87,24 @@ class FlashAtlas extends ContentSprite {
         content.scaleX = content.scaleY = descriptor.textureScale;
 
         descriptors.push(descriptor);
-        if(shareAtlases) {
-            sharedDescriptors.push(descriptor);
+        if(_shareAtlases) {
+            shareAtlasesRegions();
         }
         descriptor.atlas = getAtlas(descriptor);
         return descriptor;
+    }
+/**
+	* All texture atlases of this mirror will be shared globally with other mirrors so if they will find appropriate subtextures for reuse they will reuse them.
+	* Be carefully, this means that other mirrors will depend them so those atlases should not dispose unexpectedly.
+**/
+    public function shareAtlasesRegions() {
+        _shareAtlases = true;
+        if(sharedDescriptors.indexOf(descriptor)<0) {
+            sharedDescriptors.push(descriptor);
+        }
+    }
+    public function isSharingAtlasesRegions() {
+        return _shareAtlases;
     }
     public var symbolName:String;
     public var mc:MovieClip;
@@ -194,10 +204,11 @@ class FlashAtlas extends ContentSprite {
             subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
 
             var subtextureObjRect:Rectangle = subtextureObj.getBounds(this);
+            var subtextureObjRotation = DisplayUtil.getRotationOn(obj, content);
 
             if (subTexture != null) {
                 // checking if subtextureObjRect is bigger than existent subtexture so there is a reason to replace it with a new one (biger wiht a better final quality)
-                if (subtextureObjRect.width/subTexture.width >= chooseBestRegionSizeDifference ||  subtextureObjRect.height/subTexture.height >= chooseBestRegionSizeDifference) {
+                if (subtextureObjRotation==subTexture.objRotation && (subtextureObjRect.width*subtextureObjRect.height)/(subTexture.width*subTexture.height) >= acceptableRegionQuality) {
                     subTextureDescriptor.freeRectangle(subTexture.regionRect);
                     subTexture.object.visible = false;
                 } else {
@@ -208,10 +219,12 @@ class FlashAtlas extends ContentSprite {
                 subTextureDescriptor = checkSubtexture(obj, subTextureName, sharedDescriptors);
                 subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
                 if (subTexture != null) {
-                    subTexture = subTexture.cloneInstance();
-                    if (subtextureObjRect.width/subTexture.width <= globalSharedAtlasRegionSizeDifference ||  subtextureObjRect.height/subTexture.height <= globalSharedAtlasRegionSizeDifference) {
+                    if (subtextureObjRotation==subTexture.objRotation && (subTexture.width*subTexture.height)/(subtextureObjRect.width*subtextureObjRect.height) >= acceptableSharedRegionQuality) {
+                        subTexture = subTexture.cloneInstance();
                         obj.visible = false;
                         continueFunc = false;
+                    } else {
+                        subTexture = null;
                     }
                 }
             }
@@ -252,7 +265,9 @@ class FlashAtlas extends ContentSprite {
                 if (isFull && !continueOnFull) continueFunc = false;
                 if (continueFunc) {
                     subtextureObj = prepareForAtlas(descriptor, subtextureObj, null, subtextureObjRect);
-
+                    if(subtextureObj!=obj) {
+                        subtextureObjRotation = DisplayUtil.getRotationOn(subtextureObj, content);
+                    }
 // storing region
                     subtextureObjRect.x = descriptor.regionPoint.x;
                     subtextureObjRect.y = descriptor.regionPoint.y;
@@ -281,6 +296,7 @@ class FlashAtlas extends ContentSprite {
                     subTexture.y = subtextureObjRect.y;
                     subTexture.width = subtextureObjRect.width;
                     subTexture.height = subtextureObjRect.height;
+                    subTexture.objRotation = subtextureObjRotation;
 
                     if (mc != null) {
                         var globalBounds:Rectangle = mc.getRect(this);
@@ -322,7 +338,6 @@ class FlashAtlas extends ContentSprite {
 
         return obj;
     }
-    public var onFullHandler:Function;
 
     public inline function drawAndAddObj(obj:DisplayObject):DisplayObject {
         var _bmd:BitmapData;

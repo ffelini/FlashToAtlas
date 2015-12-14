@@ -20,7 +20,11 @@ class SubtextureRegion extends Rectangle {
     public var regionRect:Rectangle;
     public var frameRect:Rectangle;
 
-    public var rotated:Bool;
+    public var objRotation:Float;
+    @:isVar public var rotated(get, null):Bool;
+    function get_rotated():Bool {
+        return objRotation!=0;
+    }
 
     public var parent:TextureAtlasAbstract;
 
@@ -43,7 +47,7 @@ class SubtextureRegion extends Rectangle {
         c.pivotY = pivotY;
         c.regionRect = regionRect;
         c.frameRect = frameRect;
-        c.rotated = rotated;
+        c.objRotation = objRotation;
         c.parent = parent;
         return c;
     }
