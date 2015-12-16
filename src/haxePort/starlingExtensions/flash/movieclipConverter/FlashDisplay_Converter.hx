@@ -184,7 +184,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(object==null) return null;
 		convertDescriptor = _descriptor;
 
-		AtlasDescriptor.isBaselineExtended = isBaselineExtended;
+		FlashAtlas.isBaselineExtended = isBaselineExtended;
 		LogStack.addLog(this,"-------------------------------------- CONVERT " + object + " to " + mirror + " -------------------------------------------");
 
 		var t:Float = debug ? getTimer() : 0;

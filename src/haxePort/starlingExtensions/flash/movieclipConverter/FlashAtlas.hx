@@ -1,5 +1,7 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
+import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import haxePort.starlingExtensions.utils.DisplayUtil;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import log.LogUI;
@@ -66,16 +68,30 @@ class FlashAtlas extends ContentSprite {
     public var acceptableSharedRegionQuality:Float = 0.75;
     public var debug:Bool = true;
 
-    public var descriptor:AtlasDescriptor = new AtlasDescriptor();
+    public static var isBaselineExtended:Bool = false;
+    public var descriptor:AtlasDescriptor;
     public var descriptors:Array<AtlasDescriptor> = [];
+
+    public static inline var curentMaxWidth:Float = 4096;
+    public static inline var curentMaxHeight:Float = 4096;
+
+    public static inline var bestWidth:Float = 2048;
+    public static inline var bestHeight:Float = 2048;
 
     private static var sharedDescriptors:Array<AtlasDescriptor> = [];
     public static var helpTexture:Dynamic;
 
     public function new() {
         super();
+        descriptor = new AtlasDescriptor(getMaximumWidth(), getMaximumHeight());
 
         resetDescriptor();
+    }
+    function getMaximumWidth() {
+        return isBaselineExtended ? curentMaxWidth : bestWidth;
+    }
+    function getMaximumHeight() {
+        return isBaselineExtended ? curentMaxHeight : bestHeight;
     }
     public function resetDescriptor():AtlasDescriptor {
         var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
