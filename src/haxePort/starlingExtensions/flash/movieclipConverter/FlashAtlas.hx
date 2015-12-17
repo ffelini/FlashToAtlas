@@ -68,7 +68,7 @@ class FlashAtlas extends ContentSprite {
     public var acceptableSharedRegionQuality:Float = 0.75;
     public var debug:Bool = true;
 
-    public static var isBaselineExtended:Bool = false;
+    public var isBaselineExtended:Bool = false;
     public var descriptor:AtlasDescriptor;
     public var descriptors:Array<AtlasDescriptor> = [];
 
@@ -83,9 +83,6 @@ class FlashAtlas extends ContentSprite {
 
     public function new() {
         super();
-        descriptor = new AtlasDescriptor(getMaximumWidth(), getMaximumHeight());
-
-        resetDescriptor();
     }
     function getMaximumWidth() {
         return isBaselineExtended ? curentMaxWidth : bestWidth;
@@ -94,12 +91,16 @@ class FlashAtlas extends ContentSprite {
         return isBaselineExtended ? curentMaxHeight : bestHeight;
     }
     public function resetDescriptor():AtlasDescriptor {
-        var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
-        var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
-        xOffset *= 1.05;
-        descriptor = descriptor.next();
-        descriptor.xOffset = xOffset;
-        descriptor.yOffset = 0;
+        if(descriptor==null) {
+            descriptor = new AtlasDescriptor(getMaximumWidth(), getMaximumHeight());
+        } else {
+            var atlasToDrawRect:Rectangle = correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
+            var xOffset:Float = atlasToDrawRect!=null ? descriptor.xOffset + atlasToDrawRect.width : 0;
+            xOffset *= 1.05;
+            descriptor = descriptor.next();
+            descriptor.xOffset = xOffset;
+            descriptor.yOffset = 0;
+        }
         content.scaleX = content.scaleY = descriptor.textureScale;
 
         descriptors.push(descriptor);
@@ -544,6 +545,7 @@ class FlashAtlas extends ContentSprite {
 
     function clear():Void {
         Reflect.callMethod(this, forEachChild, [this, removeAtlasContainerChild]);
+        resetDescriptor();
     }
 
     public inline function removeAtlasContainerChild(child:DisplayObject, childIndex:Int):Void {

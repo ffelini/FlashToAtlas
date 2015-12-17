@@ -51,7 +51,7 @@ class Main extends Sprite {
 
 
         converter = getConverter();
-        converter.shareAtlases = true;
+        converter.shareAtlasesRegions();
 
         addChild(converter);
 
