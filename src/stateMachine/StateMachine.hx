@@ -26,7 +26,7 @@ class StateMachine extends EventDispatcher
 	 * be set using initialState setter.
 	 * @example This sample creates a state machine for a player model with 3 states (Playing, paused and stopped)
 	 * <pre>
-	 *	playerSM = new StateMachine();
+	 *	playerSM = Main StateMachine();
 	 *
 	 *	playerSM.addState("playing",{ enter: onPlayingEnter, exit: onPlayingExit, from:["paused","stopped"] });
 	 *	playerSM.addState("paused",{ enter: onPausedEnter, from:"playing"});
@@ -42,7 +42,7 @@ class StateMachine extends EventDispatcher
 	 * @example This example shows the creation of a hierarchical state machine for the monster of a game
 	 * (Its a simplified version of the state machine used to control the AI in the original Quake game)
 	 *	<pre>
-	 *	monsterSM = new StateMachine()
+	 *	monsterSM = Main StateMachine()
 	 *	
 	 *	monsterSM.addState("idle",{enter:onIdle, from:"attack"})
 	 *	monsterSM.addState("attack",{enter:onAttack, from:"idle"})
@@ -62,8 +62,8 @@ class StateMachine extends EventDispatcher
 	}
 
 	/**
-	 * Adds a new state
-	 * @param stateName	The name of the new State
+	 * Adds a Main state
+	 * @param stateName	The name of the Main State
 	 * @param stateData	A hash containing state enter and exit callbacks and allowed states to transition from
 	 * The "from" property can be a string or and array with the state names or * to allow any transition
 	**/

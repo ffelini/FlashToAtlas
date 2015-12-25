@@ -13,10 +13,13 @@ interface ITextureAtlasDynamic
 	function set_textureScale(value:Float):Float;
 	var textureSource(get, null):Dynamic;
 	function get_textureSource():Dynamic;
+	
+	var atlas(get, set):TextureAtlasAbstract;
+	function get_atlas():TextureAtlasAbstract;
+	function set_atlas(value:TextureAtlasAbstract):TextureAtlasAbstract;
 
 	function setTexture(value:Dynamic):Void;
 	function curentTexture():Dynamic;
-	function setAtlas(value:TextureAtlasAbstract):Void;
 	function addRegion(name:String, region:Rectangle, frame:Rectangle = null, rotated:Bool = false):Void;
 	function getRegion(name:String):Rectangle;
 	function getFrame(name:String):Rectangle;

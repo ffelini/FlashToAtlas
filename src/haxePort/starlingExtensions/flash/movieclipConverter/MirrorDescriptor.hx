@@ -10,10 +10,8 @@ import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
 import haxePort.starlingExtensions.flash.textureAtlas.SubtextureRegion;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 
-class Mirror_State
+class MirrorDescriptor
 {
-	public var useObjPool:Bool = false;
-	
 	public var key:Dynamic;
 	public var active:Bool = false;
 	
@@ -23,7 +21,6 @@ class Mirror_State
 	
 	public var atlasesConf:ObjectMap<Dynamic,Dynamic>;
 	public var textureAtlases:Array<ITextureAtlasDynamic>;
-	public var atlasesConfig:Array<ObjectMap<Dynamic,Dynamic>>;		
 	
 	public var mirrorsCreationStack:Array<DisplayObject>;
 	private var flashMirrors:Array<DisplayObject>;
@@ -34,7 +31,6 @@ class Mirror_State
 	{
 		atlasesConf = new ObjectMap();
 		textureAtlases = new Array<ITextureAtlasDynamic>();
-		atlasesConfig = new Array();
 		mirrorsCreationStack = new Array<DisplayObject>();
 		flashMirrors = new Array<DisplayObject>();
 		mirrorRects = new ObjectMap();
@@ -75,7 +71,7 @@ class Mirror_State
 		atlasesConf.set(mirror,subTextures);
 		atlasesConf.set(_symbolName,subTextures); 
 	}
-	public inline function addSubtexture(mirror:DisplayObject, rect:Rectangle, subTexture:SubtextureRegion,atlas:TextureAtlasAbstract):Void
+	public inline function addSubtexture(mirror:DisplayObject, rect:Rectangle, subTexture:SubtextureRegion):Void
 	{
 		storeMirrorRect(mirror,rect);
 		if (mirrorsCreationStack.indexOf(mirror) < 0) mirrorsCreationStack.push(mirror);
@@ -89,17 +85,15 @@ class Mirror_State
 		atlasesConf.set(_symbolName,subTexture); 
 		
 		// storing subtexture childs and parent atlas objects. Linking together
-		if(!atlasesConf.exists(_subtextureName)) atlasesConf.set(_subtextureName, atlas); 
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
-	public inline function storeAtlas(tatlas:ITextureAtlasDynamic, config:ObjectMap<Dynamic,Dynamic>, atlas:TextureAtlasAbstract):Void
+	public inline function storeAtlas(descriptor:AtlasDescriptor):Void
 	{
-		if(!atlasesConf.exists(tatlas))
+		if(!atlasesConf.exists(descriptor.atlas))
 		{
-			textureAtlases.push(tatlas);
-			atlasesConfig.push(config); 
-			atlasesConf.set(tatlas,atlas);
-			atlasesConf.set(atlas,tatlas);
+			if(textureAtlases.indexOf(descriptor.atlas)<0) textureAtlases.push(descriptor.atlas);
+			atlasesConf.set(descriptor.atlas,descriptor.atlasAbstract);
+			atlasesConf.set(descriptor.atlasAbstract,descriptor.atlas);
 		}
 	}
 	public inline function getAtlas(subtextureName:String,subtextureSymbolName:String):ITextureAtlasDynamic
