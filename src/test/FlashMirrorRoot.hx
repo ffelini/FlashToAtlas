@@ -1,5 +1,6 @@
 package test;
 import flash.display.Sprite;
+import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import log.LogUI;
 import flash.events.MouseEvent;
 import haxePort.starlingExtensions.flash.movieclipConverter.FlashDisplay_Converter;
@@ -24,6 +25,9 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
     public function new() {
         super();
         scaleX = scaleY = 0.3;
+    }
+
+    public function onDescriptorReset(descriptor:AtlasDescriptor) {
     }
 
     public var quality(get, set):Float;

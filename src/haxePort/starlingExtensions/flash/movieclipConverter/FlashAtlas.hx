@@ -117,7 +117,9 @@ class FlashAtlas extends ContentSprite {
     public function shareAtlasesRegions() {
         _shareAtlases = true;
         if(sharedDescriptors.indexOf(descriptor)<0) {
-            sharedDescriptors.push(descriptor);
+            if(descriptor!=null) {
+                sharedDescriptors.push(descriptor);
+            }
         }
     }
     public function isSharingAtlasesRegions() {
@@ -163,9 +165,10 @@ class FlashAtlas extends ContentSprite {
         return objName;
     }
 
-    public function addMovieClip(descriptor:AtlasDescriptor, mc:MovieClip):Void {
+    public function addMovieClip(descriptor:AtlasDescriptor, mc:MovieClip, includeAllFrames:Bool):Void {
         var frame:Int = mc.currentFrame;
-        for (i in 1...mc.totalFrames + 1) {
+        var startFrame = includeAllFrames ? 1 : frame;
+        for (i in startFrame...mc.totalFrames + 1) {
             mc.gotoAndStop(i);
             addSubTexture(descriptor, mc, "");
         }

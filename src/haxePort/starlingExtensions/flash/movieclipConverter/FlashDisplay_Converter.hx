@@ -52,6 +52,9 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		super.resetDescriptor();
 		descriptor.atlasAbstract.imagePath = curentMirror+"_"+descriptor.atlasAbstract.imagePath;
+		if(curentMirror!=null) {
+			curentMirror.onDescriptorReset(descriptor);
+		}
 		return descriptor;
 	}
 	/**
@@ -220,9 +223,10 @@ class FlashDisplay_Converter extends FlashAtlas
 		var createChildrenTimeStamp:Float = getTimer();
 
 		mirror.createChildren();
+		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
+
 		mirror.onCreateChildrenComplete();
 
-		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
 		_descriptor.totalConvertDuration = getTimer() -t;
 
 		LogStack.addLog(this, "convert+createTextureAtlass+createChildren", [curentMirror, "quality-" + mirror.quality, "createChildrenDuration-"+_descriptor.createChildrenDuration,
@@ -231,6 +235,16 @@ class FlashDisplay_Converter extends FlashAtlas
 		LogStack.addLog(this,"-------------------------------------- CONVERTED " + object + " to " + mirror + " -------------------------------------------");
 
 		return mirror;
+	}
+
+	private function createChildren() {
+		var  mirrorsCreationStack:Array<DisplayObject> = curentMirror.descriptor.mirrorsCreationStack;
+		var numMirrors:Int = mirrorsCreationStack.length;
+		for (i in 0...numMirrors)
+		{
+			curentMirror.createChild(mirrorsCreationStack[i]);
+		}
+		mirrorsCreationStack.length = 0;
 	}
 
 	public var target:DisplayObject;
