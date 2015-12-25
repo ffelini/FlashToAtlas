@@ -92,7 +92,7 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
         return new FlashSpriteMirror();
     }
 
-    public function createChildren():Void {
+    public function createChild(flashChild:DisplayObject):Void {
 
     }
 

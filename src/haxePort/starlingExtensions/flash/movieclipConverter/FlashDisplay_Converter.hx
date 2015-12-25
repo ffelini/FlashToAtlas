@@ -221,8 +221,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		createTextureAtlasses();
 
 		var createChildrenTimeStamp:Float = getTimer();
-
-		mirror.createChildren();
+		createChildren();
 		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
 
 		mirror.onCreateChildrenComplete();
@@ -237,14 +236,18 @@ class FlashDisplay_Converter extends FlashAtlas
 		return mirror;
 	}
 
-	private function createChildren() {
+	private function createChildren():Void {
 		var  mirrorsCreationStack:Array<DisplayObject> = curentMirror.descriptor.mirrorsCreationStack;
 		var numMirrors:Int = mirrorsCreationStack.length;
 		for (i in 0...numMirrors)
 		{
-			curentMirror.createChild(mirrorsCreationStack[i]);
+			createChild(mirrorsCreationStack[i]);
 		}
-		mirrorsCreationStack.length = 0;
+		curentMirror.descriptor.mirrorsCreationStack = [];
+	}
+
+	private function createChild(flashChild:DisplayObject):Void {
+		curentMirror.createChild(flashChild);
 	}
 
 	public var target:DisplayObject;

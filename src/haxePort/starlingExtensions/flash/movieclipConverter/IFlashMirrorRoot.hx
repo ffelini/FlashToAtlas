@@ -23,6 +23,7 @@ interface IFlashMirrorRoot extends IDisplayObjectContainer
 	function registerMirror(instance:Dynamic, _mirror:DisplayObject):Void;
 	function storeInstance(instance:Dynamic, _mirror:DisplayObject, mirrorRect:Rectangle = null):Void;
 	function convertSprite(sprite:DisplayObjectContainer, spClass:Class<Dynamic>):IFlashSpriteMirror;
-	function createChildren():Void;
+	function createChild(flashChild:DisplayObject):Void;
 	function onCreateChildrenComplete():Void;
+
 }
