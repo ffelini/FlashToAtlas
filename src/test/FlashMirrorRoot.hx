@@ -1,5 +1,6 @@
 package test;
 import flash.display.Sprite;
+import flash.text.TextField;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import log.LogUI;
 import flash.events.MouseEvent;
@@ -92,12 +93,32 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
         return new FlashSpriteMirror();
     }
 
-    public function createChild(flashChild:DisplayObject):Void {
+    public function createChild(flashChild:DisplayObject, childClass:Class<Dynamic>):Void {
 
     }
 
-    public function onCreateChildrenComplete():Void {
+    public function createButton(flashButton:MovieClip, childClass:Class<Dynamic>) {
+    }
 
+    public function createTextField(flashTextField:TextField, childClass:Class<Dynamic>) {
+    }
+
+    public function createImage(flashImage:DisplayObject, childClass:Class<Dynamic>) {
+    }
+
+    public function createQuad(flashImage:DisplayObject, childClass:Class<Dynamic>, color:UInt, quadAlpha:Float) {
+    }
+
+    public function createMovieClip(flashMovieClip:MovieClip, childClass:Class<Dynamic>) {
+    }
+
+    public function createScale3Image(flashImage:DisplayObject, childClass:Class<Dynamic>, direction:String) {
+    }
+
+    public function createScale9Image(flashImage:DisplayObject, childClass:Class<Dynamic>) {
+    }
+
+    public function onChildrenCreationComplete():Void {
     }
 
     public function isEconomicButton(obj:DisplayObject):Bool {

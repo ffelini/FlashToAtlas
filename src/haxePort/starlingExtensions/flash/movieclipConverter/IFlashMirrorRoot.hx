@@ -1,5 +1,7 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import flash.text.TextField;
+import flash.display.MovieClip;
 import haxePort.starlingExtensions.flash.movieclipConverter.MirrorDescriptor;
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -21,9 +23,14 @@ interface IFlashMirrorRoot extends IDisplayObjectContainer
 	function getMirror(mirror:Dynamic):Dynamic;
 	function getMirrorRect(_mirror:Dynamic):Rectangle;
 	function registerMirror(instance:Dynamic, _mirror:DisplayObject):Void;
-	function storeInstance(instance:Dynamic, _mirror:DisplayObject, mirrorRect:Rectangle = null):Void;
 	function convertSprite(sprite:DisplayObjectContainer, spClass:Class<Dynamic>):IFlashSpriteMirror;
-	function createChild(flashChild:DisplayObject):Void;
-	function onCreateChildrenComplete():Void;
-
+	function createChild(flashChild:DisplayObject, childClass:Class<Dynamic>):Void;
+	function createButton(flashButton:MovieClip, childClass:Class<Dynamic>):Void;
+	function createTextField(flashTextField:TextField, childClass:Class<Dynamic>):Void;
+	function createImage(flashImage:DisplayObject, childClass:Class<Dynamic>):Void;
+	function createQuad(flashImage:DisplayObject, childClass:Class<Dynamic>, color:UInt, quadAlpha:Float):Void;
+	function createMovieClip(flashMovieClip:MovieClip, childClass:Class<Dynamic>):Void;
+	function createScale3Image(flashImage:DisplayObject, childClass:Class<Dynamic>, direction:String):Void;
+	function createScale9Image(flashImage:DisplayObject, childClass:Class<Dynamic>):Void;
+	function onChildrenCreationComplete():Void;
 }

@@ -28,6 +28,7 @@ class ConvertUtils
 	public inline static var FIELD_DEFAULT_SCALEX:String = "defaultScaleX";
 	public inline static var FIELD_DEFAULT_SCALEY:String = "defaultScaleY";
 	public inline static var FIELD_MOVIECLIP_SIMMILAR_FRAMES:String = "simmilarFrames";
+	public inline static var FIELD_EXTRUSION_FACTOR:String = "extrusionFactor";
 	
 	public function new()
 	{

@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.utils.ObjUtil;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -35,9 +36,12 @@ import flash.Lib.getTimer;
  */
 class FlashDisplay_Converter extends FlashAtlas
 {
+	public var convertDescriptor:ConvertDescriptor;
+
 	public function new()
 	{
 		super();
+		convertDescriptor = new ConvertDescriptor();
 	}
 	override public inline function restoreObject(obj:DisplayObject):Void
 	{
@@ -172,7 +176,6 @@ class FlashDisplay_Converter extends FlashAtlas
 		atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
 		return drawAtlas(descriptor, atlasConf.atlasRect);
 	}
-	public var convertDescriptor:ConvertDescriptor;
 	/**
 	 * 
 	 * @param object - flash display intance
@@ -181,11 +184,10 @@ class FlashDisplay_Converter extends FlashAtlas
 	 * @return 
 	 * 
 	 */
-	public function convert(object:DisplayObject, _descriptor:ConvertDescriptor, mirror:IFlashMirrorRoot, coordinateSystemRect:Rectangle,
+	public function convert(object:DisplayObject, mirror:IFlashMirrorRoot, coordinateSystemRect:Rectangle,
 							isBaselineExtended:Bool=false):IFlashMirrorRoot
 	{
 		if(object==null) return null;
-		convertDescriptor = _descriptor;
 
 		this.isBaselineExtended = isBaselineExtended;
 		LogStack.addLog(this,"-------------------------------------- CONVERT " + object + " to " + mirror + " -------------------------------------------");
@@ -204,17 +206,17 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		stopAllMovieClips();
 
-		if (isDisplayObjectContainer(object)) convertSprite(Std.instance(object,DisplayObjectContainer), mirror, _descriptor);
+		if (isDisplayObjectContainer(object)) convertSprite(Std.instance(object,DisplayObjectContainer), mirror);
 		else convertObject(object,0);
 
 		stopAllMovieClips();
 
-		_descriptor.convertDuration = getTimer() - t;
-		_descriptor.maxRectPackerAlgorithDuration = rectPackerAlgorithmDuration;
+		convertDescriptor.convertDuration = getTimer() - t;
+		convertDescriptor.maxRectPackerAlgorithDuration = rectPackerAlgorithmDuration;
 
 		mirror.registerMirror(mirror,object);
 
-		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+_descriptor.convertDuration,
+		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+convertDescriptor.convertDuration,
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
 			"packerRectAlgorithmDuration-"+rectPackerAlgorithmDuration, "num loops-"+NUM_LOOPS]);
 
@@ -222,14 +224,15 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		var createChildrenTimeStamp:Float = getTimer();
 		createChildren();
-		_descriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
+		convertDescriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
 
-		mirror.onCreateChildrenComplete();
+		mirror.onChildrenCreationComplete();
 
-		_descriptor.totalConvertDuration = getTimer() -t;
+		convertDescriptor.totalConvertDuration = getTimer() -t;
 
-		LogStack.addLog(this, "convert+createTextureAtlass+createChildren", [curentMirror, "quality-" + mirror.quality, "createChildrenDuration-"+_descriptor.createChildrenDuration,
-											"duration -"+_descriptor.totalConvertDuration, "draws -"+DRAWS]);
+		LogStack.addLog(this, "convert+createTextureAtlass+createChildren", [curentMirror, "quality-" + mirror.quality,
+								"createChildrenDuration-"+convertDescriptor.createChildrenDuration,
+								"duration -"+convertDescriptor.totalConvertDuration, "draws -"+DRAWS]);
 
 		LogStack.addLog(this,"-------------------------------------- CONVERTED " + object + " to " + mirror + " -------------------------------------------");
 
@@ -241,13 +244,46 @@ class FlashDisplay_Converter extends FlashAtlas
 		var numMirrors:Int = mirrorsCreationStack.length;
 		for (i in 0...numMirrors)
 		{
-			createChild(mirrorsCreationStack[i]);
+			var flashChild:DisplayObject = mirrorsCreationStack[i];
+		var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
+			curentMirror.createChild(flashChild, childClass);
 		}
 		curentMirror.descriptor.mirrorsCreationStack = [];
 	}
 
-	private function createChild(flashChild:DisplayObject):Void {
-		curentMirror.createChild(flashChild);
+	public function createChild(flashChild:DisplayObject):Void {
+		var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
+
+		if (Std.is(flashChild, SimpleButton) || Std.is(flashChild, MovieClip)) {
+			curentMirror.createButton(Std.instance(flashChild, MovieClip), childClass);
+		}
+		else if (isMovieClip(Std.instance(flashChild, MovieClip))) {
+			curentMirror.createMovieClip(Std.instance(flashChild, MovieClip), childClass);
+		}
+		else if (Std.is(flashChild, TextField)) {
+			curentMirror.createTextField(Std.instance(flashChild, TextField), childClass);
+		}
+		else {
+			var _mirrorType:String = FlashDisplay_Converter.getFlashObjType(flashChild);
+
+			if (_mirrorType == ConvertUtils.TYPE_SCALE3_IMAGE && useFeathersScaledImages) {
+				var direction:String = FlashDisplay_Converter.getFlashObjField(flashChild, "direction");
+				curentMirror.createScale3Image(flashChild, childClass, direction);
+			}
+			else if (_mirrorType == ConvertUtils.TYPE_SCALE9_IMAGE && useFeathersScaledImages) {
+				curentMirror.createScale9Image(flashChild, childClass);
+			} else if (_mirrorType == ConvertUtils.TYPE_QUAD) {
+				var _color:UInt = getFlashObjField(flashChild, "color");
+				if (Math.isNaN(_color)) _color = 0xFFFFFF;
+				var quadAlpha:Float = getFlashObjField(flashChild, "quadAlpha");
+				if (Math.isNaN(quadAlpha)) quadAlpha = 1;
+
+				curentMirror.createQuad(flashChild, childClass, _color, quadAlpha);
+			}
+			else {
+				curentMirror.createImage(flashChild, childClass);
+			}
+		}
 	}
 
 	public var target:DisplayObject;
@@ -295,7 +331,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	public var spriteConvertMethod:Dynamic;
 	public var resetFilters:Bool = false;
 	public var NUM_LOOPS:Int = 0;
-	private function convertSprite(sprite:DisplayObjectContainer, resultSprite:IDisplayObjectContainer,_descriptor:ConvertDescriptor=null):IDisplayObjectContainer
+	private function convertSprite(sprite:DisplayObjectContainer, resultSprite:IDisplayObjectContainer):IDisplayObjectContainer
 	{
 		if(resetFilters) sprite.filters = null;
 
@@ -328,16 +364,15 @@ class FlashDisplay_Converter extends FlashAtlas
 
 			childMirror = null;
 
-			if(_descriptor.ignore(child)) continue;
+			if(convertDescriptor.ignore(child)) continue;
 
 			// converting child
 			if (isDisplayObjectContainer(child))
 			{
-				childMirror = convertSprite(Std.instance(child,DisplayObjectContainer), Std.instance(childMirror,IDisplayObjectContainer), _descriptor);
+				childMirror = convertSprite(Std.instance(child,DisplayObjectContainer), Std.instance(childMirror,IDisplayObjectContainer));
 				if(!childMirror) continue;
 
 				if(childMirror!=resultSprite && childMirror.parent!=resultSprite) resultSprite.adChild(childMirror);
-				curentMirror.storeInstance(childMirror, child);
 
 				if(Std.is(childMirror,IFlashSpriteMirror)) Std.instance(childMirror,IFlashSpriteMirror).unflatten();
 			}

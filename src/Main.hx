@@ -42,8 +42,6 @@ class Main extends Sprite {
         var stage:Stage = Lib.current.stage;
         stage.color = 0xCCCCCC;
 
-        var cd:ConvertDescriptor = new ConvertDescriptor();
-
         FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
         FlashAtlas.getAtlasFunc = getAtlas;
         FlashAtlas.helpTexture = {a:1};
@@ -55,7 +53,7 @@ class Main extends Sprite {
 
         addChild(converter);
 
-        converter.convert(target, cd, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
+        converter.convert(target, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
         converter.scaleX = converter.scaleY = 0.3;
 
 
