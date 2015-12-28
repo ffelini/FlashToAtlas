@@ -625,7 +625,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		var value:Dynamic = getFlashObjField(obj,"type");
 		return value!=null ? value+"" : "";
 	}
-	public inline static function getFlashObjField(obj:DisplayObject,fieldName:String):Dynamic
+	public inline static function getFlashObjField(obj:DisplayObject,fieldName:String, defaultValue:Dynamic=null):Dynamic
 	{
 		var r:Dynamic=null;
 		obj = Std.is(obj,MovieClip) || Std.is(obj,DisplayObjectContainer) ? obj : obj.parent;
@@ -633,6 +633,6 @@ class FlashDisplay_Converter extends FlashAtlas
 			r = obj!=null && Reflect.hasField(obj,fieldName) ? Reflect.field(obj,fieldName) : null;
 		}catch(msg:String){}
 
-		return r;
+		return r != null ? r : defaultValue;
 	}
 }
