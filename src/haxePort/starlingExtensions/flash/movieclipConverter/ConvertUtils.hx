@@ -29,6 +29,10 @@ class ConvertUtils
 	public inline static var FIELD_DEFAULT_SCALEY:String = "defaultScaleY";
 	public inline static var FIELD_MOVIECLIP_SIMMILAR_FRAMES:String = "simmilarFrames";
 	public inline static var FIELD_EXTRUSION_FACTOR:String = "extrusionFactor";
+	public inline static var FIELD_DIRECTION:String = "direction";
+	public inline static var FIELD_COLOR:String = "color";
+	public inline static var FIELD_QUAD_ALPHA:String = "quadAlpha";
+	public inline static var FIELD_FPS = "fps";
 	
 	public function new()
 	{

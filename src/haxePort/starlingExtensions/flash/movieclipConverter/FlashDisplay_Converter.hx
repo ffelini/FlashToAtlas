@@ -245,7 +245,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		for (i in 0...numMirrors)
 		{
 			var flashChild:DisplayObject = mirrorsCreationStack[i];
-		var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
+			var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
 			curentMirror.createChild(flashChild, childClass);
 		}
 		curentMirror.descriptor.mirrorsCreationStack = [];
@@ -254,7 +254,19 @@ class FlashDisplay_Converter extends FlashAtlas
 	public function createChild(flashChild:DisplayObject):Void {
 		var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
 
-		if (Std.is(flashChild, SimpleButton) || Std.is(flashChild, MovieClip)) {
+		var downSubtext:SubtextureRegion = null;
+		var upSubtext:SubtextureRegion = null;
+		var subTextures:Array<SubtextureRegion> = curentMirror.descriptor.getConf(flashChild);
+		var subTexture:SubtextureRegion = Std.is(curentMirror.descriptor.getConf(flashChild), SubtextureRegion) ? curentMirror.descriptor.getConf(flashChild) : (subTextures!=null ? subTextures[0] : null);
+
+// checking if subTextures frameLabels matches to an button
+		if (subTextures!=null && subTextures.length == 2)
+		{
+			downSubtext = subTexture.frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTextures[1] : null);
+			upSubtext = subTexture.frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTextures[1] : null);
+		}
+
+		if (downSubtext != null && upSubtext != null && (Std.is(flashChild, SimpleButton) || Std.is(flashChild, MovieClip))) {
 			curentMirror.createButton(Std.instance(flashChild, MovieClip), childClass);
 		}
 		else if (isMovieClip(Std.instance(flashChild, MovieClip))) {
@@ -264,18 +276,18 @@ class FlashDisplay_Converter extends FlashAtlas
 			curentMirror.createTextField(Std.instance(flashChild, TextField), childClass);
 		}
 		else {
-			var _mirrorType:String = FlashDisplay_Converter.getFlashObjType(flashChild);
+			var _mirrorType:String = getFlashObjType(flashChild);
 
 			if (_mirrorType == ConvertUtils.TYPE_SCALE3_IMAGE && useFeathersScaledImages) {
-				var direction:String = FlashDisplay_Converter.getFlashObjField(flashChild, "direction");
+				var direction:String = getFlashObjField(flashChild, ConvertUtils.FIELD_DIRECTION);
 				curentMirror.createScale3Image(flashChild, childClass, direction);
 			}
 			else if (_mirrorType == ConvertUtils.TYPE_SCALE9_IMAGE && useFeathersScaledImages) {
 				curentMirror.createScale9Image(flashChild, childClass);
 			} else if (_mirrorType == ConvertUtils.TYPE_QUAD) {
-				var _color:UInt = getFlashObjField(flashChild, "color");
+				var _color:UInt = getFlashObjField(flashChild, ConvertUtils.FIELD_COLOR);
 				if (Math.isNaN(_color)) _color = 0xFFFFFF;
-				var quadAlpha:Float = getFlashObjField(flashChild, "quadAlpha");
+				var quadAlpha:Float = getFlashObjField(flashChild, ConvertUtils.FIELD_QUAD_ALPHA);
 				if (Math.isNaN(quadAlpha)) quadAlpha = 1;
 
 				curentMirror.createQuad(flashChild, childClass, _color, quadAlpha);
