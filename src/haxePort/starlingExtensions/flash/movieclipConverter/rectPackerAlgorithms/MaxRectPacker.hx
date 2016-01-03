@@ -36,6 +36,8 @@ class MaxRectPacker extends TexturePacker {
     }
 
     private inline function quickFindPositionForNewNodeBestAreaFit(width:Float, height:Float):Rectangle {
+        width += atlasRegionsGap;
+        height += atlasRegionsGap;
         var free:Rectangle;
         var numRectanglesToProcess:Int = freeAreas.length;
         var score:Float = 1000000000;
@@ -58,8 +60,8 @@ class MaxRectPacker extends TexturePacker {
                     if (bestNode == null) bestNode = new Rectangle();
                     bestNode.x = free.x;
                     bestNode.y = free.y;
-                    bestNode.width = width + atlasRegionsGap;
-                    bestNode.height = height + atlasRegionsGap;
+                    bestNode.width = width;
+                    bestNode.height = height;
                     score = areaFit;
                 }
             }

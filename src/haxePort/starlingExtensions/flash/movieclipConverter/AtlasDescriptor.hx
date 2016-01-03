@@ -18,8 +18,6 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public var subtextureTargets:Array<DisplayObject> = [];
 
-	public static var savedAtlases:Int = 0;
-
 	public function new(width:Float, height:Float) {
 		super(width, height);
     }
@@ -28,7 +26,6 @@ class AtlasDescriptor extends MaxRectPacker
 		super.init(width, height);
 
 		atlasAbstract = new TextureAtlasAbstract();
-		atlasAbstract.imagePath = savedAtlases + ".png";
 
 		subtextureTargets = [];
 	}

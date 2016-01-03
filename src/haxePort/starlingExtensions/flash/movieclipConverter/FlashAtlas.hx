@@ -78,7 +78,7 @@ class FlashAtlas extends ContentSprite {
     public static inline var bestWidth:Float = 2048;
     public static inline var bestHeight:Float = 2048;
 
-    private static var sharedDescriptors:Array<AtlasDescriptor> = [];
+    static var sharedDescriptors:Array<AtlasDescriptor> = [];
     public static var helpTexture:Dynamic;
 
     public function new() {
@@ -108,6 +108,7 @@ class FlashAtlas extends ContentSprite {
             shareAtlasesRegions();
         }
         descriptor.atlas = getAtlas(descriptor);
+        descriptor.atlasAbstract.imagePath = descriptors.length + ".png";
         return descriptor;
     }
 /**
@@ -510,8 +511,6 @@ class FlashAtlas extends ContentSprite {
 
         if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasRect, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
         "\nlastSubtextureTargets-" + descriptor.subtextureTargets.length, debugAtlas ? "\n" + descriptor.atlasAbstract : "", "content scale-" + content.scaleX + "/" + content.scaleY]);
-
-        AtlasDescriptor.savedAtlases++;
         return atlasBmd;
     }
 
@@ -532,18 +531,6 @@ class FlashAtlas extends ContentSprite {
         Reflect.setField(value, "isMovieClip", isMc);
 
         return isMc;
-    }
-
-    public inline function getSubtexture(name:String, region:Rectangle = null, frame:Rectangle = null, extrusionFactor:Float = 100):Dynamic {
-        if (descriptor.atlas != null) {
-            if (region != null || frame != null || extrusionFactor < 100) return descriptor.atlas.getExtrudedTexture(name, region, frame, extrusionFactor);
-            else return descriptor.atlas.getTextureObjByName(name);
-        }
-        return null;
-    }
-
-    public inline function getSubtextures(name:String, result:Dynamic):Dynamic {
-        return descriptor.atlas != null ? descriptor.atlas.getTexturesObj(name, result) : null;
     }
 
     function clear():Void {

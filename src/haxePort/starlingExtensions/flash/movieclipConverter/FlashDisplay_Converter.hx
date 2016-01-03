@@ -38,6 +38,8 @@ class FlashDisplay_Converter extends FlashAtlas
 {
 	public var convertDescriptor:ConvertDescriptor;
 
+	static var sharedMirrorDescriptors:Array<MirrorDescriptor> = [];
+
 	public function new()
 	{
 		super();
@@ -225,11 +227,12 @@ class FlashDisplay_Converter extends FlashAtlas
 		var createChildrenTimeStamp:Float = getTimer();
 		createChildren();
 		convertDescriptor.createChildrenDuration = getTimer() - createChildrenTimeStamp;
-
-		mirror.onChildrenCreationComplete();
-
 		convertDescriptor.totalConvertDuration = getTimer() -t;
 
+		mirror.onChildrenCreationComplete();
+		if(_shareAtlases) {
+			sharedMirrorDescriptors.push(mirror.descriptor);
+		}
 		LogStack.addLog(this, "convert+createTextureAtlass+createChildren", [curentMirror, "quality-" + mirror.quality,
 								"createChildrenDuration-"+convertDescriptor.createChildrenDuration,
 								"duration -"+convertDescriptor.totalConvertDuration, "draws -"+DRAWS]);
@@ -247,6 +250,7 @@ class FlashDisplay_Converter extends FlashAtlas
 			var flashChild:DisplayObject = mirrorsCreationStack[i];
 			var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
 			curentMirror.createChild(flashChild, childClass);
+//			createChild(flashChild);
 		}
 		curentMirror.descriptor.mirrorsCreationStack = [];
 	}
@@ -256,14 +260,14 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		var downSubtext:SubtextureRegion = null;
 		var upSubtext:SubtextureRegion = null;
-		var subTextures:Array<SubtextureRegion> = curentMirror.descriptor.getConf(flashChild);
-		var subTexture:SubtextureRegion = Std.is(curentMirror.descriptor.getConf(flashChild), SubtextureRegion) ? curentMirror.descriptor.getConf(flashChild) : (subTextures!=null ? subTextures[0] : null);
+		var subTextures:Array<SubtextureRegion> = getSubtextures(flashChild, curentMirror.descriptor);
+		var subTexture:SubtextureRegion = getSubtexture(flashChild, curentMirror.descriptor);
 
 // checking if subTextures frameLabels matches to an button
 		if (subTextures!=null && subTextures.length == 2)
 		{
-			downSubtext = subTexture.frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTextures[1] : null);
-			upSubtext = subTexture.frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTextures[1] : null);
+			downSubtext = subTextures[0].frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_DOWN ? subTextures[1] : null);
+			upSubtext = subTextures[0].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTextures[1] : null);
 		}
 
 		if (downSubtext != null && upSubtext != null && (Std.is(flashChild, SimpleButton) || Std.is(flashChild, MovieClip))) {
@@ -298,6 +302,29 @@ class FlashDisplay_Converter extends FlashAtlas
 		}
 	}
 
+	private function getSubtextures(flashChild:DisplayObject, descriptor:MirrorDescriptor, checkSharedDescriptors:Bool=true):Array<SubtextureRegion> {
+		var subTextures:Array<SubtextureRegion> = Std.is(descriptor.getConf(flashChild), Array) ? descriptor.getConf(flashChild) : null;
+		if (checkSharedDescriptors && (subTextures == null || subTextures.length == 0)) {
+			for (sharedDescriptor in sharedMirrorDescriptors) {
+				subTextures = getSubtextures(flashChild, sharedDescriptor, false);
+				if (subTextures != null && subTextures.length > 0) return subTextures;
+			}
+		}
+		return subTextures;
+	}
+
+	private function getSubtexture(flashChild:DisplayObject, descriptor:MirrorDescriptor, checkSharedDescriptors:Bool=true):SubtextureRegion {
+		var subTextures:Array<SubtextureRegion> = getSubtextures(flashChild, descriptor);
+		var subTexture:SubtextureRegion = Std.is(descriptor.getConf(flashChild), SubtextureRegion) ? descriptor.getConf(flashChild) : (subTextures!=null ? subTextures[0] : null);
+		if(checkSharedDescriptors && subTexture==null) {
+			for(sharedDescriptor in sharedMirrorDescriptors) {
+				subTexture = getSubtexture(flashChild, sharedDescriptor, false);
+				if(subTexture!=null) return subTexture;
+			}
+		}
+		return subTexture;
+	}
+
 	public var target:DisplayObject;
 	public var curentMirror:IFlashMirrorRoot;
 	public function setTarget(object:DisplayObject,mirror:IFlashMirrorRoot):Void
@@ -311,10 +338,9 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		if(object.parent!=this && curentMirror!=mirror)
 		{
+			curentMirror = mirror;
 			clear();
 		}
-
-		curentMirror = mirror;
 
 		addChild(object);
 		// for redrawing we set the same flash display object position for proper mathing

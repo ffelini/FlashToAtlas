@@ -13,11 +13,7 @@ import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 class MirrorDescriptor
 {
 	public var key:Dynamic;
-	public var active:Bool = false;
-	
 	public var mirrorRect:Rectangle;
-	public var created:Bool = false;
-	public var containsOnlyVisibleMirrors:Bool = true;
 	
 	public var atlasesConf:ObjectMap<Dynamic,Dynamic>;
 	public var textureAtlases:Array<ITextureAtlasDynamic>;
