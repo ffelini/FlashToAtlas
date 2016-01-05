@@ -29,11 +29,10 @@ import haxePort.managers.*;
 import haxePort.starlingExtensions.*;
 
 //-swf-header 640:960:10:CCCCCC
-//-swf-version 16 -swf-lib gameAssets.swc --macro include('src')
+//-swf-version 16 -swf-lib gameAssets.swc --macro include('src') -debug
 
 class Main extends Sprite {
-
-    private var target:DisplayObject;// = new ScreenPlay();
+    private var target:DisplayObject = new ScreenPlay();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
@@ -41,12 +40,6 @@ class Main extends Sprite {
         super();
         var stage:Stage = Lib.current.stage;
         stage.color = 0xCCCCCC;
-
-        FlashAtlas.textureFromBmdFunc = textureFromBmdFunc;
-        FlashAtlas.getAtlasFunc = getAtlas;
-        FlashAtlas.helpTexture = {a:1};
-        FlashAtlas.saveAtlasPngFunc = saveAtlasPng;
-
 
         converter = getConverter();
         converter.shareAtlasesRegions();
@@ -91,18 +84,6 @@ class Main extends Sprite {
         " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
         " \nconverter.descriptors.length - " + converter.descriptors.length+
         "\nconverter.convertDescriptor.convertDuration - " + converter.convertDescriptor.convertDuration);
-    }
-
-    private function textureFromBmdFunc(atlasBmd:BitmapData, textureScale:Float, onRestore:Function = null):Dynamic {
-        return {a:1};
-    }
-
-    private function getAtlas(helpTexture:Dynamic, atlasXML:TextureAtlasAbstract):ITextureAtlasDynamic {
-        return new TextureAtlasDynamic();
-    }
-
-    private function saveAtlasPng(path:String, atlasBmd:BitmapData):Void {
-
     }
 
     inline function func(a:String):Void {

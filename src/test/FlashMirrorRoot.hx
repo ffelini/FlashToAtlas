@@ -1,4 +1,6 @@
 package test;
+import flash.utils.Function;
+import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 import flash.display.Sprite;
 import flash.text.TextField;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
@@ -52,6 +54,13 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
         if (atlases.indexOf(atlas) < 0) atlases.push(atlas);
 
         addBitmap(bmd);
+    }
+
+    public function createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic {
+        return new TextureAtlasDynamic();
+    }
+
+    public function saveAtlasPng(path:String, atlasBmd:BitmapData):Void {
     }
 
     public function addBitmap(bmd:BitmapData):Void {

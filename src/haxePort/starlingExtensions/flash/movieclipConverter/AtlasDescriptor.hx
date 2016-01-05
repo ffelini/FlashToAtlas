@@ -50,7 +50,7 @@ class AtlasDescriptor extends MaxRectPacker
     @:isVar public var textureScale(get, set):Float;
 
     function set_textureScale(value:Float) {
-        return atlas.textureScale = atlasAbstract.atlasRegionScale = value;
+        return atlasAbstract.atlasRegionScale = value;
     }
 
     function get_textureScale():Float {
@@ -59,8 +59,6 @@ class AtlasDescriptor extends MaxRectPacker
 
 	public function addSubtextureRegion(subTexture:SubtextureRegion):Void {
 		atlasAbstract.add(subTexture);
-		atlas.atlas = atlasAbstract;
-		atlas.addRegion(subTexture.name, subTexture.regionRect, subTexture.frameRect);
 	}
 
 	@:isVar public var atlas(get, set):ITextureAtlasDynamic;

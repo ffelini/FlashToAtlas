@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import haxePort.starlingExtensions.utils.DisplayUtil;
@@ -79,7 +80,6 @@ class FlashAtlas extends ContentSprite {
     public static inline var bestHeight:Float = 2048;
 
     static var sharedDescriptors:Array<AtlasDescriptor> = [];
-    public static var helpTexture:Dynamic;
 
     public function new() {
         super();
@@ -101,13 +101,12 @@ class FlashAtlas extends ContentSprite {
             descriptor.xOffset = xOffset;
             descriptor.yOffset = 0;
         }
-        content.scaleX = content.scaleY = descriptor.textureScale;
+        content.scaleX = content.scaleY = descriptor.atlasAbstract.atlasRegionScale;
 
         descriptors.push(descriptor);
         if(_shareAtlases) {
             shareAtlasesRegions();
         }
-        descriptor.atlas = getAtlas(descriptor);
         descriptor.atlasAbstract.imagePath = descriptors.length + ".png";
         return descriptor;
     }
@@ -439,43 +438,35 @@ class FlashAtlas extends ContentSprite {
 
         return addChild(frameMC);
     }
-    public static var getAtlasFunc:Function;
 
-    public function getAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
-        var atlas:ITextureAtlasDynamic = Handlers.functionCall(getAtlasFunc, [helpTexture, descriptor.atlasAbstract]);
-        if (atlas != null) {
-            atlas.atlas = descriptor.atlasAbstract;
-        }
-        return atlas;
+    public function createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic
+    {
+        throw this + " method createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic is not implemented";
     }
-    public var useMipMaps:Bool = false;
-    public var atlasBmd:BitmapData;
 
-    public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
+    public function saveAtlasPng(path:String,atlasBmd:BitmapData):Void
+    {
+        throw this + " method saveAtlasPng(path:String,atlasBmd:BitmapData):Void is not implemented";
+    }
+
+    public var atlasBmd:BitmapData;
+    public function createTextureAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic {
         if (width == 0 || height == 0) return null;
-        descriptor.atlas.setTexture(drawAtlasToTexture(descriptor, getAtlasToDrawRect(descriptor)));
+
+        descriptor.atlasAbstract.atlasRect = getAtlasToDrawRect(descriptor).clone();
+        descriptor.atlasAbstract.atlasRegionScale = descriptor.textureScale;
+
+        atlasBmd = drawAtlas(descriptor, descriptor.atlasAbstract.atlasRect);
+        descriptor.atlas = createTextureAtlasDynamic(descriptor.atlasAbstract, atlasBmd);
+        descriptor.atlas.atlas = descriptor.atlasAbstract;
         return descriptor.atlas;
     }
-    public static var textureFromBmdFunc:Dynamic;
-/**
-	 * 
-	 * @param rect
-	 * @return ConcreteTexture_Dynamic instance 
-	 * 
-	 */
-
-    public function drawAtlasToTexture(descriptor:AtlasDescriptor, rect:Rectangle):Dynamic {
-        if (width == 0 || height == 0) return null;
-        atlasBmd = drawAtlas(descriptor, rect);
-
-        return Handlers.functionCall(textureFromBmdFunc, [atlasBmd, descriptor.atlas.textureScale]);
-    }
-    public var drawMAX_RECTAtlas:Bool = false;
 
     public function getAtlasToDrawRect(descriptor:AtlasDescriptor, sourceAtlas:ITextureAtlasDynamic = null):Rectangle {
         return correctAtlasToDrawRect(descriptor, descriptor.textureAtlasRect);
     }
 
+    public var drawMAX_RECTAtlas:Bool = false;
     public inline function correctAtlasToDrawRect(descriptor:AtlasDescriptor, rect:Rectangle):Rectangle {
         var properRect:Rectangle = drawMAX_RECTAtlas ? descriptor.maxRect : rect;
 
@@ -486,12 +477,10 @@ class FlashAtlas extends ContentSprite {
     }
     public var debugAtlas:Bool = false;
     public var DRAWS:Int = 0;
-    public static var saveAtlasPngFunc:Function;
-
     public function drawAtlas(descriptor:AtlasDescriptor, rect:Rectangle):BitmapData {
         var t:Float = debug ? getTimer() : 0;
 
-        content.scaleX = content.scaleY = descriptor.textureScale;
+        content.scaleX = content.scaleY = descriptor.atlasAbstract.atlasRegionScale;
 
         if (debugAtlas) {
             drawFreeRectangles(descriptor);
@@ -507,7 +496,7 @@ class FlashAtlas extends ContentSprite {
             DRAWS ++;
         }
 
-        if (debugAtlas) Handlers.functionCall(saveAtlasPngFunc, [descriptor.atlasAbstract.imagePath, atlasBmd]);
+        if (debugAtlas) saveAtlasPng(descriptor.atlasAbstract.imagePath, atlasBmd);
 
         if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasRect, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
         "\nlastSubtextureTargets-" + descriptor.subtextureTargets.length, debugAtlas ? "\n" + descriptor.atlasAbstract : "", "content scale-" + content.scaleX + "/" + content.scaleY]);

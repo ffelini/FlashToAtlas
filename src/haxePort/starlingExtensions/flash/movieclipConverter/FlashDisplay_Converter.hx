@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import flash.utils.Function;
 import haxePort.utils.ObjUtil;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
@@ -139,31 +140,14 @@ class FlashDisplay_Converter extends FlashAtlas
 	}
 	private function createTextureAtlasses() {
 		for(descriptor in descriptors) {
-			createTextureAtlass(descriptor);
+			createTextureAtlas(descriptor);
 		}
 	}
-	override public function createTextureAtlass(descriptor:AtlasDescriptor):ITextureAtlasDynamic
+	override public function createTextureAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic
 	{
 		var t:Float = getTimer();
 
-		var atlasRect:Rectangle;
-		if(descriptor.atlas.textureSource!=FlashAtlas.helpTexture)
-		{
-			atlasRect = getAtlasToDrawRect(descriptor, descriptor.atlas).clone();
-
-			// preparing atlas for Main bmd upload. This method dispose the texture if the size if different. It is important to be done before drawing Main atlas
-			descriptor.atlas.prepareForBitmapDataUpload(atlasRect.width,atlasRect.height);
-
-			descriptor.atlas.haxeUpdate(descriptor.atlasAbstract,drawAtlas(descriptor, atlasRect));
-		}
-		else
-		{
-			atlasRect = getAtlasToDrawRect(descriptor).clone();
-			descriptor.atlas.setTexture(drawAtlasToTexture(descriptor, atlasRect));
-		}
-
-		descriptor.atlasAbstract.atlasConf = new AtlasConf(atlasRect, descriptor.textureScale, descriptor.regionPoint);
-
+		descriptor.atlas = super.createTextureAtlas(descriptor);
 		curentMirror.descriptor.storeAtlas(descriptor);
 		curentMirror.storeAtlas(descriptor.atlas, atlasBmd);
 
@@ -172,11 +156,20 @@ class FlashDisplay_Converter extends FlashAtlas
 		return descriptor.atlas;
 	}
 
+	override public function createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic
+	{
+		return curentMirror.createTextureAtlasDynamic(atlas, atlasBmd);
+	}
+
+	override public function saveAtlasPng(path:String,atlasBmd:BitmapData):Void
+	{
+		curentMirror.saveAtlasPng(path, atlasBmd);
+	}
+
 	public function redrawAtlas(atlas:ITextureAtlasDynamic):BitmapData {
-		var atlasConf:AtlasConf = atlas.atlas.atlasConf;
-		descriptor.textureScale = atlasConf.textureScale;
-		atlas.prepareForBitmapDataUpload(atlasConf.atlasRect.width, atlasConf.atlasRect.height);
-		return drawAtlas(descriptor, atlasConf.atlasRect);
+		descriptor.atlasAbstract = atlas.atlas;
+		atlas.prepareForBitmapDataUpload(atlas.atlas.atlasRect.width, atlas.atlas.atlasRect.height);
+		return drawAtlas(descriptor, atlas.atlas.atlasRect);
 	}
 	/**
 	 * 

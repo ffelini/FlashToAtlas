@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ee515b5-851e-48d1-9898-89299423c157" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlashToAtlas1.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/flexCompiler.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasConf.hx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" afterPath="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirrorRoot.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirrorRoot.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.hx" afterPath="$PROJECT_DIR$/src/Main.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx" afterPath="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlashToAtlas.iws" />
@@ -38,47 +44,37 @@
         <entry file="file://$PROJECT_DIR$/src/Main.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlashDisplay_Converter.hx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FlashDisplay_Converter.hx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="284" column="72" selection-start-line="284" selection-start-column="72" selection-end-line="284" selection-end-column="72" />
+              <caret line="160" column="53" selection-start-line="160" selection-start-column="53" selection-end-line="160" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlashAtlas.hx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlashAtlas.hx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="53" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+              <caret line="459" column="52" selection-start-line="459" selection-start-column="52" selection-end-line="459" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextureAtlasAbstract.hx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx">
+      <file leaf-file-name="AtlasDescriptor.hx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RectanglePacker.hx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+              <caret line="13" column="43" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -92,6 +88,7 @@
         <option value="Class" />
         <option value="HaxeInterface" />
         <option value="HaxeClass" />
+        <option value="NMMLProjectFile" />
       </list>
     </option>
   </component>
@@ -128,21 +125,23 @@
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/SortableSize.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker2.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
         <option value="$PROJECT_DIR$/src/test/TextureAtlasDynamic.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/Mirror_State.hx" />
         <option value="$PROJECT_DIR$/src/log/LogUI.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/SubtextureRegion.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirror.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertDescriptor.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx" />
+        <option value="$PROJECT_DIR$/application.xml" />
+        <option value="$PROJECT_DIR$/src/Main.nmml" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx" />
+        <option value="$PROJECT_DIR$/src/Main.hx" />
+        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirrorRoot.hx" />
         <option value="$PROJECT_DIR$/src/test/FlashMirrorRoot.hx" />
-        <option value="$PROJECT_DIR$/src/Main.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx" />
-        <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx" />
         <option value="$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx" />
       </list>
@@ -163,10 +162,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="x" value="55" />
+    <option name="y" value="23" />
+    <option name="width" value="1865" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -191,9 +190,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -208,7 +205,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -218,7 +215,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -232,7 +229,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -250,7 +247,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -268,7 +265,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -290,7 +287,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -320,7 +317,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -350,7 +347,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GameLibSWC" />
+              <option name="myItemId" value="FlashToAtlas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -378,19 +375,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlashToAtlas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlashToAtlas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="ConvertU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx&#10;keymap&#9;ACTION&#9;ChangeKeymap&#10;works&#9;FILE&#9;file://D:/work/haxe/GameLib/GameLibSWC/.idea/workspace.xml&#10;Conver&#9;null&#9;null&#10;FlashMirr&#9;FILE&#9;file://D:/work/haxe/GameLib/GameLibSWC/src/test/FlashMirrorRoot.hx&#10;IFla&#9;null&#9;null&#10;workspa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/.idea/workspace.xml&#10;plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;TexturePa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx&#10;debug&#9;ACTION&#9;Debug&#10;Function&#9;null&#9;null&#10;LogU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/log/LogUI.hx&#10;Main&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/Main2.hx&#10;Display&#9;FILE&#9;file:///usr/local/lib/haxe/std/flash/display/DisplayObject.hx&#10;Content&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ContentSprite.hx" />
+    <property name="SearchEverywhereHistoryKey" value="plugins&#9;ACTION&#9;WelcomeScreen.Plugins&#10;ConvertU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx&#10;keymap&#9;ACTION&#9;ChangeKeymap&#10;works&#9;FILE&#9;file://D:/work/haxe/GameLib/GameLibSWC/.idea/workspace.xml&#10;Conver&#9;null&#9;null&#10;FlashMirr&#9;FILE&#9;file://D:/work/haxe/GameLib/GameLibSWC/src/test/FlashMirrorRoot.hx&#10;IFla&#9;null&#9;null&#10;workspa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/.idea/workspace.xml&#10;TexturePa&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx&#10;debug&#9;ACTION&#9;Debug&#10;Function&#9;null&#9;null&#10;LogU&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/log/LogUI.hx&#10;Main&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/Main2.hx&#10;Display&#9;FILE&#9;file:///usr/local/lib/haxe/std/flash/display/DisplayObject.hx&#10;Content&#9;FILE&#9;file:///Users/vturcan/IdeaProjects/FlashToAtlas/src/haxePort/starlingExtensions/flash/movieclipConverter/ContentSprite.hx" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -632,6 +645,14 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="RemoteFlashRunConfigurationType" factoryName="Flash Remote Debug">
+      <option name="BCName" value="" />
+      <option name="debugTransport" value="USB" />
+      <option name="moduleName" value="" />
+      <option name="remoteDebugTarget" value="Computer" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -682,14 +703,14 @@
       <method />
     </configuration>
     <configuration default="false" name="FlashAtlas" type="HaxeApplicationRunConfiguration" factoryName="Haxe Application" singleton="true" show_console_on_std_err="false" show_console_on_std_out="false">
-      <module name="FlashToAtlas" />
+      <module name="FlashToAtlas1" />
       <option name="customDebugPort" value="6972" />
       <option name="customExecutable" value="false" />
       <option name="customExecutablePath" value="" />
       <option name="customFileToLaunch" value="false" />
       <option name="customFileToLaunchPath" value="" />
       <option name="customRemoteDebugging" value="false" />
-      <module name="FlashToAtlas" />
+      <module name="FlashToAtlas1" />
       <method />
     </configuration>
     <list size="1">
@@ -742,20 +763,13 @@
       <workItem from="1451306676451" duration="1062000" />
       <workItem from="1451308995282" duration="1636000" />
       <workItem from="1451310871524" duration="279000" />
-      <workItem from="1451744102426" duration="599000" />
-      <workItem from="1451748164657" duration="2145000" />
-      <workItem from="1451803181598" duration="1801000" />
-      <workItem from="1451805044411" duration="2062000" />
-      <workItem from="1451808215909" duration="1461000" />
-      <workItem from="1451810145336" duration="1184000" />
-      <workItem from="1451812201187" duration="1410000" />
-      <workItem from="1451814154553" duration="2234000" />
-      <workItem from="1451816915614" duration="1807000" />
-      <workItem from="1451818747120" duration="1532000" />
-      <workItem from="1451831185339" duration="1093000" />
-      <workItem from="1451833128975" duration="605000" />
-      <workItem from="1451835088126" duration="599000" />
-      <workItem from="1451836989809" duration="411000" />
+      <workItem from="1451984622678" duration="1305000" />
+      <workItem from="1451986464891" duration="1180000" />
+      <workItem from="1451988285018" duration="1526000" />
+      <workItem from="1451990194436" duration="1680000" />
+      <workItem from="1451994882185" duration="2584000" />
+      <workItem from="1451997691617" duration="1481000" />
+      <workItem from="1452008104855" duration="93000" />
     </task>
     <task id="LOCAL-00001" summary="compilation issues fixed. Added gameAssets.swc (build with Adobe Flash CC that is parsed without issues)">
       <created>1447666588460</created>
@@ -1013,7 +1027,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182980000" />
+    <option name="totallyTimeSpent" value="172808000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1025,62 +1039,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <frame x="55" y="23" width="1865" height="1057" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5019199" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30376345" sideWeight="0.49808007" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3266129" sideWeight="0.49808007" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15938303" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.49808007" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5019199" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30457935" sideWeight="0.49808007" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1278113" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41320553" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33013844" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41129032" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5019199" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33013844" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30510753" sideWeight="0.49808007" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3266129" sideWeight="0.49808007" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15938303" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41129032" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1136,14 +1123,7 @@
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1175,6 +1155,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1182,6 +1163,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,6 +1171,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1196,6 +1179,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="220" column="30" selection-start-line="220" selection-start-column="30" selection-end-line="220" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,6 +1211,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="220" column="30" selection-start-line="220" selection-start-column="30" selection-end-line="220" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1258,6 +1243,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1289,6 +1275,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="159" column="11" selection-start-line="159" selection-start-column="11" selection-end-line="159" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1320,6 +1307,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="163" column="18" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1367,13 +1355,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/ITextureAtlasDynamic.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/SubtextureRegion.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1385,14 +1366,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18967922">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1417,13 +1390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Program Files/haxe/haxe/std/Array.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33240223">
-          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1431,75 +1397,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/FlashMirrorRoot.hx">
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5726257">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5433589">
+          <caret line="33" column="67" selection-start-line="33" selection-start-column="67" selection-end-line="33" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/MaxRectPacker.hx">
+    <entry file="file:///usr/local/lib/haxe/std/StdTypes.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6410614">
-          <caret line="62" column="42" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.3327787">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/TexturePacker.hx">
+    <entry file="file:///usr/local/lib/haxe/std/flash/utils/Function.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="10" selection-start-line="46" selection-start-column="7" selection-end-line="50" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/rectPackerAlgorithms/RectanglePacker.hx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding />
+        <state vertical-scroll-proportion="0.049916804">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/MirrorDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33240223">
-          <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="42" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirrorRoot.hx">
+    <entry file="file://$PROJECT_DIR$/application.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5935754">
-          <caret line="25" column="88" selection-start-line="25" selection-start-column="88" selection-end-line="25" selection-end-column="88" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
+    <entry file="file://$PROJECT_DIR$/bat/SetupApplication.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33170733">
-          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/FlashToAtlas/debug/FlashToAtlas.swf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/ITextureAtlasDynamic.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26344675">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/textureAtlas/TextureAtlasAbstract.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.074875206">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/ConvertUtils.hx">
+    <entry file="file://$PROJECT_DIR$/src/Main.hx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16620111">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="53" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
+    <entry file="file://$PROJECT_DIR$/src/test/FlashMirrorRoot.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3622393">
+          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/IFlashMirrorRoot.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39517015">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/AtlasDescriptor.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="284" column="72" selection-start-line="284" selection-start-column="72" selection-end-line="284" selection-end-column="72" />
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1507,7 +1499,15 @@
     <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashAtlas.hx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="53" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+          <caret line="459" column="52" selection-start-line="459" selection-start-column="52" selection-end-line="459" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/haxePort/starlingExtensions/flash/movieclipConverter/FlashDisplay_Converter.hx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="160" column="53" selection-start-line="160" selection-start-column="53" selection-end-line="160" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1552,7 +1552,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>AdobeAIR:FlexSDK</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1564,11 +1564,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>FlashToAtlas</last-edited>
+          <last-edited>FlashToAtlas1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1576,7 +1577,7 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>AIRSDK_Compiler</last-edited>
+          <last-edited>Haxe 3.2.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

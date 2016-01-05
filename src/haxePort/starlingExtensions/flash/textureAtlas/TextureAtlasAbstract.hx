@@ -1,6 +1,6 @@
 package haxePort.starlingExtensions.flash.textureAtlas;
+import flash.geom.Rectangle;
 import haxe.ds.Vector;
-import haxePort.starlingExtensions.flash.movieclipConverter.AtlasConf;
 
 /**
  * ...
@@ -9,9 +9,11 @@ import haxePort.starlingExtensions.flash.movieclipConverter.AtlasConf;
 class TextureAtlasAbstract {
     public var imagePath:String;
 
-    public var atlasRegionScale:Float = 1;
-
     public var subtextures:Array<SubtextureRegion>;
+
+    public var atlasRect:Rectangle;
+
+    public var atlasRegionScale:Float = 1;
 
     public function new() {
         map = new Map();
@@ -40,16 +42,4 @@ class TextureAtlasAbstract {
         c.subtextures = subtextures.copy();
         return c;
     }
-
-    private var _atlasConf:AtlasConf;
-    @isVar public var atlasConf(get, set):AtlasConf;
-	function get_atlasConf():AtlasConf 
-	{
-		return _atlasConf;
-	}
-	
-	function set_atlasConf(value:AtlasConf):AtlasConf 
-	{
-		return _atlasConf = value;
-	}
 }
