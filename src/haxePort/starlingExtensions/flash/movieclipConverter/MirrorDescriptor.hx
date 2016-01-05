@@ -83,13 +83,13 @@ class MirrorDescriptor
 		// storing subtexture childs and parent atlas objects. Linking together
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
-	public inline function storeAtlas(descriptor:AtlasDescriptor):Void
+	public inline function storeAtlas(atlas:ITextureAtlasDynamic, atlasAbstract:TextureAtlasAbstract):Void
 	{
-		if(!atlasesConf.exists(descriptor.atlas))
+		if(!atlasesConf.exists(atlas))
 		{
-			if(textureAtlases.indexOf(descriptor.atlas)<0) textureAtlases.push(descriptor.atlas);
-			atlasesConf.set(descriptor.atlas,descriptor.atlasAbstract);
-			atlasesConf.set(descriptor.atlasAbstract,descriptor.atlas);
+			if(textureAtlases.indexOf(atlas)<0) textureAtlases.push(atlas);
+			atlasesConf.set(atlas,atlasAbstract);
+			atlasesConf.set(atlasAbstract,atlas);
 		}
 	}
 	public inline function getAtlas(subtextureName:String,subtextureSymbolName:String):ITextureAtlasDynamic

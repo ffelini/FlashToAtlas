@@ -146,11 +146,8 @@ class FlashDisplay_Converter extends FlashAtlas
 	override public function createTextureAtlas(descriptor:AtlasDescriptor):ITextureAtlasDynamic
 	{
 		var t:Float = getTimer();
-
 		descriptor.atlas = super.createTextureAtlas(descriptor);
-		curentMirror.descriptor.storeAtlas(descriptor);
-		curentMirror.storeAtlas(descriptor.atlas, atlasBmd);
-
+		curentMirror.descriptor.storeAtlas(descriptor.atlas, descriptor.atlasAbstract);
 		LogStack.addLog(this, "createTextureAtlass", ["duration-"+(getTimer() - t)]);
 
 		return descriptor.atlas;

@@ -32,7 +32,7 @@ import haxePort.starlingExtensions.*;
 //-swf-version 16 -swf-lib gameAssets.swc --macro include('src') -debug
 
 class Main extends Sprite {
-    private var target:DisplayObject = new ScreenPlay();
+    private var target:DisplayObject;// = new ScreenPlay();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 

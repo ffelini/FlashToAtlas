@@ -458,7 +458,6 @@ class FlashAtlas extends ContentSprite {
 
         atlasBmd = drawAtlas(descriptor, descriptor.atlasAbstract.atlasRect);
         descriptor.atlas = createTextureAtlasDynamic(descriptor.atlasAbstract, atlasBmd);
-        descriptor.atlas.atlas = descriptor.atlasAbstract;
         return descriptor.atlas;
     }
 
