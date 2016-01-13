@@ -186,9 +186,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		var t:Float = debug ? getTimer() : 0;
 
-		rectPackerAlgorithmDuration = 0;
-		NUM_LOOPS = DRAWS = 0;
-
 		setTarget(object,mirror);
 
 		// changing object size in case if it is bigger than the screen size, however big textures are not required for small screens
@@ -205,8 +202,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		convertDescriptor.convertDuration = getTimer() - t;
 		convertDescriptor.maxRectPackerAlgorithDuration = rectPackerAlgorithmDuration;
-
-		mirror.registerMirror(mirror,object);
 
 		LogStack.addLog(this,"convert", [curentMirror, "DURATION-"+convertDescriptor.convertDuration,
 			"packer placeInSmallestFreeRect-"+descriptor.placeInSmallestFreeRect,
@@ -374,7 +369,6 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		processFlashObjQuality(sprite);
 
-		if(resultSprite==null) resultSprite = curentMirror.getMirror(sprite);
 		if(resultSprite==null)
 		{
 			var spClass:Class<Dynamic> = convertDescriptor.getObjClassToConvert(sprite);
