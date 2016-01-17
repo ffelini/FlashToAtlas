@@ -289,8 +289,8 @@ class FlashAtlas extends ContentSprite {
                         subtextureObjRotation = DisplayUtil.getRotationOn(subtextureObj, content);
                     }
 // storing region
-                    subtextureObjRect.x = descriptor.regionPoint.x;
-                    subtextureObjRect.y = descriptor.regionPoint.y;
+                    subtextureObjRect.x = descriptor.regionPoint.x - descriptor.xOffset;
+                    subtextureObjRect.y = descriptor.regionPoint.y - descriptor.yOffset;
 
 // calculating object position in the Main texture atlas region considering his local position
                     var localP:Point = subtextureObj.parent.globalToLocal(descriptor.regionPoint);

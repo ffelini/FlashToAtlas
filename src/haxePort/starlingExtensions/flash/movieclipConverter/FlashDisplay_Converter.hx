@@ -234,8 +234,8 @@ class FlashDisplay_Converter extends FlashAtlas
 		{
 			var flashChild:DisplayObject = mirrorsCreationStack[i];
 			var childClass:Class<Dynamic> = convertDescriptor.getInstanceMirrorClass(flashChild);
-			curentMirror.createChild(flashChild, childClass);
-//			createChild(flashChild);
+//			curentMirror.createChild(flashChild, childClass);
+			createChild(flashChild);
 		}
 		curentMirror.descriptor.mirrorsCreationStack = [];
 	}
