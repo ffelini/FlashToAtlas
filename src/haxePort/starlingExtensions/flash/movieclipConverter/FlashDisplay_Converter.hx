@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxe.ds.Vector;
 import flash.utils.Function;
 import haxePort.utils.ObjUtil;
 import flash.display.BitmapData;
@@ -13,7 +14,6 @@ import flash.geom.Rectangle;
 import flash.text.TextField;
 import flash.utils.Dictionary;
 import haxe.ds.ObjectMap;
-import haxe.ds.Vector;
 import haxe.Timer;
 import haxePort.starlingExtensions.flash.textureAtlas.SubtextureRegion;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
@@ -245,9 +245,9 @@ class FlashDisplay_Converter extends FlashAtlas
 
 		var downSubtext:SubtextureRegion = null;
 		var upSubtext:SubtextureRegion = null;
-		var subTextures:Array<SubtextureRegion> = getSubtextures(flashChild, curentMirror.descriptor);
+		var subTextures:Vector<SubtextureRegion> = getSubtextures(flashChild, curentMirror.descriptor);
 		var subTexture:SubtextureRegion = getSubtexture(flashChild, curentMirror.descriptor);
-
+		
 // checking if subTextures frameLabels matches to an button
 		if (subTextures!=null && subTextures.length == 2)
 		{
@@ -255,6 +255,12 @@ class FlashDisplay_Converter extends FlashAtlas
 			upSubtext = subTextures[0].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTexture : (subTextures[1].frameLabel == ConvertUtils.BUTTON_KEYFRAME_UP ? subTextures[1] : null);
 		}
 
+		if (debug) {
+			var numSubtextures:Int = subTextures != null ? subTextures.length : 0;
+			LogStack.addLog(this, "createChild ", [flashChild, "subTexture-" + subTexture, "subTextures("+numSubtextures+")-" + subTextures, 
+			"downSubtext-" + downSubtext, "upSubtext-" + upSubtext]);
+		}
+		
 		if (downSubtext != null && upSubtext != null && (Std.is(flashChild, SimpleButton) || Std.is(flashChild, MovieClip))) {
 			curentMirror.createButton(Std.instance(flashChild, MovieClip), childClass);
 		}
@@ -287,8 +293,8 @@ class FlashDisplay_Converter extends FlashAtlas
 		}
 	}
 
-	private function getSubtextures(flashChild:DisplayObject, descriptor:MirrorDescriptor, checkSharedDescriptors:Bool=true):Array<SubtextureRegion> {
-		var subTextures:Array<SubtextureRegion> = Std.is(descriptor.getConf(flashChild), Array) ? descriptor.getConf(flashChild) : null;
+	private function getSubtextures(flashChild:DisplayObject, descriptor:MirrorDescriptor, checkSharedDescriptors:Bool=true):Vector<SubtextureRegion> {
+		var subTextures:Vector<SubtextureRegion> = descriptor.getSubtextures(flashChild);
 		if (checkSharedDescriptors && (subTextures == null || subTextures.length == 0)) {
 			for (sharedDescriptor in sharedMirrorDescriptors) {
 				subTextures = getSubtextures(flashChild, sharedDescriptor, false);
@@ -299,8 +305,11 @@ class FlashDisplay_Converter extends FlashAtlas
 	}
 
 	private function getSubtexture(flashChild:DisplayObject, descriptor:MirrorDescriptor, checkSharedDescriptors:Bool=true):SubtextureRegion {
-		var subTextures:Array<SubtextureRegion> = getSubtextures(flashChild, descriptor);
-		var subTexture:SubtextureRegion = Std.is(descriptor.getConf(flashChild), SubtextureRegion) ? descriptor.getConf(flashChild) : (subTextures!=null ? subTextures[0] : null);
+		var subTexture:SubtextureRegion = descriptor.getSubtexture(flashChild);
+		if (subTexture == null) {
+			var subTextures:Vector<SubtextureRegion> = getSubtextures(flashChild, descriptor);
+			subTexture = subTextures != null ? subTextures[0] : null;
+		}
 		if(checkSharedDescriptors && subTexture==null) {
 			for(sharedDescriptor in sharedMirrorDescriptors) {
 				subTexture = getSubtexture(flashChild, sharedDescriptor, false);
@@ -431,7 +440,7 @@ class FlashDisplay_Converter extends FlashAtlas
 				objBounds.y = mc.y;
 			}
 			var _symbolName:String = Type.getClassName(Type.getClass(child));
-			var subTextures:Vector<SubtextureRegion> = curentMirror.descriptor.getSubtextures(_symbolName);
+			var subTextures:Vector<SubtextureRegion> = curentMirror.descriptor.getSubtexturesBySymbolName(_symbolName);
 
 			if(subTextures==null)
 			{
@@ -441,12 +450,16 @@ class FlashDisplay_Converter extends FlashAtlas
 				{
 					mc.gotoAndStop(i);
 					subTexture = addSubTextureSomewhere(mc, "");
-
 					subTextures.set(i-1,subTexture);
 				}
 			}
 			curentMirror.descriptor.addSubtextures(mc, objBounds, _symbolName, subTextures);
 			mc.stop();
+			
+			if (debug) {
+				LogStack.addLog(this, "convertObject", [child, "isEconomicButton-" + _isEconomicButton, "isBtn-"+isBtn, "objType-"+objType,
+				"_symbolName-"+_symbolName, "subTextures("+subTextures.length+") - "+subTextures]);
+			}
 		}
 		else
 		{
@@ -463,6 +476,10 @@ class FlashDisplay_Converter extends FlashAtlas
 				var objName:String = _isEconomicButton || Std.is(child, DisplayObjectContainer) ? "" : Type.getClassName(Type.getClass(child.parent)) + "_" + objIndex;
 
 				subTexture = addSubTextureSomewhere(child, objName);
+				
+				if (debug) {
+					LogStack.addLog(this, "convertObject", [child, "isEconomicButton-"+_isEconomicButton, "objName-"+objName, "subTexture-"+subTexture]);
+				}
 			}
 			curentMirror.descriptor.addSubtexture(child, objBounds, subTexture);
 		}
@@ -576,7 +593,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	/**
 	 * if true all flash buttons (movie clips with 2 frames - down and up) are converted to images and decorated as simple buttons using Decorator_Button class
 	 */
-	public var economicDecoration:Bool = true;
+	public var economicDecoration:Bool = false;
 	public inline function isEconomicButton(obj:MovieClip):Bool
 	{
 		return economicDecoration && isButton(obj);

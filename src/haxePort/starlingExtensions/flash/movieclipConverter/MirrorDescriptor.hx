@@ -16,6 +16,7 @@ class MirrorDescriptor
 	public var mirrorRect:Rectangle;
 	
 	public var atlasesConf:ObjectMap<Dynamic,Dynamic>;
+	public var subtexturesMap:ObjectMap < Dynamic, Vector<SubtextureRegion>>;
 	public var textureAtlases:Array<ITextureAtlasDynamic>;
 	
 	public var mirrorsCreationStack:Array<DisplayObject>;
@@ -26,6 +27,7 @@ class MirrorDescriptor
 	public function new()
 	{
 		atlasesConf = new ObjectMap();
+		subtexturesMap = new ObjectMap();
 		textureAtlases = new Array<ITextureAtlasDynamic>();
 		mirrorsCreationStack = new Array<DisplayObject>();
 		flashMirrors = new Array<DisplayObject>();
@@ -64,8 +66,16 @@ class MirrorDescriptor
 		storeMirrorRect(mirror,rect);
 		if (mirrorsCreationStack.indexOf(mirror) < 0) mirrorsCreationStack.push(mirror);
 		
-		atlasesConf.set(mirror,subTextures);
-		atlasesConf.set(_symbolName,subTextures); 
+		subtexturesMap.set(mirror,subTextures);
+		subtexturesMap.set(_symbolName,subTextures); 
+	}
+	public inline function getSubtextures(mirror:DisplayObject):Vector<SubtextureRegion>
+	{
+		return subtexturesMap.get(mirror);
+	}
+	public inline function getSubtexturesBySymbolName(symbolName:String):Vector<SubtextureRegion>
+	{
+		return subtexturesMap.get(symbolName);
 	}
 	public inline function addSubtexture(mirror:DisplayObject, rect:Rectangle, subTexture:SubtextureRegion):Void
 	{
@@ -83,6 +93,13 @@ class MirrorDescriptor
 		// storing subtexture childs and parent atlas objects. Linking together
 		if(!atlasesConf.exists(_subtextureName+"_|_"+_symbolName)) atlasesConf.set(_subtextureName+"_|_"+_symbolName, subTexture); 
 	}
+	public inline function getSubtexture(mirror:DisplayObject):SubtextureRegion {
+		return atlasesConf.get(mirror);
+	}
+	public inline function getSubtextureByName(name:String, symbolName:String):SubtextureRegion
+	{
+		return atlasesConf.get(name+"_|_"+symbolName);
+	}
 	public inline function storeAtlas(atlas:ITextureAtlasDynamic, atlasAbstract:TextureAtlasAbstract):Void
 	{
 		if(!atlasesConf.exists(atlas))
@@ -95,14 +112,6 @@ class MirrorDescriptor
 	public inline function getAtlas(subtextureName:String,subtextureSymbolName:String):ITextureAtlasDynamic
 	{
 		return atlasesConf.get(atlasesConf.get(subtextureName));
-	}
-	public inline function getSubtexture(name:String, symbolName:String):SubtextureRegion
-	{
-		return atlasesConf.get(name+"_|_"+symbolName);
-	}
-	public inline function getSubtextures(symbolName:String):Vector<SubtextureRegion>
-	{
-		return atlasesConf.get(symbolName);
 	}
 	public inline function clearMirrorState():Void
 	{

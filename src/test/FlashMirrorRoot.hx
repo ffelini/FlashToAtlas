@@ -74,7 +74,7 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
     }
 
     public function clear() {
-        removeChildren(0, numChildren-1);
+        if(numChildren>0) removeChildren(0, numChildren-1);
         curentAtlasBitmap = null;
     }
 

@@ -32,7 +32,7 @@ import haxePort.starlingExtensions.*;
 //-swf-version 16 -swf-lib gameAssets.swc --macro include('src') -debug
 
 class Main extends Sprite {
-    private var target:DisplayObject;// = new ScreenPlay();
+    private var target:DisplayObject;// = new ScreenPlayPaid();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
 
@@ -47,7 +47,7 @@ class Main extends Sprite {
         addChild(converter);
 
         converter.convert(target, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
-        converter.scaleX = converter.scaleY = 0.3;
+        converter.scaleX = converter.scaleY = 0.15;
 
 
 //        target = new ScreenPlay();
