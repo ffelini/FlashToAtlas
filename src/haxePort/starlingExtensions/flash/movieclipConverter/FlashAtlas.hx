@@ -444,9 +444,9 @@ class FlashAtlas extends ContentSprite {
         throw this + " method createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic is not implemented";
     }
 
-    public function saveAtlasPng(path:String,atlasBmd:BitmapData):Void
+    public function saveAtlasPng(atlas:TextureAtlasAbstract,atlasBmd:BitmapData):Void
     {
-        throw this + " method saveAtlasPng(path:String,atlasBmd:BitmapData):Void is not implemented";
+        throw this + " method saveAtlasPng(atlas:TextureAtlasAbstract,atlasBmd:BitmapData):Void is not implemented";
     }
 
     public var atlasBmd:BitmapData;
@@ -495,10 +495,10 @@ class FlashAtlas extends ContentSprite {
             DRAWS ++;
         }
 
-        if (debugAtlas) saveAtlasPng(descriptor.atlasAbstract.imagePath, atlasBmd);
-
         if (debug) LogStack.addLog(this, "FlashAtlas.drawAtlas size", [descriptor.textureAtlasRect, rect, "drawWithQuality-" + drawWithQuality, "drawQuality-" + drawQuality, "DURATION-" + (getTimer() - t), "bmd size-" + ObjUtil.getObjSize(atlasBmd),
         "\nlastSubtextureTargets-" + descriptor.subtextureTargets.length, debugAtlas ? "\n" + descriptor.atlasAbstract : "", "content scale-" + content.scaleX + "/" + content.scaleY]);
+
+        if (debugAtlas) saveAtlasPng(descriptor.atlasAbstract, atlasBmd);
         return atlasBmd;
     }
 

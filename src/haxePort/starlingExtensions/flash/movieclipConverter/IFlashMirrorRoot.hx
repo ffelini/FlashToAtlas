@@ -24,7 +24,7 @@ interface IFlashMirrorRoot extends IDisplayObjectContainer
 
 	function createTextureAtlasDynamic(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):ITextureAtlasDynamic;
 	function storeAtlas(atlas:ITextureAtlasDynamic, bmd:BitmapData):Void;
-	function saveAtlasPng(path:String,atlasBmd:BitmapData):Void;
+	function saveAtlasPng(atlas:TextureAtlasAbstract,atlasBmd:BitmapData):Void;
 
 	function convertSprite(sprite:DisplayObjectContainer, spClass:Class<Dynamic>):IFlashSpriteMirror;
 	function createChild(flashChild:DisplayObject, childClass:Class<Dynamic>):Void;

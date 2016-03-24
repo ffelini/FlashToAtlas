@@ -60,7 +60,7 @@ class FlashMirrorRoot extends Sprite implements IFlashMirrorRoot {
         return new TextureAtlasDynamic();
     }
 
-    public function saveAtlasPng(path:String, atlasBmd:BitmapData):Void {
+    public function saveAtlasPng(atlas:TextureAtlasAbstract, atlasBmd:BitmapData):Void {
     }
 
     public function addBitmap(bmd:BitmapData):Void {

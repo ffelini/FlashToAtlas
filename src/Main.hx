@@ -26,6 +26,7 @@ import flash.Lib;
 import haxePort.utils.*;
 import haxePort.interfaces.*;
 import haxePort.managers.*;
+import haxePort.managers.interfaces.*;
 import haxePort.starlingExtensions.*;
 
 //-swf-header 640:960:10:CCCCCC
@@ -35,7 +36,9 @@ class Main extends Sprite {
     private var target:DisplayObject;// = new ScreenPlayPaid();
     private var converter:FlashDisplay_Converter = new FlashDisplay_Converter();
     private var flashMirror:FlashMirrorRoot = new FlashMirrorRoot();
-
+	
+	private var resetable:IResetable;
+	
     public function new() {
         super();
         var stage:Stage = Lib.current.stage;

@@ -2,11 +2,11 @@
 <module type="HAXE_MODULE" version="4">
   <component name="HaxeModuleSettingsStorage">
     <option name="arguments" value="-swf-version 16 -swf-lib gameAssets.swc --macro include('src') -debug" />
-    <option name="flexSdkName" value="AdobeAIR:FlexSDK" />
+    <option name="flexSdkName" value="4.6.0 AIR 14" />
     <option name="haxeTarget" value="Flash" />
     <option name="mainClass" value="Main" />
     <option name="outputFileName" value="FlashToAtlas.swf" />
-    <option name="outputFolder" value="$MODULE_DIR$/out/production/FlashToAtlas" />
+    <option name="outputFolder" value="$MODULE_DIR$/out/production/FlashToAtlas1" />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <output url="file://$MODULE_DIR$/out/production/FlashToAtlas" />

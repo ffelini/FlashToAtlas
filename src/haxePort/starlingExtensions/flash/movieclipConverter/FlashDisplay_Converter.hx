@@ -20,7 +20,6 @@ import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 import haxePort.starlingExtensions.interfaces.IDisplayObjectContainer;
 import haxePort.utils.LogStack;
 
-import haxePort.managers.ObjPool;
 
 import haxePort.starlingExtensions.flash.textureAtlas.ITextureAtlasDynamic;
 import haxePort.starlingExtensions.utils.RectangleUtil;
@@ -158,9 +157,9 @@ class FlashDisplay_Converter extends FlashAtlas
 		return curentMirror.createTextureAtlasDynamic(atlas, atlasBmd);
 	}
 
-	override public function saveAtlasPng(path:String,atlasBmd:BitmapData):Void
+	override public function saveAtlasPng(atlas:TextureAtlasAbstract,atlasBmd:BitmapData):Void
 	{
-		curentMirror.saveAtlasPng(path, atlasBmd);
+		curentMirror.saveAtlasPng(atlas, atlasBmd);
 	}
 
 	public function redrawAtlas(atlas:ITextureAtlasDynamic):BitmapData {
