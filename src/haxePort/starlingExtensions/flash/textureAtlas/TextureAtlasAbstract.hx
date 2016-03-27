@@ -42,4 +42,9 @@ class TextureAtlasAbstract {
         c.subtextures = subtextures.copy();
         return c;
     }
+	public function toString():String 
+	{
+		return "[TextureAtlasAbstract imagePath=" + imagePath + " atlasRect=" + atlasRect + 
+					" atlasRegionScale=" + atlasRegionScale + "]";
+	}
 }

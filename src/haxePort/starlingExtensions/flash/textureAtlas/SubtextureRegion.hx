@@ -51,5 +51,11 @@ class SubtextureRegion extends Rectangle {
         c.parent = parent;
         return c;
     }
-
+	override public function toString():String 
+	{
+		return "[SubtextureRegion name=" + name + " symbolName=" + symbolName + " frameLabel=" + frameLabel + " object=" + object + 
+					" frame=" + frame + " pivotX=" + pivotX + " pivotY=" + pivotY + " regionRect=" + regionRect + 
+					" frameRect=" + frameRect + " objRotation=" + objRotation + " rotated=" + rotated + 
+					" x=" + x + " y=" + y + " width=" + width + " height=" + height + "]";
+	}
 }

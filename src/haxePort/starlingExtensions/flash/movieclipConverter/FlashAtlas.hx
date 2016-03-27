@@ -204,12 +204,12 @@ class FlashAtlas extends ContentSprite {
         var numDescriptors:Int = descriptors.length;
         for (i in 0...numDescriptors) {
             var descriptor:AtlasDescriptor = descriptors[i];
-            var subTexture:SubtextureRegion = addSubTexture(descriptor, obj, name, i == numDescriptors - 1);
+            var subTexture:SubtextureRegion = addSubTexture(descriptor, obj, name, false);
             if (subTexture != null) {
                 return subTexture;
             }
         }
-        return null;
+        return addSubTexture(descriptor, obj, name, true);
     }
 
     public function addSubTexture(descriptor:AtlasDescriptor, obj:DisplayObject, name:String = "", addToNextAtlasOnFull:Bool=true):SubtextureRegion {
