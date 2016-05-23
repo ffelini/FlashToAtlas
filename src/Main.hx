@@ -50,7 +50,7 @@ class Main extends Sprite {
         addChild(converter);
 
         converter.convert(target, flashMirror, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), false);
-        converter.scaleX = converter.scaleY = 0.15;
+        converter.scaleX = converter.scaleY = 0.075;
 
 
 //        target = new ScreenPlay();
@@ -72,21 +72,23 @@ class Main extends Sprite {
     }
 
     private function onMouseEvent(e:MouseEvent):Void {
-        flashMirror.clear();
-        addChild(flashMirror);
-        removeChild(converter);
-
-        converter.setTarget(target, flashMirror);
+        //converter.setTarget(target, flashMirror);
         for(atlas in flashMirror.atlases) {
             flashMirror.addBitmap(converter.redrawAtlas(atlas));
         }
-        LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY +
+
+        flashMirror.clear();
+        addChild(flashMirror);
+        removeChild(converter);
+        /*
+		LogUI.inst().setText(e.target + " " + e.stageX + "/" + e.stageY +
         " \nstage.width - " + stage.width +
         " \nstage.height - " + stage.height +
         " \nstage.fullScreenWidth - " + stage.fullScreenWidth +
         " \nstage.fullScreenHeight - " + stage.fullScreenHeight +
         " \nconverter.descriptors.length - " + converter.descriptors.length+
         "\nconverter.convertDescriptor.convertDuration - " + converter.convertDescriptor.convertDuration);
+		*/
     }
 
     inline function func(a:String):Void {

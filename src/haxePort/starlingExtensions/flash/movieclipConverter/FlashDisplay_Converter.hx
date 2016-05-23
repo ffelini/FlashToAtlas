@@ -57,7 +57,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	override public function resetDescriptor():AtlasDescriptor
 	{
 		super.resetDescriptor();
-		descriptor.atlasAbstract.imagePath = curentMirror+"_"+descriptor.atlasAbstract.imagePath;
+		descriptor.atlasAbstract.imagePath = curentMirror + ConvertUtils.SUBTEXTURE_NAME_DELIMITER + descriptor.atlasAbstract.imagePath;
 		if(curentMirror!=null) {
 			curentMirror.onDescriptorReset(descriptor);
 		}
@@ -270,18 +270,18 @@ class FlashDisplay_Converter extends FlashAtlas
 			curentMirror.createTextField(Std.instance(flashChild, TextField), childClass);
 		}
 		else {
-			var _mirrorType:String = getFlashObjType(flashChild);
+			var _mirrorType:String = ConvertUtils.getFlashObjType(flashChild);
 
 			if (_mirrorType == ConvertUtils.TYPE_SCALE3_IMAGE && useFeathersScaledImages) {
-				var direction:String = getFlashObjField(flashChild, ConvertUtils.FIELD_DIRECTION);
+				var direction:String = ConvertUtils.getFlashObjField(flashChild, ConvertUtils.FIELD_DIRECTION);
 				curentMirror.createScale3Image(flashChild, childClass, direction);
 			}
 			else if (_mirrorType == ConvertUtils.TYPE_SCALE9_IMAGE && useFeathersScaledImages) {
 				curentMirror.createScale9Image(flashChild, childClass);
 			} else if (_mirrorType == ConvertUtils.TYPE_QUAD) {
-				var _color:UInt = getFlashObjField(flashChild, ConvertUtils.FIELD_COLOR);
+				var _color:UInt = ConvertUtils.getFlashObjField(flashChild, ConvertUtils.FIELD_COLOR);
 				if (Math.isNaN(_color)) _color = 0xFFFFFF;
-				var quadAlpha:Float = getFlashObjField(flashChild, ConvertUtils.FIELD_QUAD_ALPHA);
+				var quadAlpha:Float = ConvertUtils.getFlashObjField(flashChild, ConvertUtils.FIELD_QUAD_ALPHA);
 				if (Math.isNaN(quadAlpha)) quadAlpha = 1;
 
 				curentMirror.createQuad(flashChild, childClass, _color, quadAlpha);
@@ -351,7 +351,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	}
 	public inline function processFlashObjQuality(obj:DisplayObject):Void
 	{
-		var textureQuality:Float = getFlashObjField(obj,ConvertUtils.FIELD_QUALITY);
+		var textureQuality:Float = ConvertUtils.getFlashObjField(obj,ConvertUtils.FIELD_QUALITY);
 		if(textureQuality!=Math.NaN && textureQuality>0)
 		{
 			var factor:Float = obj.scaleX/obj.scaleY;
@@ -397,6 +397,12 @@ class FlashDisplay_Converter extends FlashAtlas
 			if(convertDescriptor.ignore(child)) continue;
 
 			// converting child
+			var isFlashMC:Bool = isFlashMovieClip(child);
+			if(isFlashMC) {
+				var mc:MovieClip = Std.instance(child, MovieClip);
+				mc.gotoAndStop(1);
+				mc.stopAllMovieClips();
+			}
 			if (isDisplayObjectContainer(child))
 			{
 				childMirror = convertSprite(Std.instance(child,DisplayObjectContainer), Std.instance(childMirror,IDisplayObjectContainer));
@@ -431,7 +437,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(superIsMovieClip(mc) && !_isEconomicButton)
 		{
 			var isBtn:Bool = isButton(mc);
-			var objType:String = getFlashObjType(mc);
+			var objType:String = ConvertUtils.getFlashObjType(mc);
 			// setting proper position for mc rect. This value will be assigned to mirror movieClip
 			if(!isBtn && objType!=ConvertUtils.TYPE_BTN)
 			{
@@ -472,7 +478,7 @@ class FlashDisplay_Converter extends FlashAtlas
 				if(mc!=null) mc.stop();
 				processObjType(child);
 
-				var objName:String = _isEconomicButton || Std.is(child, DisplayObjectContainer) ? "" : Type.getClassName(Type.getClass(child.parent)) + "_" + objIndex;
+				var objName:String = _isEconomicButton || Std.is(child, DisplayObjectContainer) ? "" : Type.getClassName(Type.getClass(child.parent)) + ConvertUtils.SUBTEXTURE_NAME_DELIMITER + objIndex;
 
 				subTexture = addSubTextureSomewhere(child, objName);
 				
@@ -488,7 +494,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	{
 		if(obj.parent!=null)
 		{
-			var objType:String = getFlashObjType(obj);
+			var objType:String = ConvertUtils.getFlashObjType(obj);
 
 			switch(objType)
 			{
@@ -506,8 +512,8 @@ class FlashDisplay_Converter extends FlashAtlas
 				{
 					if(useFeathersScaledImages)
 					{
-						var hResizeFactor:Float = getFlashObjField(obj,"hResizeFactor");
-						var vResizeFactor:Float = getFlashObjField(obj,"vResizeFactor");
+						var hResizeFactor:Float = ConvertUtils.getFlashObjField(obj,"hResizeFactor");
+						var vResizeFactor:Float = ConvertUtils.getFlashObjField(obj,"vResizeFactor");
 
 						obj.width = rect==null ? obj.width/hResizeFactor : rect.width;
 						obj.height = rect==null ? obj.height/vResizeFactor : rect.height;
@@ -517,8 +523,8 @@ class FlashDisplay_Converter extends FlashAtlas
 				{
 					if(useFeathersScaledImages)
 					{
-						var hResizeFactor:Float = getFlashObjField(obj,"hResizeFactor");
-						var vResizeFactor:Float = getFlashObjField(obj,"vResizeFactor");
+						var hResizeFactor:Float = ConvertUtils.getFlashObjField(obj,"hResizeFactor");
+						var vResizeFactor:Float = ConvertUtils.getFlashObjField(obj,"vResizeFactor");
 
 						obj.width = rect==null ? obj.width/hResizeFactor : rect.width;
 						obj.height = rect==null ? obj.height/vResizeFactor : rect.height;
@@ -581,7 +587,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	}
 	public inline static function isDisplayObjectContainer(obj:DisplayObject):Bool
 	{
-		var hierarchyField:Dynamic = getFlashObjField(obj, ConvertUtils.FIELD_HIERARCHY);
+		var hierarchyField:Dynamic = ConvertUtils.getFlashObjField(obj, ConvertUtils.FIELD_HIERARCHY);
 		if(hierarchyField!=null && hierarchyField==false) return false;
 
 		var isFlashMC:Bool = isFlashMovieClip(obj);
@@ -610,7 +616,7 @@ class FlashDisplay_Converter extends FlashAtlas
 	}
 	public inline static function isFlashMovieClip(obj:DisplayObject):Bool
 	{
-		var objType:String = getFlashObjType(obj);
+		var objType:String = ConvertUtils.getFlashObjType(obj);
 		return objType==ConvertUtils.TYPE_FLASH_MOVIE_CLIP && Std.is(obj,MovieClip) && Std.instance(obj,MovieClip).totalFrames>1;
 	}
 	public static function isButton(value:MovieClip):Bool
@@ -620,7 +626,7 @@ class FlashDisplay_Converter extends FlashAtlas
 		if(Reflect.hasField(value,"isButton"))
 			return Reflect.field(value,"isButton")==true;
 
-		if(value==null || getFlashObjType(value)==ConvertUtils.TYPE_BTN)
+		if(value==null || ConvertUtils.getFlashObjType(value)==ConvertUtils.TYPE_BTN)
 		{
 			if(value!=null) Reflect.setField(value,"isButton",false);
 			return false;
@@ -645,20 +651,5 @@ class FlashDisplay_Converter extends FlashAtlas
 			return true;
 		}
 		return false;
-	}
-	public inline static function getFlashObjType(obj:DisplayObject):String
-	{
-		var value:Dynamic = getFlashObjField(obj,"type");
-		return value!=null ? value+"" : "";
-	}
-	public inline static function getFlashObjField(obj:DisplayObject,fieldName:String, defaultValue:Dynamic=null):Dynamic
-	{
-		var r:Dynamic=null;
-		obj = Std.is(obj,MovieClip) || Std.is(obj,DisplayObjectContainer) ? obj : obj.parent;
-		try{
-			r = obj!=null && Reflect.hasField(obj,fieldName) ? Reflect.field(obj,fieldName) : null;
-		}catch(msg:String){}
-
-		return r != null ? r : defaultValue;
 	}
 }

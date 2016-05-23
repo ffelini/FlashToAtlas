@@ -1,7 +1,11 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.MovieClip;
 class ConvertUtils
 {
+	public inline static var SUBTEXTURE_NAME_DELIMITER:String = "_";
 	/**
 	 * constant that defines the down frameLabel name of the flash button instance 
 	 */		
@@ -25,6 +29,7 @@ class ConvertUtils
 	
 	public inline static var FIELD_HIERARCHY:String = "hierarchy";
 	public inline static var FIELD_QUALITY:String = "texturesQuality";
+	public inline static var FIELD_ACCEPTABLE_SHARED_REGION_QUALITY = "acceptableSharedRegionQuality";
 	public inline static var FIELD_DEFAULT_SCALEX:String = "defaultScaleX";
 	public inline static var FIELD_DEFAULT_SCALEY:String = "defaultScaleY";
 	public inline static var FIELD_MOVIECLIP_SIMMILAR_FRAMES:String = "simmilarFrames";
@@ -33,8 +38,26 @@ class ConvertUtils
 	public inline static var FIELD_COLOR:String = "color";
 	public inline static var FIELD_QUAD_ALPHA:String = "quadAlpha";
 	public inline static var FIELD_FPS = "fps";
+	public inline static var FIELD_TYPE = "type";
 	
 	public function new()
 	{
+	}
+
+	public inline static function getFlashObjType(obj:DisplayObject):String
+	{
+		var value:Dynamic = ConvertUtils.getFlashObjField(obj,FIELD_TYPE);
+		return value!=null ? value+"" : "";
+	}
+
+	public inline static function getFlashObjField(obj:DisplayObject,fieldName:String, defaultValue:Dynamic=null):Dynamic
+	{
+		var r:Dynamic=null;
+		obj = Std.is(obj,MovieClip) || Std.is(obj,DisplayObjectContainer) ? obj : obj.parent;
+		try{
+			r = obj!=null && Reflect.hasField(obj,fieldName) ? Reflect.field(obj,fieldName) : null;
+		}catch(msg:String){}
+
+		return r != null ? r : defaultValue;
 	}
 }

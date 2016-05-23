@@ -1,5 +1,6 @@
 package haxePort.starlingExtensions.flash.movieclipConverter;
 
+import haxePort.starlingExtensions.flash.movieclipConverter.ConvertUtils;
 import haxePort.starlingExtensions.flash.textureAtlas.TextureAtlasAbstract;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
 import haxePort.starlingExtensions.flash.movieclipConverter.AtlasDescriptor;
@@ -160,7 +161,7 @@ class FlashAtlas extends ContentSprite {
                     i++;
                 }
             }
-            objName += (addS != "" ? "_" + addS : "");
+            objName += (addS != "" ? ConvertUtils.SUBTEXTURE_NAME_DELIMITER + addS : "");
         }
         return objName;
     }
@@ -239,6 +240,7 @@ class FlashAtlas extends ContentSprite {
                 subTextureDescriptor = checkSubtexture(obj, subTextureName, sharedDescriptors);
                 subTexture = subTextureDescriptor!=null ? subTextureDescriptor.atlasAbstract.getSubtextureByName(subTextureName) : null;
                 if (subTexture != null) {
+                    var acceptableSharedRegionQuality:Float = ConvertUtils.getFlashObjField(subTexture.object.parent, ConvertUtils.FIELD_ACCEPTABLE_SHARED_REGION_QUALITY, this.acceptableSharedRegionQuality);
                     if (subtextureObjRotation==subTexture.objRotation && (subTexture.width*subTexture.height)/(subtextureObjRect.width*subtextureObjRect.height) >= acceptableSharedRegionQuality) {
                         subTexture = subTexture.cloneInstance();
                         obj.visible = false;
